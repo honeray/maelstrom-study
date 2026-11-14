@@ -14,6 +14,13 @@ in a **private** GitHub repository.
 - **Storage** — 10-second autosave to the browser *and* to the study server
 - **Recovery** — participants return with their eight-character tag
 
+![Homepage](docs/images/home.png)
+
+![Survey round](docs/images/survey-intro.png)
+
+*(Both screenshots were taken with no response server configured, which is why the amber
+"not connected" strip is visible. It disappears once `apiBase` is set.)*
+
 ---
 
 ## 1. Quick start
