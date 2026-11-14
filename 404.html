@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Page not found · MAELStrOM</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="assets/img/favicon-64.png" sizes="64x64" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/home.css" />
+    <style>
+      .notfound {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        background: linear-gradient(168deg, #04121d 0%, #062a44 55%, #0a4a7a 100%);
+        color: #eaf4fb;
+        padding: 2rem;
+      }
+      .notfound img {
+        width: min(340px, 70vw);
+        margin: 0 auto 2rem;
+      }
+      .notfound__code {
+        font-family: var(--font-mono);
+        letter-spacing: 0.3em;
+        color: #6fcdf3;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        margin: 0 0 0.75rem;
+      }
+      .notfound h1 {
+        font-size: clamp(1.5rem, 4vw, 2.25rem);
+        color: #fff;
+        margin-bottom: 0.75rem;
+      }
+      .notfound p {
+        color: #a9c2d4;
+        max-width: 44ch;
+        margin: 0 auto 1.75rem;
+      }
+    </style>
+  </head>
+  <body class="home">
+    <main class="notfound">
+      <div>
+        <img src="assets/img/banner-white.png" alt="MAELStrOM" width="1800" height="298" />
+        <p class="notfound__code">Error 404</p>
+        <h1>This page does not exist</h1>
+        <p>
+          The link may be mistyped, or a survey round may have moved. Everything for the study lives
+          on the homepage.
+        </p>
+        <a class="btn btn--on-dark" href="./">Return to the homepage</a>
+      </div>
+    </main>
+  </body>
+</html>

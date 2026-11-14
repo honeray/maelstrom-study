@@ -1,0 +1,17 @@
+{
+  "name": "maelstrom-study-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Multi-round Delphi study website for Project MAELStrOM (GitHub Pages).",
+  "scripts": {
+    "serve": "python tools/serve.py",
+    "validate": "node tools/validate.mjs",
+    "manifest": "node .github/scripts/build-manifest.mjs",
+    "check": "node tools/validate.mjs && node .github/scripts/build-manifest.mjs --check",
+    "export": "node tools/export-csv.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

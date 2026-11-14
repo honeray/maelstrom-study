@@ -1,0 +1,162 @@
+{
+  "common": {
+    "skip": "Aller au contenu",
+    "language": "Langue",
+    "languageShort": "Langue",
+    "optional": "Facultatif",
+    "pleaseSpecify": "Veuillez préciser",
+    "loading": "Chargement…"
+  },
+  "home": {
+    "headerLabel": "Étude Delphi sur l'évaluation musicale",
+    "hero": {
+      "kicker": "Projet MAELStrOM",
+      "title": "Étude Delphi sur l'évaluation musicale",
+      "lede": "Comment les musiciens et les pédagogues décident-ils qu'une œuvre musicale est bonne ? Il s'agit d'une étude Delphi à plusieurs tours sur les facteurs de l'évaluation musicale — y compris la musique produite par l'intelligence artificielle. Anonyme, sauvegardée en continu et proposée en trois langues.",
+      "cta": "Commencer l'enquête",
+      "ctaNone": "Voir les enquêtes",
+      "secondary": "J'ai déjà une étiquette"
+    },
+    "surveys": {
+      "title": "Tours d'enquête",
+      "sub": "Chaque tour s'ouvre lorsque le précédent se termine. Vous pouvez quitter et revenir à tout moment.",
+      "count": "{open} sur {total} ouverts",
+      "countNone": "{total} tours"
+    },
+    "status": {
+      "open": "Ouvert",
+      "done": "Terminé",
+      "closed": "Clôturé",
+      "scheduled": "Pas encore ouvert",
+      "enter": "Entrer",
+      "doneLabel": "Terminé",
+      "closedLabel": "Clôturé",
+      "scheduledLabel": "Ouvre plus tard"
+    },
+    "meta": {
+      "minutes": "environ {minutes} minutes"
+    },
+    "flow": {
+      "title": "Comment se déroule l'étude",
+      "sub": "Le même panel d'experts répond à chaque tour, ce qui permet au groupe de converger vers un consensus.",
+      "oneTitle": "Générez votre étiquette",
+      "oneText": "Une étiquette de huit caractères est créée pour vous. C'est le seul identifiant que nous détenons — conservez-la en lieu sûr.",
+      "twoTitle": "Complétez le tour",
+      "twoText": "Les réponses sont sauvegardées automatiquement. Vous pouvez fermer l'onglet et reprendre plus tard avec votre étiquette.",
+      "threeTitle": "Lisez la synthèse",
+      "threeText": "Lorsqu'un tour se termine, une synthèse anonymisée des réponses de tous les experts est publiée sur cette page.",
+      "fourTitle": "Révisez au tour suivant",
+      "fourText": "Au tour suivant, vos réponses précédentes sont chargées : vous pouvez les conserver ou les modifier."
+    },
+    "docs": {
+      "title": "Documents de l'étude",
+      "sub": "Rapports de synthèse anonymisés et documents de l'étude publiés par le coordinateur de l'étude.",
+      "empty": "Aucun document n'a encore été publié. Les rapports de synthèse apparaîtront ici après la clôture de chaque tour."
+    },
+    "resume": {
+      "title": "Vous revenez à l'étude ?",
+      "body": "Saisissez l'étiquette de huit caractères générée précédemment pour reprendre exactement où vous vous êtes arrêté(e).",
+      "label": "Votre étiquette",
+      "placeholder": "ABCD2345",
+      "submit": "Retrouver mes réponses",
+      "invalid": "Une étiquette comporte exactement 8 lettres ou chiffres.",
+      "none": "Nous n'avons trouvé aucune enquête inachevée pour cette étiquette. Elle est peut-être déjà terminée — vérifiez aussi que l'étiquette est exacte.",
+      "noneOpen": "Aucune enquête n'est ouverte pour le moment."
+    },
+    "footer": {
+      "blurb": "Le projet MAELStrOM étudie la manière dont la musique est évaluée, en mettant l'accent sur la musique générée par l'intelligence artificielle. Ce site héberge les tours d'enquête Delphi de l'étude.",
+      "contactTitle": "Contact",
+      "privacy": "Les réponses sont anonymes et identifiées uniquement par l'étiquette de huit caractères du participant."
+    },
+    "offline": "Ce site n'est pas encore relié au serveur de réponses — les réponses sont enregistrées uniquement dans ce navigateur.",
+    "error": {
+      "load": "La liste des enquêtes n'a pas pu être chargée. Veuillez actualiser la page ou contacter le coordinateur de l'étude."
+    }
+  },
+  "survey": {
+    "home": "Accueil",
+    "foot": {
+      "privacy": "Vos réponses sont sauvegardées automatiquement sur cet appareil et, lorsque la connexion le permet, sur le serveur de l'étude."
+    },
+    "progress": {
+      "step": "Page {current} sur {total}"
+    },
+    "save": {
+      "saved": "Enregistré",
+      "saving": "Enregistrement…",
+      "local": "Enregistré sur cet appareil",
+      "error": "Non enregistré sur le serveur"
+    },
+    "nav": {
+      "back": "Retour",
+      "next": "Continuer",
+      "submit": "Envoyer",
+      "home": "Retour à l'accueil",
+      "incomplete": "Répondez aux questions ci-dessus pour continuer",
+      "readyToSubmit": "Vos réponses sont prêtes à être envoyées"
+    },
+    "error": {
+      "required": "Cette question est obligatoire.",
+      "fix": "Veuillez répondre aux questions signalées.",
+      "network": "Le serveur est injoignable. Vérifiez votre connexion et réessayez.",
+      "lookupOffline": "La recherche d'une étiquette nécessite une connexion au serveur de l'étude.",
+      "loadFailed": "Cette enquête n'a pas pu être chargée. Veuillez actualiser la page ou contacter le coordinateur de l'étude.",
+      "notFound": {
+        "title": "Enquête introuvable",
+        "text": "Le lien que vous avez suivi ne correspond à aucune enquête de cette étude."
+      }
+    },
+    "tag": {
+      "generate": "Générer mon étiquette",
+      "regenerate": "Générer une nouvelle étiquette",
+      "copy": "Copier l'étiquette",
+      "copied": "Copié dans le presse-papiers.",
+      "copyManually": "La copie a échoué — veuillez sélectionner et copier l'étiquette manuellement.",
+      "cardHint": "Conservez-la en lieu sûr. Vous en aurez besoin à chaque tour.",
+      "keepSafe": "Conservez-la en lieu sûr — vous en aurez besoin à chaque tour.",
+      "enterLabel": "Étiquette de huit caractères",
+      "lookupButton": "Retrouver mes réponses",
+      "resumeButton": "Reprendre",
+      "invalid": "Une étiquette comporte exactement 8 lettres ou chiffres.",
+      "found": "Vos réponses précédentes ont été retrouvées.",
+      "notFound": "Aucune réponse antérieure n'a été trouvée pour cette étiquette.",
+      "notVerified": "Saisissez et validez votre étiquette pour continuer.",
+      "notGenerated": "Générez votre étiquette pour continuer.",
+      "confirmRegenerate": "Générer une nouvelle étiquette déconnecte les réponses déjà enregistrées sous votre étiquette actuelle. Continuer ?",
+      "haveTag": "Vous avez déjà une étiquette d'une session précédente ?",
+      "blankOption": "J'ai perdu mon étiquette — continuer sans mes réponses antérieures",
+      "blankStarted": "Une nouvelle étiquette a été créée. Vos réponses ne seront pas reliées à un tour antérieur."
+    },
+    "scenario": {
+      "option": "Scénario contextuel {letter}",
+      "neutral": "Neutre",
+      "prompt": "Lequel de ces deux scénarios mènerait à une meilleure expérience musicale ?",
+      "commentLabel": "Souhaitez-vous expliquer quelque chose à propos de cette paire ? (facultatif)",
+      "commentPlaceholder": "Si vous souhaitez expliquer le raisonnement qui sous-tend votre réponse, veuillez le faire ici."
+    },
+    "resume": {
+      "restored": "Vos réponses enregistrées ont été restaurées."
+    },
+    "sync": {
+      "failed": "Le serveur de l'étude est injoignable. Vos réponses sont enregistrées sur cet appareil et seront envoyées dès le retour de la connexion.",
+      "retry": "Réessayer maintenant"
+    },
+    "blocked": {
+      "scheduled": {
+        "title": "Ce tour n'est pas encore ouvert",
+        "text": "Ce tour s'ouvre lorsque le tour précédent se termine et que son rapport de synthèse a été publié."
+      },
+      "closed": {
+        "title": "Ce tour est clôturé",
+        "text": "Ce tour n'accepte plus de réponses. Veuillez revenir à l'accueil pour le tour suivant."
+      },
+      "submitted": {
+        "title": "Déjà envoyé",
+        "text": "Nos dossiers indiquent que cette enquête a déjà été envoyée pour votre étiquette."
+      }
+    },
+    "offline": {
+      "body": "Ce site n'est pas relié au serveur de réponses : les réponses sont conservées uniquement dans ce navigateur. Veuillez contacter le coordinateur de l'étude avant de vous y fier."
+    }
+  }
+}

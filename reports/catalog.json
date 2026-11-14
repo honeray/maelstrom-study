@@ -1,0 +1,17 @@
+{
+  "$comment": "Optional titles for files placed in reports/. Matching is by path relative to reports/ (or by filename). Anything not listed is titled from its filename.",
+  "files": [
+    {
+      "name": "round-1-summary.pdf",
+      "title": "Round 1 summary report",
+      "description": "Anonymised summary of all expert responses to Preliminary Round 1.",
+      "order": 1
+    },
+    {
+      "name": "round-2-summary.pdf",
+      "title": "Round 2 summary report",
+      "description": "Anonymised summary of all expert responses to Preliminary Round 2.",
+      "order": 2
+    }
+  ]
+}

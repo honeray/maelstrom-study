@@ -1,0 +1,145 @@
+{
+  "id": "delphi-round-2",
+  "code": "R2",
+  "schemaVersion": 1,
+  "estimateMinutes": 15,
+  "flow": {
+    "createsTag": false,
+    "requiresTag": true,
+    "baselineSurvey": "delphi-round-1"
+  },
+  "title": {
+    "en": "Music Evaluation Survey (Preliminary Round 2)",
+    "zh": "音乐评价调查（第二轮预调查）",
+    "fr": "Enquête sur l'évaluation musicale (tour préliminaire 2)"
+  },
+  "shortTitle": {
+    "en": "Preliminary Round 2",
+    "zh": "第二轮预调查",
+    "fr": "Tour préliminaire 2"
+  },
+  "summary": {
+    "en": "Revision round: your Round 1 answers are loaded so you can keep or change any of them.",
+    "zh": "修订轮：系统会载入您第一轮的回答，您可以保留或修改其中任何一项。",
+    "fr": "Tour de révision : vos réponses du tour 1 sont chargées afin que vous puissiez les conserver ou les modifier."
+  },
+  "pages": [
+    {
+      "id": "lookup",
+      "title": { "en": "Welcome Back", "zh": "欢迎回来", "fr": "Bon retour" },
+      "blocks": [
+        {
+          "type": "prose",
+          "text": {
+            "en": "Welcome! Please enter your **eight-character tag** to continue.",
+            "zh": "欢迎！请输入您的**八位字符标签**以继续。",
+            "fr": "Bienvenue ! Veuillez saisir votre **étiquette de huit caractères** pour continuer."
+          }
+        },
+        {
+          "type": "tagLookup",
+          "id": "tag_lookup",
+          "allowSkip": true,
+          "required": true
+        },
+        {
+          "type": "prose",
+          "variant": "muted",
+          "text": {
+            "en": "We use this tag to find the answers you gave in the previous round and load them for you. If you cannot find your tag, the option below lets you continue anyway — but your two rounds will not be linked.",
+            "zh": "我们使用该标签查找您在上一轮的回答并为您载入。如果您找不到标签，可以使用下方选项继续——但您的两轮回答将无法关联。",
+            "fr": "Cette étiquette nous permet de retrouver les réponses que vous avez données au tour précédent et de les charger. Si vous ne retrouvez pas votre étiquette, l'option ci-dessous vous permet de continuer malgré tout — mais vos deux tours ne seront pas reliés."
+          }
+        }
+      ]
+    },
+    {
+      "id": "welcome",
+      "eyebrow": { "en": "Round 2", "zh": "第二轮", "fr": "Tour 2" },
+      "title": { "en": "Welcome to Round 2", "zh": "欢迎参加第二轮", "fr": "Bienvenue au tour 2" },
+      "blocks": [
+        {
+          "type": "prose",
+          "text": {
+            "en": "Welcome to the **second round** of preliminary surveys! Now that you have seen the summary report of anonymized responses from your fellow experts, you will have a chance to **modify** your answers from the previous round of surveys.",
+            "zh": "欢迎参加**第二轮**预调查！在看过同行专家的匿名回答汇总报告之后，您将有机会**修改**自己在上一轮问卷中的回答。",
+            "fr": "Bienvenue au **deuxième tour** des enquêtes préliminaires ! Maintenant que vous avez pris connaissance du rapport de synthèse des réponses anonymisées de vos confrères, vous aurez l'occasion de **modifier** vos réponses au tour précédent."
+          }
+        },
+        {
+          "type": "prose",
+          "text": {
+            "en": "If you do not wish to modify any of your answers, please feel free to simply skip to the end and submit.",
+            "zh": "如果您不想修改任何回答，可以直接跳到最后一页并提交。",
+            "fr": "Si vous ne souhaitez modifier aucune de vos réponses, vous pouvez tout simplement aller jusqu'à la dernière page et envoyer."
+          }
+        },
+        {
+          "type": "callout",
+          "tone": "info",
+          "text": {
+            "en": "Your previous answers are already filled in on the following pages. Change only what you want to change, then submit at the end. Your Round 1 answers are kept unchanged, so the study can compare the two rounds.",
+            "zh": "您在上一轮的回答已自动填入后续页面。只需修改您想修改的内容，最后提交即可。您第一轮的回答会原样保留，以便研究比较两轮结果。",
+            "fr": "Vos réponses précédentes sont déjà remplies sur les pages suivantes. Ne modifiez que ce que vous souhaitez modifier, puis envoyez à la fin. Vos réponses du tour 1 restent inchangées, afin que l'étude puisse comparer les deux tours."
+          }
+        }
+      ]
+    },
+    {
+      "include": { "from": "delphi-round-1", "pages": ["demographics"] },
+      "with": { "eyebrow": { "en": "Revision", "zh": "修订", "fr": "Révision" } }
+    },
+    {
+      "include": { "from": "delphi-round-1", "pages": ["factors"] },
+      "with": { "eyebrow": { "en": "Revision", "zh": "修订", "fr": "Révision" } }
+    },
+    {
+      "include": { "from": "delphi-round-1", "pages": ["scenarios"] },
+      "with": { "eyebrow": { "en": "Revision", "zh": "修订", "fr": "Révision" } }
+    },
+    {
+      "include": { "from": "delphi-round-1", "pages": ["closing"] },
+      "with": {
+        "title": { "en": "Final Thoughts", "zh": "最后的想法", "fr": "Dernières réflexions" },
+        "submitLabel": {
+          "en": "Submit my revised responses",
+          "zh": "提交我的修订回答",
+          "fr": "Envoyer mes réponses révisées"
+        }
+      }
+    },
+    {
+      "id": "done",
+      "kind": "completion",
+      "title": { "en": "Thank you for Round 2!", "zh": "感谢您完成第二轮！", "fr": "Merci pour le tour 2 !" },
+      "blocks": [
+        {
+          "type": "prose",
+          "text": {
+            "en": "Your revised responses have been saved. Your Round 1 answers were kept as they were, so the study can compare how the group's views changed.",
+            "zh": "您的修订回答已保存。您第一轮的回答保持原样，以便研究比较专家组意见的变化。",
+            "fr": "Vos réponses révisées ont été enregistrées. Vos réponses du tour 1 ont été conservées telles quelles, afin que l'étude puisse comparer l'évolution des points de vue du groupe."
+          }
+        },
+        {
+          "type": "prose",
+          "text": {
+            "en": "Here is your **eight-character tag** again, in case you need it for the next round.",
+            "zh": "以下是您的**八位字符标签**，以备下一轮使用。",
+            "fr": "Voici de nouveau votre **étiquette de huit caractères**, au cas où vous en auriez besoin pour le prochain tour."
+          }
+        },
+        { "type": "tagDisplay" },
+        {
+          "type": "prose",
+          "text": {
+            "en": "If you have any questions or concerns, please feel free to contact Benjamin Honeray Lee at any time.",
+            "zh": "如果您有任何问题或疑虑，欢迎随时联系 Benjamin Honeray Lee。",
+            "fr": "Si vous avez des questions ou des préoccupations, n'hésitez pas à contacter Benjamin Honeray Lee à tout moment."
+          }
+        },
+        { "type": "contact" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "common": {
+    "skip": "跳至主要内容",
+    "language": "语言",
+    "languageShort": "语言",
+    "optional": "选填",
+    "pleaseSpecify": "请注明",
+    "loading": "载入中……"
+  },
+  "home": {
+    "headerLabel": "音乐评价德尔菲研究",
+    "hero": {
+      "kicker": "MAELStrOM 项目",
+      "title": "音乐评价德尔菲研究",
+      "lede": "音乐家与教育者如何判断一首音乐是否优秀？本研究以多轮德尔菲法探讨音乐评价背后的因素，其中包括由人工智能生成的音乐。全程匿名，随时自动保存，提供三种语言。",
+      "cta": "开始填写问卷",
+      "ctaNone": "查看问卷",
+      "secondary": "我已有标签"
+    },
+    "surveys": {
+      "title": "调查轮次",
+      "sub": "每一轮在上一轮结束后开放。您可以随时离开，稍后继续。",
+      "count": "{open}/{total} 轮开放中",
+      "countNone": "共 {total} 轮"
+    },
+    "status": {
+      "open": "开放中",
+      "done": "已完成",
+      "closed": "已结束",
+      "scheduled": "尚未开放",
+      "enter": "进入",
+      "doneLabel": "已完成",
+      "closedLabel": "已结束",
+      "scheduledLabel": "稍后开放"
+    },
+    "meta": {
+      "minutes": "约 {minutes} 分钟"
+    },
+    "flow": {
+      "title": "研究流程",
+      "sub": "同一批专家参与每一轮，使专家组能够逐步形成共识。",
+      "oneTitle": "生成您的标签",
+      "oneText": "系统将为您生成一个八位字符标签。这是我们掌握的唯一标识，请妥善保存。",
+      "twoTitle": "完成本轮问卷",
+      "twoText": "回答会自动保存。如需离开可关闭页面，之后用标签即可继续。",
+      "threeTitle": "阅读汇总报告",
+      "threeText": "一轮结束后，所有专家回答的匿名汇总将发布在本页面上。",
+      "fourTitle": "在下一轮中修改",
+      "fourText": "下一轮会自动载入您此前的回答，您可以保留，也可以修改。"
+    },
+    "docs": {
+      "title": "研究文件",
+      "sub": "由研究协调人发布的匿名汇总报告与研究材料。",
+      "empty": "目前尚未发布任何文件。每轮结束后，汇总报告将出现在此处。"
+    },
+    "resume": {
+      "title": "继续参与研究？",
+      "body": "请输入您此前生成的八位字符标签，即可从上次离开处继续。",
+      "label": "您的标签",
+      "placeholder": "ABCD2345",
+      "submit": "查找我的回答",
+      "invalid": "标签为 8 位字母或数字。",
+      "none": "未找到该标签下尚未完成的问卷。可能已经完成，或请确认标签是否完全正确。",
+      "noneOpen": "目前没有开放的问卷。"
+    },
+    "footer": {
+      "blurb": "MAELStrOM 项目研究音乐如何被评价，重点关注由人工智能生成的音乐。本站承载该研究的德尔菲问卷轮次。",
+      "contactTitle": "联系方式",
+      "privacy": "所有回答均为匿名，仅以参与者的八位字符标签标识。"
+    },
+    "offline": "本站尚未连接至回答服务器——回答目前仅保存在本浏览器中。",
+    "error": {
+      "load": "无法载入问卷列表。请刷新页面或联系研究协调人。"
+    }
+  },
+  "survey": {
+    "home": "首页",
+    "foot": {
+      "privacy": "您的回答会自动保存在本设备上，并在网络允许时同步至研究服务器。"
+    },
+    "progress": {
+      "step": "第 {current} 页，共 {total} 页"
+    },
+    "save": {
+      "saved": "已保存",
+      "saving": "保存中……",
+      "local": "已保存在本设备",
+      "error": "未能保存至服务器"
+    },
+    "nav": {
+      "back": "上一步",
+      "next": "继续",
+      "submit": "提交",
+      "home": "返回首页",
+      "incomplete": "请先回答上方问题再继续",
+      "readyToSubmit": "回答已可提交"
+    },
+    "error": {
+      "required": "此题为必答题。",
+      "fix": "请回答已标出的问题。",
+      "network": "无法连接服务器。请检查网络后重试。",
+      "lookupOffline": "查询标签需要连接研究服务器。",
+      "loadFailed": "无法载入本问卷。请刷新页面或联系研究协调人。",
+      "notFound": {
+        "title": "未找到问卷",
+        "text": "您访问的链接与本研究中的任何问卷都不匹配。"
+      }
+    },
+    "tag": {
+      "generate": "生成我的标签",
+      "regenerate": "生成新标签",
+      "copy": "复制标签",
+      "copied": "已复制到剪贴板。",
+      "copyManually": "复制失败——请手动选中并复制标签。",
+      "cardHint": "请将其保存在安全之处。后续每一轮都需要使用它。",
+      "keepSafe": "请妥善保存——后续每一轮都需要使用它。",
+      "enterLabel": "八位字符标签",
+      "lookupButton": "查找我的回答",
+      "resumeButton": "继续填写",
+      "invalid": "标签为 8 位字母或数字。",
+      "found": "已找到您此前的回答。",
+      "notFound": "未找到该标签此前的回答。",
+      "notVerified": "请输入并验证您的标签以继续。",
+      "notGenerated": "请先生成标签以继续。",
+      "confirmRegenerate": "生成新标签将使当前标签下已保存的回答失联。是否继续？",
+      "haveTag": "已有此前生成的标签？",
+      "blankOption": "我找不到标签——不带此前回答继续",
+      "blankStarted": "已创建新标签。您的回答将不会与此前轮次关联。"
+    },
+    "scenario": {
+      "option": "情境场景 {letter}",
+      "neutral": "中立",
+      "prompt": "这两种场景中，哪一种会带来更好的音乐体验？",
+      "commentLabel": "关于这组场景，您还有其他想说明的吗？（选填）",
+      "commentPlaceholder": "如果您希望说明做出该判断的理由，请在此处填写。"
+    },
+    "resume": {
+      "restored": "已恢复您保存的回答。"
+    },
+    "sync": {
+      "failed": "无法连接研究服务器。您的回答已保存在本设备上，网络恢复后会尽快发送。",
+      "retry": "立即重试"
+    },
+    "blocked": {
+      "scheduled": {
+        "title": "本轮尚未开放",
+        "text": "上一轮结束并发布汇总报告后，本轮将开放。"
+      },
+      "closed": {
+        "title": "本轮已结束",
+        "text": "本轮已不再接受回答。请返回首页查看下一轮。"
+      },
+      "submitted": {
+        "title": "已提交",
+        "text": "记录显示，您的标签已提交过本问卷。"
+      }
+    },
+    "offline": {
+      "body": "本站尚未连接回答服务器，回答仅保存在本浏览器中。在依赖本页面前，请联系研究协调人。"
+    }
+  }
+}

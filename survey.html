@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Survey · MAELStrOM</title>
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#04121d" />
+    <link rel="icon" href="assets/img/favicon-64.png" sizes="64x64" />
+    <link rel="apple-touch-icon" href="assets/img/mark-black-192.png" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/survey.css" />
+  </head>
+
+  <body class="survey">
+    <a class="skip-link" href="#card" data-i18n="common.skip">Skip to content</a>
+
+    <header class="survey-header">
+      <div class="wrap survey-header__inner">
+        <a class="survey-header__home" href="index.html">
+          <img class="survey-header__mark" src="assets/img/mark-black-192.png" alt="" width="192" height="192" />
+          <span data-i18n="survey.home"></span>
+        </a>
+        <div class="survey-header__titles">
+          <span class="survey-header__eyebrow" id="survey-code"></span>
+          <span class="survey-header__name" id="survey-name"></span>
+        </div>
+        <div class="survey-header__right">
+          <span class="save-state" id="save-state" data-state="idle">
+            <span class="save-state__dot" aria-hidden="true"></span>
+            <span class="save-state__text"></span>
+          </span>
+          <div id="lang-slot"></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="progress" id="progress" hidden>
+      <div class="wrap wrap--narrow">
+        <div class="progress__meta">
+          <span class="progress__step" id="progress-step"></span>
+          <span class="progress__label" id="progress-label"></span>
+        </div>
+        <div class="progress__track" id="progress-track">
+          <svg
+            class="progress__svg"
+            viewBox="0 0 1000 44"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <defs>
+              <linearGradient id="progressGradient" x1="0" y1="0" x2="1000" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#084066" />
+                <stop offset="0.55" stop-color="#1789d6" />
+                <stop offset="1" stop-color="#6fcdf3" />
+              </linearGradient>
+              <clipPath id="progress-clip">
+                <rect id="progress-clip-rect" x="-20" y="-16" width="0" height="80" />
+              </clipPath>
+            </defs>
+            <path
+              id="progress-path"
+              class="progress__rail"
+              d="M 14 22 C 90 4, 168 40, 244 22 C 320 4, 398 40, 474 22 C 550 4, 628 40, 704 22 C 780 4, 858 40, 934 22 C 958 16, 974 19, 986 22"
+              vector-effect="non-scaling-stroke"
+            />
+            <g clip-path="url(#progress-clip)">
+              <path
+                class="progress__fill"
+                d="M 14 22 C 90 4, 168 40, 244 22 C 320 4, 398 40, 474 22 C 550 4, 628 40, 704 22 C 780 4, 858 40, 934 22 C 958 16, 974 19, 986 22"
+                vector-effect="non-scaling-stroke"
+              />
+            </g>
+          </svg>
+          <div class="progress__thumb" id="progress-thumb" aria-hidden="true">
+            <img src="assets/img/mark-black-512.png" alt="" width="26" height="26" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notice-strip" id="site-notice" hidden></div>
+
+    <main class="survey-main" id="main">
+      <div class="wrap wrap--narrow">
+        <div class="survey-card" id="card">
+          <div class="blocked">
+            <p class="blocked__text" data-i18n="common.loading"></p>
+          </div>
+        </div>
+        <div class="survey-foot">
+          <p data-i18n="survey.foot.privacy"></p>
+        </div>
+      </div>
+    </main>
+
+    <nav class="nav-bar" id="nav" hidden></nav>
+
+    <script type="module" src="assets/js/survey/runner.js"></script>
+  </body>
+</html>

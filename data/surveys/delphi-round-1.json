@@ -1,0 +1,892 @@
+{
+  "id": "delphi-round-1",
+  "code": "R1",
+  "schemaVersion": 1,
+  "estimateMinutes": 25,
+  "flow": {
+    "createsTag": true,
+    "requiresTag": true
+  },
+  "title": {
+    "en": "Music Evaluation Survey (Preliminary Round 1)",
+    "zh": "音乐评价调查（第一轮预调查）",
+    "fr": "Enquête sur l'évaluation musicale (tour préliminaire 1)"
+  },
+  "shortTitle": {
+    "en": "Preliminary Round 1",
+    "zh": "第一轮预调查",
+    "fr": "Tour préliminaire 1"
+  },
+  "summary": {
+    "en": "Free-response round: demographics, the factors that matter in music evaluation, and twelve contextual scenarios.",
+    "zh": "自由作答轮：人口学信息、音乐评价中的重要因素，以及十二组情境场景。",
+    "fr": "Tour à réponses libres : données démographiques, facteurs importants de l'évaluation musicale et douze scénarios contextuels."
+  },
+  "pages": [
+    {
+      "id": "intro",
+      "eyebrow": { "en": "Introduction", "zh": "引言", "fr": "Introduction" },
+      "title": { "en": "Welcome", "zh": "欢迎", "fr": "Bienvenue" },
+      "blocks": [
+        {
+          "type": "prose",
+          "text": {
+            "en": "Welcome to the **first round** of preliminary surveys concerning how musicians evaluate music!",
+            "zh": "欢迎参加关于音乐家如何评价音乐的**第一轮**初步问卷调查！",
+            "fr": "Bienvenue au **premier tour** des enquêtes préliminaires sur la manière dont les musiciens évaluent la musique !"
+          }
+        },
+        {
+          "type": "prose",
+          "text": {
+            "en": "This first round prioritizes **free response** and **personal opinions**; many questions will give you the chance to write freely without the constraints of predetermined options.",
+            "zh": "本轮问卷侧重**自由作答**与**个人观点**；许多问题将让您在没有预设选项限制的情况下自由书写。",
+            "fr": "Ce premier tour privilégie les **réponses libres** et les **opinions personnelles** ; de nombreuses questions vous donneront l'occasion d'écrire librement, sans les contraintes d'options prédéfinies."
+          }
+        },
+        {
+          "type": "prose",
+          "text": {
+            "en": "All responses are **anonymized**. The only identifying information we will have of you will be the **eight-character tag** you generate during this survey. Once you have this tag, **please keep it safe**; if you lose this tag, we will not be able to identify which responses are yours in future surveys.",
+            "zh": "所有回答均**匿名**。我们掌握的唯一身份信息是您在本问卷中生成的**八位字符标签**。生成后，**请务必妥善保管**；若遗失该标签，我们将无法在后续问卷中识别哪些回答属于您。",
+            "fr": "Toutes les réponses sont **anonymisées**. La seule information permettant de vous identifier sera l'**étiquette de huit caractères** que vous générerez au cours de cette enquête. Une fois cette étiquette obtenue, **conservez-la précieusement** ; si vous la perdez, nous ne pourrons pas déterminer quelles réponses sont les vôtres lors des enquêtes ultérieures."
+          }
+        },
+        {
+          "type": "prose",
+          "text": {
+            "en": "Once we receive all responses, we will share an **anonymized summary report** to allow you to see how other experts answered the questions in this survey. After this report, you will have a chance to change your responses if you wish.",
+            "zh": "收到全部回答后，我们将发布一份**匿名汇总报告**，让您了解其他专家如何作答。报告发布后，您将有机会修改自己的回答。",
+            "fr": "Une fois toutes les réponses reçues, nous partagerons un **rapport de synthèse anonymisé** afin que vous puissiez voir comment d'autres experts ont répondu aux questions de cette enquête. Après ce rapport, vous aurez la possibilité de modifier vos réponses si vous le souhaitez."
+          }
+        },
+        {
+          "type": "prose",
+          "text": {
+            "en": "If you have read the above and are ready to begin, please check the box below and proceed to the next page.",
+            "zh": "如果您已阅读以上内容并准备开始，请勾选下方方框并进入下一页。",
+            "fr": "Si vous avez lu ce qui précède et êtes prêt(e) à commencer, veuillez cocher la case ci-dessous et passer à la page suivante."
+          }
+        },
+        {
+          "type": "consent",
+          "id": "consent_start",
+          "required": true,
+          "label": {
+            "en": "I have read through the above introduction and am ready to begin.",
+            "zh": "我已阅读以上介绍，并准备开始。",
+            "fr": "J'ai lu l'introduction ci-dessus et je suis prêt(e) à commencer."
+          }
+        }
+      ]
+    },
+    {
+      "id": "tag",
+      "eyebrow": { "en": "Step 1 of 2", "zh": "第 1 步（共 2 步）", "fr": "Étape 1 sur 2" },
+      "title": { "en": "Getting Your Tag", "zh": "获取您的标签", "fr": "Obtenir votre étiquette" },
+      "blocks": [
+        {
+          "type": "prose",
+          "text": {
+            "en": "Since this is the first round of surveys, please generate your **eight-character tag** now.",
+            "zh": "由于这是第一轮问卷，请现在生成您的**八位字符标签**。",
+            "fr": "Comme il s'agit du premier tour d'enquêtes, veuillez générer dès maintenant votre **étiquette de huit caractères**."
+          }
+        },
+        {
+          "type": "prose",
+          "text": {
+            "en": "We will not collect any identifying data from you besides this tag, so **please keep this tag safe**. If you lose it, we will be unable to confirm which surveys in the future are yours.",
+            "zh": "除该标签外，我们不会收集您的任何身份信息，因此**请妥善保管此标签**。若遗失该标签，我们将无法确认后续问卷中哪些回答属于您。",
+            "fr": "Nous ne recueillerons aucune donnée permettant de vous identifier en dehors de cette étiquette ; **conservez donc précieusement cette étiquette**. Si vous la perdez, nous ne pourrons pas confirmer quelles enquêtes futures sont les vôtres."
+          }
+        },
+        { "type": "tagGenerate", "id": "tag" },
+        {
+          "type": "prose",
+          "text": {
+            "en": "Once you have generated the eight-character tag and pasted it somewhere you can retrieve it later, please check the box below when you are ready to continue.",
+            "zh": "生成八位字符标签并将其粘贴到日后可以找回的位置后，请在准备继续时勾选下方方框。",
+            "fr": "Une fois l'étiquette de huit caractères générée et collée à un endroit où vous pourrez la retrouver, veuillez cocher la case ci-dessous lorsque vous êtes prêt(e) à continuer."
+          }
+        },
+        {
+          "type": "consent",
+          "id": "consent_tag_saved",
+          "required": true,
+          "label": {
+            "en": "I have generated my eight-character tag and pasted it somewhere I can retrieve it in the future.",
+            "zh": "我已生成八位字符标签，并将其粘贴到日后可以找回的位置。",
+            "fr": "J'ai généré mon étiquette de huit caractères et je l'ai collée à un endroit où je pourrai la retrouver à l'avenir."
+          }
+        },
+        { "type": "resumePrompt" }
+      ]
+    },
+    {
+      "id": "demographics",
+      "eyebrow": { "en": "Step 2 of 2", "zh": "第 2 步（共 2 步）", "fr": "Étape 2 sur 2" },
+      "title": { "en": "Demographics", "zh": "人口学信息", "fr": "Données démographiques" },
+      "blocks": [
+        {
+          "type": "prose",
+          "text": {
+            "en": "In this section, we wish to confirm that our team of experts is sufficiently diverse to provide meaningful consensus on music evaluation factors and processes.",
+            "zh": "本部分旨在确认我们的专家组具有足够的多样性，以便就音乐评价的因素与过程形成有意义的共识。",
+            "fr": "Dans cette section, nous souhaitons confirmer que notre groupe d'experts est suffisamment diversifié pour parvenir à un consensus significatif sur les facteurs et les processus d'évaluation de la musique."
+          }
+        },
+        {
+          "type": "shortText",
+          "id": "q_language",
+          "required": true,
+          "prompt": {
+            "en": "What is your mother tongue / most fluent language(s)?",
+            "zh": "您的母语／最流利的语言是什么？",
+            "fr": "Quelle est votre langue maternelle / la ou les langues que vous maîtrisez le mieux ?"
+          }
+        },
+        {
+          "type": "singleChoice",
+          "id": "q_gender",
+          "required": true,
+          "prompt": {
+            "en": "What is your gender?",
+            "zh": "您的性别是？",
+            "fr": "Quel est votre genre ?"
+          },
+          "options": [
+            { "id": "male", "label": { "en": "Male", "zh": "男", "fr": "Homme" } },
+            { "id": "female", "label": { "en": "Female", "zh": "女", "fr": "Femme" } },
+            { "id": "nonbinary", "label": { "en": "Nonbinary", "zh": "非二元", "fr": "Non binaire" } },
+            {
+              "id": "prefer_not_to_say",
+              "label": { "en": "Prefer not to say", "zh": "不愿透露", "fr": "Je préfère ne pas répondre" }
+            },
+            {
+              "id": "other",
+              "allowText": true,
+              "label": { "en": "Other (please specify)", "zh": "其他（请注明）", "fr": "Autre (veuillez préciser)" }
+            }
+          ]
+        },
+        {
+          "type": "singleChoice",
+          "id": "q_age",
+          "required": true,
+          "prompt": {
+            "en": "What age bracket are you in?",
+            "zh": "您所属的年龄段是？",
+            "fr": "Dans quelle tranche d'âge vous situez-vous ?"
+          },
+          "options": [
+            { "id": "18_22", "label": { "en": "18 to 22", "zh": "18 至 22 岁", "fr": "18 à 22 ans" } },
+            { "id": "23_25", "label": { "en": "23 to 25", "zh": "23 至 25 岁", "fr": "23 à 25 ans" } },
+            { "id": "26_30", "label": { "en": "26 to 30", "zh": "26 至 30 岁", "fr": "26 à 30 ans" } },
+            { "id": "31_40", "label": { "en": "31 to 40", "zh": "31 至 40 岁", "fr": "31 à 40 ans" } },
+            { "id": "41_64", "label": { "en": "41 to 64", "zh": "41 至 64 岁", "fr": "41 à 64 ans" } },
+            { "id": "65_plus", "label": { "en": "65+", "zh": "65 岁以上", "fr": "65 ans et plus" } }
+          ]
+        },
+        {
+          "type": "singleChoice",
+          "id": "q_education",
+          "required": true,
+          "prompt": {
+            "en": "What is your highest level of formal music education (either currently pursuing or already obtained)?",
+            "zh": "您目前已获得或正在攻读的最高正式音乐教育学历是？",
+            "fr": "Quel est votre plus haut niveau de formation musicale formelle (en cours ou déjà obtenu) ?"
+          },
+          "options": [
+            {
+              "id": "undergraduate",
+              "label": { "en": "Undergraduate", "zh": "本科", "fr": "Licence (undergraduate)" }
+            },
+            {
+              "id": "postgraduate_ma",
+              "label": {
+                "en": "Postgraduate (MA, MM, GD, etc.)",
+                "zh": "研究生（硕士、音乐硕士、研究生文凭等）",
+                "fr": "Master (MA, MM, diplôme d'études supérieures, etc.)"
+              }
+            },
+            {
+              "id": "postgraduate_phd",
+              "label": {
+                "en": "Postgraduate (PhD, DMA, etc.)",
+                "zh": "研究生（博士、音乐艺术博士等）",
+                "fr": "Doctorat (PhD, DMA, etc.)"
+              }
+            },
+            {
+              "id": "part_time",
+              "label": {
+                "en": "Part-time or short-term program",
+                "zh": "非全日制或短期课程",
+                "fr": "Programme à temps partiel ou de courte durée"
+              }
+            },
+            {
+              "id": "other",
+              "allowText": true,
+              "label": { "en": "Other (please specify)", "zh": "其他（请注明）", "fr": "Autre (veuillez préciser)" }
+            }
+          ]
+        },
+        {
+          "type": "singleChoice",
+          "id": "q_country",
+          "required": true,
+          "prompt": {
+            "en": "In which country did you receive the majority of your formal music education?",
+            "zh": "您的大部分正式音乐教育是在哪个国家接受的？",
+            "fr": "Dans quel pays avez-vous reçu la majeure partie de votre formation musicale formelle ?"
+          },
+          "options": [
+            { "id": "china", "label": { "en": "China", "zh": "中国", "fr": "Chine" } },
+            { "id": "france", "label": { "en": "France", "zh": "法国", "fr": "France" } },
+            { "id": "usa", "label": { "en": "USA", "zh": "美国", "fr": "États-Unis" } },
+            {
+              "id": "other",
+              "allowText": true,
+              "label": { "en": "Other (please specify)", "zh": "其他（请注明）", "fr": "Autre (veuillez préciser)" }
+            }
+          ]
+        },
+        {
+          "type": "singleChoice",
+          "id": "q_teaching",
+          "required": true,
+          "prompt": {
+            "en": "How long have you taught a music-related course?",
+            "zh": "您教授音乐相关课程的时长是？",
+            "fr": "Depuis combien de temps enseignez-vous un cours lié à la musique ?"
+          },
+          "options": [
+            { "id": "0", "label": { "en": "0 years", "zh": "0 年", "fr": "0 an" } },
+            { "id": "1_10", "label": { "en": "1 to 10 years", "zh": "1 至 10 年", "fr": "1 à 10 ans" } },
+            { "id": "11_20", "label": { "en": "11 to 20 years", "zh": "11 至 20 年", "fr": "11 à 20 ans" } },
+            { "id": "21_30", "label": { "en": "21 to 30 years", "zh": "21 至 30 年", "fr": "21 à 30 ans" } },
+            { "id": "30_plus", "label": { "en": "30+ years", "zh": "30 年以上", "fr": "Plus de 30 ans" } }
+          ]
+        },
+        {
+          "type": "singleChoice",
+          "id": "q_ai_listened",
+          "required": true,
+          "prompt": {
+            "en": "Have you knowingly listened to AI music before?",
+            "zh": "您是否曾明确听过 AI 生成的音乐？",
+            "fr": "Avez-vous déjà écouté de la musique générée par IA en le sachant ?"
+          },
+          "options": [
+            { "id": "yes", "label": { "en": "Yes", "zh": "是", "fr": "Oui" } },
+            { "id": "no", "label": { "en": "No", "zh": "否", "fr": "Non" } },
+            { "id": "unsure", "label": { "en": "Unsure", "zh": "不确定", "fr": "Je ne sais pas" } }
+          ]
+        },
+        {
+          "type": "shortText",
+          "id": "q_field",
+          "required": true,
+          "prompt": {
+            "en": "What specific field(s) of music (composition, performance, instrument(s), etc.) do you mainly focus on?",
+            "zh": "您主要专注于哪些具体的音乐领域（作曲、演奏、乐器等）？",
+            "fr": "Sur quel(s) domaine(s) musical(aux) précis (composition, interprétation, instrument(s), etc.) vous concentrez-vous principalement ?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "factors",
+      "title": {
+        "en": "Factors of Music Evaluation",
+        "zh": "音乐评价的因素",
+        "fr": "Facteurs de l'évaluation musicale"
+      },
+      "blocks": [
+        {
+          "type": "prose",
+          "text": {
+            "en": "Now that the introductory sections have been completed, this section focuses on asking you what factors you believe, in your expert opinion, to be important in music evaluation.",
+            "zh": "完成前几部分的介绍后，本部分希望了解：在您看来，哪些因素对音乐评价至关重要。",
+            "fr": "Les sections introductives étant terminées, cette section vous demande quels facteurs, selon votre expertise, sont importants dans l'évaluation de la musique."
+          }
+        },
+        {
+          "type": "prose",
+          "text": {
+            "en": "From this point forward, please feel free to use the provided text boxes to provide as much input as you would like. If you have any questions or concerns that cannot be expressed in the free-response boxes, please feel free to contact Benjamin Honeray Lee using the details below.",
+            "zh": "从这里开始，请随意使用所提供的文本框，尽可能充分地表达您的想法。如果您有无法在自由作答框中表达的问题或疑虑，欢迎通过下方信息联系 Benjamin Honeray Lee。",
+            "fr": "À partir de maintenant, n'hésitez pas à utiliser les zones de texte proposées pour vous exprimer aussi longuement que vous le souhaitez. Si vous avez des questions ou des préoccupations qui ne peuvent être exprimées dans les zones de réponse libre, n'hésitez pas à contacter Benjamin Honeray Lee avec les coordonnées ci-dessous."
+          }
+        },
+        { "type": "contact" },
+        {
+          "type": "multiChoice",
+          "id": "q_factors",
+          "required": true,
+          "minSelections": 1,
+          "prompt": {
+            "en": "Below are several factors that have been considered for music evaluation frameworks. Please check all factors that you believe are important for evaluating music.",
+            "zh": "以下是音乐评价框架中常被考虑的一些因素。请勾选所有您认为对评价音乐重要的因素。",
+            "fr": "Voici plusieurs facteurs pris en compte dans les cadres d'évaluation musicale. Veuillez cocher tous les facteurs que vous jugez importants pour évaluer la musique."
+          },
+          "options": [
+            {
+              "id": "vocal",
+              "label": { "en": "Vocal", "zh": "人声", "fr": "Voix" },
+              "sub": {
+                "en": "Assesses vocal quality, including clarity, pitch stability, and vocal techniques (e.g., vibrato, portamento).",
+                "zh": "评估人声质量，包括清晰度、音高稳定性以及演唱技巧（如颤音、滑音）。",
+                "fr": "Évalue la qualité vocale, notamment la clarté, la stabilité de la hauteur et les techniques vocales (p. ex. vibrato, portamento)."
+              }
+            },
+            {
+              "id": "instrument",
+              "label": { "en": "Instrument", "zh": "器乐", "fr": "Instruments" },
+              "sub": {
+                "en": "Evaluates the realism and synthesis quality of instruments and their acoustic fidelity.",
+                "zh": "评估乐器的真实感与合成质量及其声学保真度。",
+                "fr": "Évalue le réalisme et la qualité de synthèse des instruments ainsi que leur fidélité acoustique."
+              }
+            },
+            {
+              "id": "melody",
+              "label": { "en": "Melody", "zh": "旋律", "fr": "Mélodie" },
+              "sub": {
+                "en": "Assesses melodic richness and memorability, focusing on the creative quality of the musical lines.",
+                "zh": "评估旋律的丰富性与记忆度，关注音乐线条的创作质量。",
+                "fr": "Évalue la richesse et la mémorabilité mélodiques, en se concentrant sur la qualité créative des lignes musicales."
+              }
+            },
+            {
+              "id": "structure",
+              "label": { "en": "Structure", "zh": "结构", "fr": "Structure" },
+              "sub": {
+                "en": "Evaluates the organization of song sections (e.g., verse, chorus, bridge), ensuring natural transitions and adherence to compositional logic.",
+                "zh": "评估歌曲各段落（如主歌、副歌、桥段）的组织，确保过渡自然并符合作曲逻辑。",
+                "fr": "Évalue l'organisation des sections d'une chanson (p. ex. couplet, refrain, pont), en veillant à des transitions naturelles et au respect de la logique compositionnelle."
+              }
+            },
+            {
+              "id": "arrangement",
+              "label": { "en": "Arrangement", "zh": "编曲", "fr": "Arrangement" },
+              "sub": {
+                "en": "Assesses the artistry of the harmonic framework and instrumental orchestration.",
+                "zh": "评估和声框架的艺术性以及乐器配器。",
+                "fr": "Évalue l'art du cadre harmonique et de l'orchestration instrumentale."
+              }
+            },
+            {
+              "id": "mixing",
+              "label": { "en": "Mixing", "zh": "混音", "fr": "Mixage" },
+              "sub": {
+                "en": "Evaluates post-production quality, focusing on the balance between tracks and the clarity of spatial imaging.",
+                "zh": "评估后期制作质量，关注各轨之间的平衡与空间成像的清晰度。",
+                "fr": "Évalue la qualité de la postproduction, en se concentrant sur l'équilibre entre les pistes et la clarté de l'image spatiale."
+              }
+            },
+            {
+              "id": "musicality",
+              "label": { "en": "Musicality", "zh": "音乐性", "fr": "Musicalité" },
+              "sub": {
+                "en": "A holistic appraisal of the song's overall artistic impact and auditory pleasure.",
+                "zh": "对歌曲整体艺术感染力与听觉愉悦感的综合评判。",
+                "fr": "Appréciation holistique de l'impact artistique global et du plaisir auditif de la chanson."
+              }
+            },
+            {
+              "id": "coherence",
+              "label": { "en": "Coherence", "zh": "连贯性", "fr": "Cohérence" },
+              "sub": {
+                "en": "Evaluates the musical and emotional continuity across different sections of the song, including intro, verse, chorus, and outro.",
+                "zh": "评估歌曲不同段落（前奏、主歌、副歌、尾声）之间在音乐与情感上的连续性。",
+                "fr": "Évalue la continuité musicale et émotionnelle entre les différentes sections de la chanson, y compris l'introduction, le couplet, le refrain et la conclusion."
+              }
+            },
+            {
+              "id": "memorability",
+              "label": { "en": "Memorability", "zh": "记忆度", "fr": "Mémorabilité" },
+              "sub": {
+                "en": "Evaluates the presence of distinctive musical features, such as a catchy melody, rhythmic motif, or lyrical hook, that make the song easy to remember after a single listen.",
+                "zh": "评估是否存在鲜明的音乐特征（如朗朗上口的旋律、节奏动机或歌词钩子），使歌曲在听过一次后仍易于记住。",
+                "fr": "Évalue la présence de traits musicaux distinctifs, tels qu'une mélodie accrocheuse, un motif rythmique ou un refrain mémorable, qui rendent la chanson facile à retenir après une seule écoute."
+              }
+            }
+          ]
+        },
+        {
+          "type": "longText",
+          "id": "q_factors_reason",
+          "required": false,
+          "prompt": {
+            "en": "If you wish to explain any reasoning behind your selections, please do so here.",
+            "zh": "如果您希望说明选择的理由，请在此处填写。",
+            "fr": "Si vous souhaitez expliquer le raisonnement qui sous-tend vos choix, veuillez le faire ici."
+          }
+        },
+        {
+          "type": "branchScale",
+          "id": "q_factors_sufficient",
+          "required": true,
+          "prompt": {
+            "en": "Do you agree or disagree with the following statement?",
+            "zh": "您是否同意以下说法？",
+            "fr": "Êtes-vous d'accord ou non avec l'affirmation suivante ?"
+          },
+          "statement": {
+            "en": "\"Sufficiently accurate music evaluation can be done by only examining the factors checked in the previous question.\"",
+            "zh": "“仅考察上一题中所勾选的因素，即可完成足够准确的音乐评价。”",
+            "fr": "« Une évaluation musicale suffisamment précise peut être réalisée en examinant uniquement les facteurs cochés à la question précédente. »"
+          },
+          "options": [
+            { "id": "agree", "label": { "en": "Agree", "zh": "同意", "fr": "D'accord" } },
+            { "id": "neutral", "label": { "en": "Neutral", "zh": "中立", "fr": "Neutre" } },
+            { "id": "disagree", "label": { "en": "Disagree", "zh": "不同意", "fr": "Pas d'accord" } }
+          ],
+          "followUp": {
+            "when": ["agree", "disagree"],
+            "prompt": { "en": "To what extent?", "zh": "程度如何？", "fr": "Dans quelle mesure ?" },
+            "options": [
+              { "id": "slightly", "label": { "en": "Slightly", "zh": "略微", "fr": "Légèrement" } },
+              { "id": "somewhat", "label": { "en": "Somewhat", "zh": "较为", "fr": "Assez" } },
+              { "id": "strongly", "label": { "en": "Strongly", "zh": "非常", "fr": "Fortement" } }
+            ]
+          }
+        },
+        {
+          "type": "longText",
+          "id": "q_factors_sufficient_reason",
+          "required": false,
+          "prompt": {
+            "en": "If you wish to explain any reasoning behind your response, please do so here.",
+            "zh": "如果您希望说明做出该判断的理由，请在此处填写。",
+            "fr": "Si vous souhaitez expliquer le raisonnement qui sous-tend votre réponse, veuillez le faire ici."
+          }
+        },
+        {
+          "type": "branchScale",
+          "id": "q_aural_only",
+          "required": true,
+          "prompt": {
+            "en": "Do you agree or disagree with the following statement?",
+            "zh": "您是否同意以下说法？",
+            "fr": "Êtes-vous d'accord ou non avec l'affirmation suivante ?"
+          },
+          "statement": {
+            "en": "\"Accurate music evaluation can be achieved by examining **only** its aural content, i.e. its sound. In other words, non-aural context (e.g. composer background, culture, human relationships, etc.) does **not** need to be considered to accurately evaluate music.\"",
+            "zh": "“只要考察其听觉内容（即声音本身），就能实现准确的音乐评价。换言之，为了准确评价音乐，**无需**考虑非听觉语境（如作曲家背景、文化、人际关系等）。”",
+            "fr": "« Une évaluation musicale précise peut être obtenue en examinant **uniquement** son contenu sonore, c'est-à-dire son son. Autrement dit, le contexte non sonore (p. ex. le parcours du compositeur, la culture, les relations humaines, etc.) n'a **pas** besoin d'être pris en compte pour évaluer précisément la musique. »"
+          },
+          "options": [
+            { "id": "agree", "label": { "en": "Agree", "zh": "同意", "fr": "D'accord" } },
+            { "id": "neutral", "label": { "en": "Neutral", "zh": "中立", "fr": "Neutre" } },
+            { "id": "disagree", "label": { "en": "Disagree", "zh": "不同意", "fr": "Pas d'accord" } }
+          ],
+          "followUp": {
+            "when": ["agree", "disagree"],
+            "prompt": { "en": "To what extent?", "zh": "程度如何？", "fr": "Dans quelle mesure ?" },
+            "options": [
+              { "id": "slightly", "label": { "en": "Slightly", "zh": "略微", "fr": "Légèrement" } },
+              { "id": "somewhat", "label": { "en": "Somewhat", "zh": "较为", "fr": "Assez" } },
+              { "id": "strongly", "label": { "en": "Strongly", "zh": "非常", "fr": "Fortement" } }
+            ]
+          }
+        },
+        {
+          "type": "longText",
+          "id": "q_aural_only_reason",
+          "required": false,
+          "prompt": {
+            "en": "If you wish to explain any reasoning behind your response, please do so here.",
+            "zh": "如果您希望说明做出该判断的理由，请在此处填写。",
+            "fr": "Si vous souhaitez expliquer le raisonnement qui sous-tend votre réponse, veuillez le faire ici."
+          }
+        },
+        {
+          "type": "longText",
+          "id": "q_own_factors",
+          "required": false,
+          "prompt": {
+            "en": "What factors would you, as a musician, use to accurately evaluate music? Are there any factors you believe are important to music evaluation that have not yet been mentioned in this survey?",
+            "zh": "作为音乐家，您会使用哪些因素来准确评价音乐？您是否认为还有一些对音乐评价很重要、但本问卷尚未提及的因素？",
+            "fr": "Quels facteurs utiliseriez-vous, en tant que musicien(ne), pour évaluer précisément la musique ? Y a-t-il des facteurs que vous jugez importants pour l'évaluation musicale et qui n'ont pas encore été mentionnés dans cette enquête ?"
+          }
+        },
+        {
+          "type": "longText",
+          "id": "q_ai_positive",
+          "required": false,
+          "prompt": {
+            "en": "What aspects of musicianship (e.g. authenticity, virtuosity, etc.) do you believe are positively impacted by a piece of music being AI-generated, if any? Why?",
+            "zh": "您认为一首音乐由 AI 生成，会对音乐素养的哪些方面（如真实性、技艺精湛度等）产生积极影响（如果有的话）？为什么？",
+            "fr": "Quels aspects du métier de musicien (p. ex. l'authenticité, la virtuosité, etc.) estimez-vous positivement influencés par le fait qu'une œuvre musicale soit générée par IA, le cas échéant ? Pourquoi ?"
+          }
+        },
+        {
+          "type": "longText",
+          "id": "q_ai_negative",
+          "required": false,
+          "prompt": {
+            "en": "What aspects of musicianship (e.g. authenticity, virtuosity, etc.) do you believe are negatively impacted by a piece of music being AI-generated, if any? Why?",
+            "zh": "您认为一首音乐由 AI 生成，会对音乐素养的哪些方面（如真实性、技艺精湛度等）产生负面影响（如果有的话）？为什么？",
+            "fr": "Quels aspects du métier de musicien (p. ex. l'authenticité, la virtuosité, etc.) estimez-vous négativement influencés par le fait qu'une œuvre musicale soit générée par IA, le cas échéant ? Pourquoi ?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "scenarios",
+      "randomize": "blocks",
+      "title": { "en": "Contextual Scenarios", "zh": "情境场景", "fr": "Scénarios contextuels" },
+      "blocks": [
+        {
+          "type": "prose",
+          "text": {
+            "en": "In this section, you will be given several pairs of contextual scenarios inspired by music in real life. For each pair, please respond with your preference (if any) for which of the two scenarios you believe would lead to a better musical experience. If you believe that there is no appreciable difference in the quality of music experience between the two scenarios, please respond as neutral.",
+            "zh": "本部分将呈现若干组源自现实音乐情境的场景对。对于每一组场景，请说明您更倾向于其中哪一种——即您认为哪种场景会带来更好的音乐体验。如果您认为两种场景在音乐体验质量上没有明显差别，请选择“中立”。",
+            "fr": "Dans cette section, plusieurs paires de scénarios contextuels inspirés de la musique réelle vous seront présentées. Pour chaque paire, indiquez votre préférence (le cas échéant) quant au scénario qui, selon vous, mènerait à une meilleure expérience musicale. Si vous estimez qu'il n'y a pas de différence appréciable entre les deux scénarios, répondez « neutre »."
+          }
+        },
+        {
+          "type": "scenarioPair",
+          "id": "s01",
+          "required": true,
+          "a": {
+            "en": "An emotional song with English lyrics is sung to an English-speaking audience.",
+            "zh": "一首英文歌词的情感歌曲，唱给英语听众。",
+            "fr": "Une chanson émouvante aux paroles anglaises est chantée devant un public anglophone."
+          },
+          "b": {
+            "en": "An emotional song with English lyrics is sung to a non-English-speaking audience.",
+            "zh": "一首英文歌词的情感歌曲，唱给非英语听众。",
+            "fr": "Une chanson émouvante aux paroles anglaises est chantée devant un public non anglophone."
+          },
+          "followUp": {
+            "prompt": { "en": "To what extent?", "zh": "程度如何？", "fr": "Dans quelle mesure ?" },
+            "options": [
+              { "id": "slightly", "label": { "en": "Slightly", "zh": "略微", "fr": "Légèrement" } },
+              { "id": "somewhat", "label": { "en": "Somewhat", "zh": "较为", "fr": "Assez" } },
+              { "id": "strongly", "label": { "en": "Strongly", "zh": "非常", "fr": "Fortement" } }
+            ]
+          }
+        },
+        {
+          "type": "scenarioPair",
+          "id": "s02",
+          "required": true,
+          "a": {
+            "en": "A singer who espouses feminist views collaborates with an alleged sexual abuser to compose and perform a song conveying the value of feminist ideals.",
+            "zh": "一位秉持女性主义观点的歌手，与一名被指控性侵者合作创作并演唱一首传达女性主义理想的歌曲。",
+            "fr": "Une chanteuse qui défend des idées féministes collabore avec une personne accusée d'agression sexuelle pour composer et interpréter une chanson portant les valeurs féministes."
+          },
+          "b": {
+            "en": "A singer who espouses feminist views composes and performs a song conveying the value of feminist ideals.",
+            "zh": "一位秉持女性主义观点的歌手独自创作并演唱一首传达女性主义理想的歌曲。",
+            "fr": "Une chanteuse qui défend des idées féministes compose et interprète une chanson portant les valeurs féministes."
+          },
+          "followUp": {
+            "prompt": { "en": "To what extent?", "zh": "程度如何？", "fr": "Dans quelle mesure ?" },
+            "options": [
+              { "id": "slightly", "label": { "en": "Slightly", "zh": "略微", "fr": "Légèrement" } },
+              { "id": "somewhat", "label": { "en": "Somewhat", "zh": "较为", "fr": "Assez" } },
+              { "id": "strongly", "label": { "en": "Strongly", "zh": "非常", "fr": "Fortement" } }
+            ]
+          }
+        },
+        {
+          "type": "scenarioPair",
+          "id": "s03",
+          "required": true,
+          "a": {
+            "en": "Wealthy celebrities collaborate to sing a rendition of a song conveying the struggles of everyday life in poverty.",
+            "zh": "富裕的名人合作演唱一首讲述贫困日常生活的歌曲。",
+            "fr": "Des célébrités fortunées s'unissent pour interpréter une reprise d'une chanson évoquant les difficultés de la vie quotidienne dans la pauvreté."
+          },
+          "b": {
+            "en": "Everyday musicians from lower-class economic backgrounds sing a rendition of a song conveying the struggles of everyday life in poverty.",
+            "zh": "来自较低经济背景的普通音乐人演唱一首讲述贫困日常生活的歌曲。",
+            "fr": "Des musiciens ordinaires issus de milieux économiques modestes interprètent une reprise d'une chanson évoquant les difficultés de la vie quotidienne dans la pauvreté."
+          },
+          "followUp": {
+            "prompt": { "en": "To what extent?", "zh": "程度如何？", "fr": "Dans quelle mesure ?" },
+            "options": [
+              { "id": "slightly", "label": { "en": "Slightly", "zh": "略微", "fr": "Légèrement" } },
+              { "id": "somewhat", "label": { "en": "Somewhat", "zh": "较为", "fr": "Assez" } },
+              { "id": "strongly", "label": { "en": "Strongly", "zh": "非常", "fr": "Fortement" } }
+            ]
+          }
+        },
+        {
+          "type": "scenarioPair",
+          "id": "s04",
+          "required": true,
+          "a": {
+            "en": "A song conveying everyday life in the 1950s is sung to an audience of people whose childhoods were in the 1950s.",
+            "zh": "一首讲述 20 世纪 50 年代日常生活的歌曲，唱给童年时期在 20 世纪 50 年代度过的听众。",
+            "fr": "Une chanson évoquant la vie quotidienne des années 1950 est chantée devant un public dont l'enfance s'est déroulée dans les années 1950."
+          },
+          "b": {
+            "en": "A song conveying everyday life in the 1950s is sung to an audience of people whose childhoods were in the 2010s.",
+            "zh": "一首讲述 20 世纪 50 年代日常生活的歌曲，唱给童年时期在 2010 年代度过的听众。",
+            "fr": "Une chanson évoquant la vie quotidienne des années 1950 est chantée devant un public dont l'enfance s'est déroulée dans les années 2010."
+          },
+          "followUp": {
+            "prompt": { "en": "To what extent?", "zh": "程度如何？", "fr": "Dans quelle mesure ?" },
+            "options": [
+              { "id": "slightly", "label": { "en": "Slightly", "zh": "略微", "fr": "Légèrement" } },
+              { "id": "somewhat", "label": { "en": "Somewhat", "zh": "较为", "fr": "Assez" } },
+              { "id": "strongly", "label": { "en": "Strongly", "zh": "非常", "fr": "Fortement" } }
+            ]
+          }
+        },
+        {
+          "type": "scenarioPair",
+          "id": "s05",
+          "required": true,
+          "a": {
+            "en": "A song conveying the traumas of war is sung to an audience of veterans.",
+            "zh": "一首讲述战争创伤的歌曲，唱给退伍军人听众。",
+            "fr": "Une chanson évoquant les traumatismes de la guerre est chantée devant un public d'anciens combattants."
+          },
+          "b": {
+            "en": "A song conveying the traumas of war is sung to an audience of wealthy people with no experience nor acquaintance with war.",
+            "zh": "一首讲述战争创伤的歌曲，唱给从未经历或接触过战争的富裕人群。",
+            "fr": "Une chanson évoquant les traumatismes de la guerre est chantée devant un public de personnes fortunées n'ayant ni vécu ni connu la guerre."
+          },
+          "followUp": {
+            "prompt": { "en": "To what extent?", "zh": "程度如何？", "fr": "Dans quelle mesure ?" },
+            "options": [
+              { "id": "slightly", "label": { "en": "Slightly", "zh": "略微", "fr": "Légèrement" } },
+              { "id": "somewhat", "label": { "en": "Somewhat", "zh": "较为", "fr": "Assez" } },
+              { "id": "strongly", "label": { "en": "Strongly", "zh": "非常", "fr": "Fortement" } }
+            ]
+          }
+        },
+        {
+          "type": "scenarioPair",
+          "id": "s06",
+          "required": true,
+          "a": {
+            "en": "The theme song of a television show is performed to an audience of people who grew up with the show as children.",
+            "zh": "某电视节目的主题曲，演奏给从小看着该节目长大的听众。",
+            "fr": "Le générique d'une série télévisée est interprété devant un public qui a grandi en regardant cette série."
+          },
+          "b": {
+            "en": "The theme song of a television show is performed to an audience of people who have never watched the show.",
+            "zh": "某电视节目的主题曲，演奏给从未看过该节目的听众。",
+            "fr": "Le générique d'une série télévisée est interprété devant un public qui n'a jamais regardé cette série."
+          },
+          "followUp": {
+            "prompt": { "en": "To what extent?", "zh": "程度如何？", "fr": "Dans quelle mesure ?" },
+            "options": [
+              { "id": "slightly", "label": { "en": "Slightly", "zh": "略微", "fr": "Légèrement" } },
+              { "id": "somewhat", "label": { "en": "Somewhat", "zh": "较为", "fr": "Assez" } },
+              { "id": "strongly", "label": { "en": "Strongly", "zh": "非常", "fr": "Fortement" } }
+            ]
+          }
+        },
+        {
+          "type": "scenarioPair",
+          "id": "s07",
+          "required": true,
+          "a": {
+            "en": "The anthem of a racial hate group is sung to an audience of children.",
+            "zh": "一个种族仇恨团体的颂歌，唱给儿童听众。",
+            "fr": "L'hymne d'un groupe de haine raciale est chanté devant un public d'enfants."
+          },
+          "b": {
+            "en": "A song conveying compassion regardless of race is sung to an audience of children.",
+            "zh": "一首传达不分种族之悲悯的歌曲，唱给儿童听众。",
+            "fr": "Une chanson prônant la compassion sans distinction de race est chantée devant un public d'enfants."
+          },
+          "followUp": {
+            "prompt": { "en": "To what extent?", "zh": "程度如何？", "fr": "Dans quelle mesure ?" },
+            "options": [
+              { "id": "slightly", "label": { "en": "Slightly", "zh": "略微", "fr": "Légèrement" } },
+              { "id": "somewhat", "label": { "en": "Somewhat", "zh": "较为", "fr": "Assez" } },
+              { "id": "strongly", "label": { "en": "Strongly", "zh": "非常", "fr": "Fortement" } }
+            ]
+          }
+        },
+        {
+          "type": "scenarioPair",
+          "id": "s08",
+          "required": true,
+          "a": {
+            "en": "A love song treating the female romantic partner as an object to be bought is sung to an audience of children.",
+            "zh": "一首把女性伴侣物化为可购买之物的情歌，唱给儿童听众。",
+            "fr": "Une chanson d'amour présentant la partenaire féminine comme un objet à acheter est chantée devant un public d'enfants."
+          },
+          "b": {
+            "en": "A love song treating both partners in the relationship as equal human beings is sung to an audience of children.",
+            "zh": "一首把恋爱双方都视为平等个体的情歌，唱给儿童听众。",
+            "fr": "Une chanson d'amour considérant les deux partenaires comme des êtres humains égaux est chantée devant un public d'enfants."
+          },
+          "followUp": {
+            "prompt": { "en": "To what extent?", "zh": "程度如何？", "fr": "Dans quelle mesure ?" },
+            "options": [
+              { "id": "slightly", "label": { "en": "Slightly", "zh": "略微", "fr": "Légèrement" } },
+              { "id": "somewhat", "label": { "en": "Somewhat", "zh": "较为", "fr": "Assez" } },
+              { "id": "strongly", "label": { "en": "Strongly", "zh": "非常", "fr": "Fortement" } }
+            ]
+          }
+        },
+        {
+          "type": "scenarioPair",
+          "id": "s09",
+          "required": true,
+          "a": {
+            "en": "A song encouraging the physical abuse of children as punishment for bad behaviour is sung to an audience of parents.",
+            "zh": "一首鼓励以体罚管教孩子不当行为的歌曲，唱给父母听众。",
+            "fr": "Une chanson encourageant les châtiments corporels envers les enfants en punition d'un mauvais comportement est chantée devant un public de parents."
+          },
+          "b": {
+            "en": "A song encouraging patience with children is sung to an audience of parents.",
+            "zh": "一首鼓励耐心对待孩子的歌曲，唱给父母听众。",
+            "fr": "Une chanson encourageant la patience envers les enfants est chantée devant un public de parents."
+          },
+          "followUp": {
+            "prompt": { "en": "To what extent?", "zh": "程度如何？", "fr": "Dans quelle mesure ?" },
+            "options": [
+              { "id": "slightly", "label": { "en": "Slightly", "zh": "略微", "fr": "Légèrement" } },
+              { "id": "somewhat", "label": { "en": "Somewhat", "zh": "较为", "fr": "Assez" } },
+              { "id": "strongly", "label": { "en": "Strongly", "zh": "非常", "fr": "Fortement" } }
+            ]
+          }
+        },
+        {
+          "type": "scenarioPair",
+          "id": "s10",
+          "required": true,
+          "a": {
+            "en": "A song meant to unite two sides of a war favours one side of the war.",
+            "zh": "一首旨在弥合战争双方的歌曲，却偏袒其中一方。",
+            "fr": "Une chanson destinée à unir les deux camps d'une guerre prend parti pour l'un d'eux."
+          },
+          "b": {
+            "en": "A song meant to unite two sides of a war details the casualties on both sides.",
+            "zh": "一首旨在弥合战争双方的歌曲，详述双方的伤亡。",
+            "fr": "Une chanson destinée à unir les deux camps d'une guerre relate les pertes des deux côtés."
+          },
+          "followUp": {
+            "prompt": { "en": "To what extent?", "zh": "程度如何？", "fr": "Dans quelle mesure ?" },
+            "options": [
+              { "id": "slightly", "label": { "en": "Slightly", "zh": "略微", "fr": "Légèrement" } },
+              { "id": "somewhat", "label": { "en": "Somewhat", "zh": "较为", "fr": "Assez" } },
+              { "id": "strongly", "label": { "en": "Strongly", "zh": "非常", "fr": "Fortement" } }
+            ]
+          }
+        },
+        {
+          "type": "scenarioPair",
+          "id": "s11",
+          "required": true,
+          "a": {
+            "en": "A historically anti-fascist song is used in the modern day to protest public safety regulations.",
+            "zh": "一首历史上反法西斯的歌曲，在当代被用来抗议公共安全法规。",
+            "fr": "Une chanson historiquement antifasciste est utilisée aujourd'hui pour protester contre des réglementations de sécurité publique."
+          },
+          "b": {
+            "en": "A historically anti-fascist song is used to unite disparate rebel groups against a fascist regime.",
+            "zh": "一首历史上反法西斯的歌曲，被用来团结各自分散的抵抗团体，共同对抗法西斯政权。",
+            "fr": "Une chanson historiquement antifasciste est utilisée pour unir des groupes rebelles disparates contre un régime fasciste."
+          },
+          "followUp": {
+            "prompt": { "en": "To what extent?", "zh": "程度如何？", "fr": "Dans quelle mesure ?" },
+            "options": [
+              { "id": "slightly", "label": { "en": "Slightly", "zh": "略微", "fr": "Légèrement" } },
+              { "id": "somewhat", "label": { "en": "Somewhat", "zh": "较为", "fr": "Assez" } },
+              { "id": "strongly", "label": { "en": "Strongly", "zh": "非常", "fr": "Fortement" } }
+            ]
+          }
+        },
+        {
+          "type": "scenarioPair",
+          "id": "s12",
+          "required": true,
+          "a": {
+            "en": "A traditional song from one religion is performed in an attempt to unite an audience of multiple religions.",
+            "zh": "某一宗教的传统歌曲被用来团结多宗教的听众。",
+            "fr": "Une chanson traditionnelle d'une religion est interprétée pour tenter d'unir un public multiconfessionnel."
+          },
+          "b": {
+            "en": "A medley of songs from various religions is performed in an attempt to unite an audience of multiple religions.",
+            "zh": "多宗教歌曲的集锦被用来团结多宗教的听众。",
+            "fr": "Un medley de chansons de diverses religions est interprété pour tenter d'unir un public multiconfessionnel."
+          },
+          "followUp": {
+            "prompt": { "en": "To what extent?", "zh": "程度如何？", "fr": "Dans quelle mesure ?" },
+            "options": [
+              { "id": "slightly", "label": { "en": "Slightly", "zh": "略微", "fr": "Légèrement" } },
+              { "id": "somewhat", "label": { "en": "Somewhat", "zh": "较为", "fr": "Assez" } },
+              { "id": "strongly", "label": { "en": "Strongly", "zh": "非常", "fr": "Fortement" } }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "closing",
+      "title": { "en": "Any Additional Thoughts?", "zh": "还有什么想说的？", "fr": "D'autres réflexions ?" },
+      "submit": true,
+      "submitLabel": { "en": "Submit my responses", "zh": "提交我的回答", "fr": "Envoyer mes réponses" },
+      "blocks": [
+        {
+          "type": "prose",
+          "text": {
+            "en": "Thank you for making it through this first round of surveys! If there is anything else that you would like to add, please feel free to use the text box below to express your last thoughts.",
+            "zh": "感谢您完成第一轮问卷！如果您还有其他想补充的内容，欢迎使用下方文本框写下您最后的想法。",
+            "fr": "Merci d'avoir parcouru ce premier tour d'enquêtes ! Si vous souhaitez ajouter quelque chose, n'hésitez pas à utiliser la zone de texte ci-dessous pour exprimer vos dernières réflexions."
+          }
+        },
+        {
+          "type": "longText",
+          "id": "q_closing",
+          "required": false,
+          "tall": true,
+          "prompt": {
+            "en": "Anything else you would like to add?",
+            "zh": "您还有其他想补充的内容吗？",
+            "fr": "Souhaitez-vous ajouter autre chose ?"
+          }
+        },
+        {
+          "type": "callout",
+          "tone": "info",
+          "text": {
+            "en": "Once you submit, your responses are locked. You will still be able to see your eight-character tag on the next page.",
+            "zh": "提交后，您的回答将被锁定。您仍然可以在下一页查看自己的八位字符标签。",
+            "fr": "Une fois envoyées, vos réponses seront verrouillées. Vous pourrez toujours consulter votre étiquette de huit caractères sur la page suivante."
+          }
+        }
+      ]
+    },
+    {
+      "id": "done",
+      "kind": "completion",
+      "title": { "en": "Thank you!", "zh": "感谢您！", "fr": "Merci !" },
+      "blocks": [
+        {
+          "type": "prose",
+          "text": {
+            "en": "In case you need to refer to it again, here is your **eight-character tag**, which will be needed for future surveys in this study.",
+            "zh": "如需再次查阅，以下是您的**八位字符标签**，后续问卷将需要使用它。",
+            "fr": "Au cas où vous auriez besoin de la consulter à nouveau, voici votre **étiquette de huit caractères**, nécessaire pour les enquêtes futures de cette étude."
+          }
+        },
+        { "type": "tagDisplay" },
+        {
+          "type": "prose",
+          "text": {
+            "en": "As always, if you have any questions or concerns, please feel free to contact Benjamin Honeray Lee at any time.",
+            "zh": "一如既往，如果您有任何问题或疑虑，欢迎随时联系 Benjamin Honeray Lee。",
+            "fr": "Comme toujours, si vous avez des questions ou des préoccupations, n'hésitez pas à contacter Benjamin Honeray Lee à tout moment."
+          }
+        },
+        { "type": "contact" }
+      ]
+    }
+  ]
+}

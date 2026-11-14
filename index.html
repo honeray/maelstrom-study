@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MAELStrOM · Music Evaluation Study</title>
+    <meta
+      name="description"
+      content="Project MAELStrOM — a multi-round Delphi study on how musicians evaluate music, including AI-generated music. Three languages, anonymous participation."
+    />
+    <meta name="theme-color" content="#04121d" />
+    <meta name="color-scheme" content="light" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="MAELStrOM · Music Evaluation Study" />
+    <meta
+      property="og:description"
+      content="An international Delphi study on how musicians evaluate music. Participate in English, 中文 or Français."
+    />
+    <meta property="og:image" content="assets/img/og-card.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="assets/img/favicon-64.png" sizes="64x64" />
+    <link rel="apple-touch-icon" href="assets/img/mark-black-192.png" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/home.css" />
+  </head>
+
+  <body class="home">
+    <a class="skip-link" href="#main" data-i18n="common.skip">Skip to content</a>
+
+    <header class="site-header">
+      <div class="wrap site-header__inner">
+        <a class="site-header__brand" href="index.html">
+          <img src="assets/img/banner-black.png" alt="MAELStrOM" width="1800" height="298" />
+          <span class="site-header__label" data-i18n="home.headerLabel"></span>
+        </a>
+        <div id="lang-slot"></div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="wrap hero__inner">
+        <p class="hero__kicker" data-i18n="home.hero.kicker"></p>
+        <img
+          class="hero__wordmark"
+          src="assets/img/banner-white.png"
+          alt=""
+          width="1800"
+          height="298"
+          aria-hidden="true"
+        />
+        <h1 class="hero__title" data-i18n="home.hero.title"></h1>
+        <p class="hero__lede" data-i18n="home.hero.lede"></p>
+        <div class="hero__actions">
+          <a class="btn btn--on-dark btn--lg" id="hero-cta" href="survey.html" data-i18n="home.hero.cta"></a>
+          <a class="btn btn--outline-dark" href="#resume" data-i18n="home.hero.secondary"></a>
+        </div>
+      </div>
+
+      <div class="hero__scroll" aria-hidden="true">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path
+            class="wave wave--1"
+            fill="rgba(255,255,255,0.045)"
+            d="M0,64 C120,18 240,110 360,64 C480,18 600,110 720,64 C840,18 960,110 1080,64 C1200,18 1320,110 1440,64 L1440,120 L0,120 Z"
+          />
+          <path
+            class="wave wave--2"
+            fill="rgba(111,205,243,0.10)"
+            d="M0,78 C160,120 320,36 480,78 C640,120 800,36 960,78 C1120,120 1280,36 1440,78 L1440,120 L0,120 Z"
+          />
+          <path
+            class="wave wave--3"
+            fill="rgba(255,255,255,0.07)"
+            d="M0,96 C180,70 360,118 540,96 C720,74 900,118 1080,96 C1260,74 1380,110 1440,96 L1440,120 L0,120 Z"
+          />
+        </svg>
+      </div>
+    </section>
+
+    <div class="notice-strip" id="offline-strip" hidden>
+      <div class="wrap notice-strip__inner">
+        <span class="notice-strip__icon" aria-hidden="true">!</span>
+        <span data-i18n="home.offline"></span>
+      </div>
+    </div>
+
+    <main id="main">
+      <section class="section" id="surveys">
+        <div class="wrap">
+          <div class="section__head">
+            <div>
+              <h2 class="section__title" data-i18n="home.surveys.title"></h2>
+              <p class="section__sub" data-i18n="home.surveys.sub"></p>
+            </div>
+            <span class="section__count" id="surveys-count"></span>
+          </div>
+          <ul class="banner-list" id="surveys-list" aria-live="polite"></ul>
+        </div>
+      </section>
+
+      <section class="section section--tint" id="how">
+        <div class="wrap">
+          <div class="section__head">
+            <div>
+              <h2 class="section__title" data-i18n="home.flow.title"></h2>
+              <p class="section__sub" data-i18n="home.flow.sub"></p>
+            </div>
+          </div>
+          <ol class="flow">
+            <li class="flow__item">
+              <h3 class="flow__title" data-i18n="home.flow.oneTitle"></h3>
+              <p class="flow__text" data-i18n="home.flow.oneText"></p>
+            </li>
+            <li class="flow__item">
+              <h3 class="flow__title" data-i18n="home.flow.twoTitle"></h3>
+              <p class="flow__text" data-i18n="home.flow.twoText"></p>
+            </li>
+            <li class="flow__item">
+              <h3 class="flow__title" data-i18n="home.flow.threeTitle"></h3>
+              <p class="flow__text" data-i18n="home.flow.threeText"></p>
+            </li>
+            <li class="flow__item">
+              <h3 class="flow__title" data-i18n="home.flow.fourTitle"></h3>
+              <p class="flow__text" data-i18n="home.flow.fourText"></p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="documents">
+        <div class="wrap">
+          <div class="section__head">
+            <div>
+              <h2 class="section__title" data-i18n="home.docs.title"></h2>
+              <p class="section__sub" data-i18n="home.docs.sub"></p>
+            </div>
+          </div>
+          <ul class="doc-list" id="docs-list" aria-live="polite"></ul>
+          <p class="doc-empty" id="docs-empty" hidden data-i18n="home.docs.empty"></p>
+        </div>
+      </section>
+
+      <section class="section" id="resume">
+        <div class="wrap">
+          <div class="resume">
+            <div class="resume__grid">
+              <div>
+                <h2 data-i18n="home.resume.title"></h2>
+                <p data-i18n="home.resume.body"></p>
+              </div>
+              <form class="resume__form" id="resume-form" novalidate>
+                <div class="resume__field">
+                  <label class="resume__label" for="resume-input" data-i18n="home.resume.label"></label>
+                  <input
+                    class="tag-input"
+                    id="resume-input"
+                    name="tag"
+                    type="text"
+                    inputmode="latin"
+                    autocomplete="off"
+                    spellcheck="false"
+                    maxlength="8"
+                    placeholder="••••••••"
+                    data-i18n-attr="placeholder:home.resume.placeholder"
+                  />
+                </div>
+                <div class="resume__actions">
+                  <button class="btn btn--on-dark" type="submit" data-i18n="home.resume.submit"></button>
+                </div>
+                <p class="resume__hint" id="resume-message" role="status" aria-live="polite"></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="site-footer__grid">
+          <div class="site-footer__brand">
+            <img src="assets/img/banner-white.png" alt="MAELStrOM" width="1800" height="298" />
+            <p data-i18n="home.footer.blurb"></p>
+          </div>
+          <div>
+            <h2 data-i18n="home.footer.contactTitle"></h2>
+            <div id="contact-slot"></div>
+          </div>
+        </div>
+        <div class="site-footer__meta">
+          <span data-i18n="home.footer.privacy"></span>
+          <span id="footer-year"></span>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="assets/js/pages/home.js"></script>
+  </body>
+</html>

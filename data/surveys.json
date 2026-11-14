@@ -1,0 +1,19 @@
+{
+  "$comment": "The survey manifest. Add a new round by adding one entry here and one JSON file in data/surveys/. status: open | closed | scheduled.",
+  "surveys": [
+    {
+      "id": "delphi-round-1",
+      "file": "data/surveys/delphi-round-1.json",
+      "code": "R1",
+      "order": 1,
+      "status": "open"
+    },
+    {
+      "id": "delphi-round-2",
+      "file": "data/surveys/delphi-round-2.json",
+      "code": "R2",
+      "order": 2,
+      "status": "scheduled"
+    }
+  ]
+}
