@@ -325,7 +325,7 @@
         {
           "type": "multiChoice",
           "id": "q_factors",
-          "required": true,
+          "required": false,
           "minSelections": 1,
           "prompt": {
             "en": "Below are several factors that have been considered for music evaluation frameworks. Please check all factors that you believe are important for evaluating music.",

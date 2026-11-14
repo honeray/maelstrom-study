@@ -182,37 +182,7 @@ Evergreen Chrome, Edge, Firefox and Safari (2022 or newer). The site uses ES mod
 `structuredClone` with a JSON fallback, and `Intl`. It is keyboard navigable, respects
 `prefers-reduced-motion`, and needs no cookies and no third-party requests.
 
-## 10. Where this departs from the original outlines
-
-Four things in the brief cannot be built literally on GitHub Pages, or would have been
-unsafe. Each was changed deliberately; the participant-facing behaviour is preserved.
-
-**"Back responses up to the GitHub repository every 10 seconds."**
-A static page cannot write to GitHub without embedding a token, and a token in the page
-is readable by every visitor — they could then read, overwrite or delete all responses.
-Instead, answers save to the participant's browser *and* to the study server every 10
-seconds, and the worker commits them to a private repository every two minutes (and
-immediately on submission). Durability is the same or better; the repository history
-stays readable.
-
-**"Password-protected interface for the study coordinator to upload files."**
-A password checked in JavaScript is visible in the page source, so it protects nothing.
-Files are published by committing them to `reports/`, which is protected by GitHub's own
-authentication — stronger, and it keeps the public page free of an upload endpoint. Drop
-a file in `reports/` and push; the homepage shows it as a banner automatically.
-
-**"Once a survey is completed, its banner should be greyed out."**
-A static site cannot know that a participant has finished without asking the server.
-Banners grey out per participant (tracked by tag, on that device and via the server) and
-additionally for everyone once the coordinator sets the round to `closed`.
-
-**Round 2's outline stops after two pages** and assumes a summary report and a
-re-creation of Round 1. It is built as: tag lookup → welcome → the Round 1 pages, fully
-pre-filled and editable → submit. Round 1 is never overwritten, so you keep both the
-original and revised Delphi answers. Round 2 stays visibly "not yet open" until you flip
-its `status` to `open` in `data/surveys.json`.
-
-## Licence
+## License
 
 Code is provided for the MAELStrOM study. The MAELStrOM name and logo remain the
 property of the project.
