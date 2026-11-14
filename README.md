@@ -18,9 +18,6 @@ in a **private** GitHub repository.
 
 ![Survey round](docs/images/survey-intro.png)
 
-*(Both screenshots were taken with no response server configured, which is why the amber
-"not connected" strip is visible. It disappears once `apiBase` is set.)*
-
 ---
 
 ## 1. Quick start
