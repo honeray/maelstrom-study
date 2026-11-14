@@ -1086,3 +1086,45 @@ body.has-nav {
   margin-top: 1.75rem;
 }
 
+/* --- Checkboxes get a real tick -----------------------------------------
+   The shared control draws a filled dot (correct for radios). A checkbox
+   needs a tick, otherwise a checked box is just a blue square and reads as
+   "still empty". Drawn with two borders so it stays crisp at any DPI. */
+
+.opt--multi .opt__control,
+.consent .opt__control {
+  border-radius: 5px;
+}
+
+.opt--multi .opt__control::after,
+.consent .opt__control::after {
+  content: "";
+  position: absolute;
+  inset: auto;
+  left: 50%;
+  top: 46%;
+  width: 10px;
+  height: 5px;
+  border: 0 solid #fff;
+  border-left-width: 2px;
+  border-bottom-width: 2px;
+  border-radius: 0;
+  background: none;
+  transform: translate(-50%, -50%) rotate(-45deg) scale(0);
+  transform-origin: center;
+  transition: transform 0.16s var(--ease);
+}
+
+.opt--multi.is-checked .opt__control::after,
+.consent.is-checked .opt__control::after {
+  transform: translate(-50%, -50%) rotate(-45deg) scale(1);
+}
+
+/* The consent box is not an .opt, so it needs its own filled state; without
+   this the tick would be white on white. */
+.consent.is-checked .opt__control {
+  border-color: var(--blue-600);
+  background: var(--blue-600);
+}
+
+

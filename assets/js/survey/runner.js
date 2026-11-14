@@ -429,13 +429,16 @@ export class SurveyRunner {
 
     let tag = randomTag();
     if (apiConfigured()) {
-      // Opportunistic collision check. A network failure must never block the
-      // participant, so failures simply keep the freshly generated tag.
-      for (let attempt = 0; attempt < 3; attempt += 1) {
-        const existing = await loadResponse(this.survey.id, tag).catch(() => null);
-        if (!existing) break;
-        tag = randomTag();
-      }
+      // Opportunistic collision check, bounded by a hard deadline. A slow or
+      // unreachable response server must never leave the participant staring at
+      // a spinning button (the worst case would otherwise be the full 15 s
+      // request timeout). A collision is a ~1-in-10^12 event, so giving up
+      // after a second and keeping the tag is the right trade.
+      const existing = await Promise.race([
+        loadResponse(this.survey.id, tag).catch(() => null),
+        new Promise((resolve) => setTimeout(() => resolve(null), 1200)),
+      ]);
+      if (existing) tag = randomTag();
     }
 
     this.state.tag = tag;
@@ -723,15 +726,19 @@ export class SurveyRunner {
 
     this.state.final = true;
     this.persistLocal();
-
-    const ok = await this.syncCloud({ force: true, final: true });
-
     storage.markCompleted(this.survey.id);
     if (this.state.tag) storage.writeProfile({ tag: this.state.tag, lastSurvey: this.survey.id });
+
+    // Start the final save immediately, but do not block the thank-you page on
+    // it: on a poor connection the request can take many seconds, and a frozen
+    // submit button looks like a broken site. The local draft is already marked
+    // final, and the next visit retries anything that did not reach the server.
+    const pendingSave = this.syncCloud({ force: true, final: true });
 
     const doneIndex = this.pages.findIndex((candidate) => candidate.kind === 'completion');
     this.goTo(doneIndex >= 0 ? doneIndex : this.pages.length - 1);
 
+    const ok = await pendingSave;
     if (!ok && apiConfigured()) {
       this.syncFailed = true;
       this.render();

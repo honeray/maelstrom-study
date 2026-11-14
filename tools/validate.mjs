@@ -230,6 +230,13 @@ function validateBlock(scope, surveyId, block, seenIds, pageId) {
     if (block.type === 'multiChoice' && block.minSelections !== undefined) {
       if (!Number.isInteger(block.minSelections) || block.minSelections < 0) {
         error(scope, 'minSelections must be a non-negative integer');
+      } else if (block.required === false && block.minSelections > 0) {
+        // The exact trap that made the factor question look optional but still
+        // gate the Continue button: the floor wins over `required: false`.
+        warn(
+          scope,
+          `multiChoice "${block.id}" is optional but "minSelections": ${block.minSelections} still forces a selection`
+        );
       }
     }
   }

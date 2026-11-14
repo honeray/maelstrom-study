@@ -326,7 +326,6 @@
           "type": "multiChoice",
           "id": "q_factors",
           "required": false,
-          "minSelections": 1,
           "prompt": {
             "en": "Below are several factors that have been considered for music evaluation frameworks. Please check all factors that you believe are important for evaluating music.",
             "zh": "以下是音乐评价框架中常被考虑的一些因素。请勾选所有您认为对评价音乐重要的因素。",

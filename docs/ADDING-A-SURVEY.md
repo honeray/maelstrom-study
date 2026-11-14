@@ -184,7 +184,19 @@ Both accept `placeholder`, `maxLength`, `hint`. Stored as a string.
 
 ### `multiChoice`
 
-Same shape plus `"minSelections": 1`. Stored as an array of ids in authored order.
+Same shape, stored as an array of ids in authored order.
+
+```json
+{ "type": "multiChoice", "id": "q_factors", "required": false, "prompt": { … }, "options": [ … ] }
+```
+
+- `required: false` lets the participant skip the question entirely.
+- `"minSelections": 1` is an **independent floor**, not a synonym for required. A block
+  with `"required": false` *and* `"minSelections": 1` still blocks the Continue button
+  until one box is ticked — that combination looks optional but is not. Omit
+  `minSelections` (or set it to `0`) when the question is genuinely optional.
+- An untouched optional multi-choice stores nothing; it is not saved as an empty array.
+
 
 ### `branchScale`
 
