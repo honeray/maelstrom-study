@@ -6,6 +6,15 @@ GitHub Pages. Deploy in that order.
 
 Total cost: zero on both free tiers. Total time: about 30 minutes the first time.
 
+> **Before you start, two facts that account for almost every failed deployment:**
+>
+> 1. The **site** repository must be **public**. GitHub Free publishes Pages only from
+>    public repositories. The **data** repository in step 1 must be **private**. They are
+>    two different repositories and that contrast is deliberate.
+> 2. `git push` does **not** publish a website. Pages must be enabled once in
+>    **Settings → Pages** (step 6.3). Until then the site URL answers *"There isn't a
+>    GitHub Pages site here."* even though the code is safely on GitHub.
+
 ```
 participant's browser
         │  HTTPS + JSON (no secret in the page)
@@ -14,6 +23,8 @@ Cloudflare Worker  ──▶  Workers KV       (instant, durable buffer)
         │  every 2 minutes, or immediately on submit
         ▼
 GitHub API  ──▶  private repo honeray/maelstrom-study-data
+
+static site  ──▶  PUBLIC repo honeray/maelstrom-study  ──▶  GitHub Pages
 ```
 
 ---
@@ -139,33 +150,90 @@ Commit and push. That is the only change the front end needs.
 > browser and every page shows an amber warning strip. Never share a survey link in that
 > state.
 
-## 6. Publish the site
+## 6. Publish the site on GitHub Pages
 
-1. Create a public repository `honeray/maelstrom-study`.
-2. Push this repository to it:
+> ### The site repository must be **public**
+>
+> GitHub Free publishes Pages **only from public repositories**. Private repositories
+> need GitHub Pro, GitHub Team or Enterprise.
+>
+> This is the most common way this deployment appears to fail. If `maelstrom-study` is
+> created as **private**, `git push` succeeds exactly as documented, everything looks
+> fine, and then the Pages settings never offer a branch to publish — the URL simply
+> answers *"There isn't a GitHub Pages site here."*
+>
+> Making the site repository public is safe and intended. It contains the questionnaire
+> and its UI only; **every response lives in the separate private
+> `maelstrom-study-data` repository** from step 1, and no token ever reaches the browser.
 
-   ```bash
-   git add .
-   git commit -m "MAELStrOM study site"
-   git branch -M main
-   git remote add origin https://github.com/honeray/maelstrom-study.git
-   git push -u origin main
-   ```
+A successful `git push` does **not** publish a site. Pages has to be enabled once, in
+the repository settings; after that every push to `main` redeploys automatically.
 
-3. **Settings → Pages → Build and deployment → Source: Deploy from a branch →
-   Branch: `main` / `(root)` → Save.**
+### 6.1 Create the repository as public
 
-4. The site appears at <https://honeray.github.io/maelstrom-study/> within a minute or two.
+With the GitHub CLI, which creates it with the right visibility in one step:
 
-The repository contains a `.nojekyll` file, which stops GitHub from running Jekyll and
-keeps every file exactly as committed.
+```bash
+gh repo create maelstrom-study --public --source=. --remote=origin --push
+```
 
-### Why the site repository must be public
+Or in the web UI: **New repository** → name `maelstrom-study` → **Public** (not
+Private) → *Create repository*, then:
 
-Free GitHub Pages publishes only from public repositories. That is fine and intended:
-the **site** contains no responses. Responses live in the separate private repository.
-If you would rather keep the site repository private too, GitHub Pro allows Pages from a
-private repository; the published site is still public either way.
+```bash
+git add .
+git commit -m "MAELStrOM study site"
+git branch -M main
+git remote add origin https://github.com/honeray/maelstrom-study.git
+# if origin already exists: git remote set-url origin https://github.com/honeray/maelstrom-study.git
+git push -u origin main
+```
+
+### 6.2 Check the name and visibility before going further
+
+```bash
+git remote -v
+# origin  https://github.com/honeray/maelstrom-study.git (fetch)
+# origin  https://github.com/honeray/maelstrom-study.git (push)
+
+gh repo view honeray/maelstrom-study --json name,visibility,hasPages
+# {"hasPages":false,"name":"maelstrom-study","visibility":"PUBLIC"}
+```
+
+Then open <https://github.com/honeray/maelstrom-study> **in a private window** (signed
+out). If it returns 404, the repository is private or has a different name — fix that
+first, because nothing else can work until it is public.
+
+The repository name also becomes the URL path. If you named it something else (for
+example `maelstrom-study-site`), your address will be
+`https://honeray.github.io/<that-name>/`. All links in the site are relative, so any
+name works without code changes.
+
+### 6.3 Enable Pages
+
+**Settings → Pages → Build and deployment → Source: Deploy from a branch → Branch:
+`main` / folder `/(root)` → Save.**
+
+That branch selector only appears for a public repository (or on a paid plan). After
+saving, GitHub reports "Your site is live at …" and a `pages build and deployment` run
+appears under the **Actions** tab.
+
+### 6.4 Done
+
+<https://honeray.github.io/maelstrom-study/> — allow a minute or two for the first
+deployment; later pushes go live in seconds.
+
+The repository contains `.nojekyll`, which stops GitHub from running Jekyll and keeps
+every file exactly as committed.
+
+### If you must keep the code private
+
+Two options that both work:
+
+- **GitHub Pro** (free for students through the GitHub Student Developer Pack) enables
+  Pages from private repositories; the published site is still public.
+- Keep the code private and push only the site to a **separate public repository**
+  (delete `worker/` from that copy if you prefer).
 
 ## 7. Verify the whole chain
 
@@ -207,8 +275,21 @@ curl "https://maelstrom-api.<subdomain>.workers.dev/v1/flush?token=<ADMIN_TOKEN>
 
 ## 10. Troubleshooting
 
+Run the doctor first — it checks the remote, repository visibility, Pages status, the
+live URL and the worker in one pass and prints the fix for whatever is wrong:
+
+```bash
+npm run doctor
+# or, to inspect a repository private to the world:
+GITHUB_TOKEN=github_pat_… node tools/doctor.mjs --repo honeray/maelstrom-study
+```
+
 | Symptom | Cause | Fix |
 |---|---|---|
+| **`git push` works but the site URL says "There isn't a GitHub Pages site here."** | **Pages was never enabled, or the repository is private on GitHub Free** | **Make the repository public (Settings → General → Danger zone → Change visibility) and enable Pages (§6.3). `git push` alone never publishes a site.** |
+| <https://github.com/honeray/maelstrom-study> 404s when signed out | repository is private, or has a different name | Make it public; `git remote -v` to confirm the name |
+| Settings → Pages has no branch selector / shows an upgrade prompt | private repository on GitHub Free | Make it public, or use GitHub Pro (free with the Student Developer Pack) |
+| Pages build fails under the Actions tab | usually Jekyll trying to process the files | Confirm the dot-file is committed: `git ls-files --error-unmatch .nojekyll` |
 | Amber strip on every page | `apiBase` is empty or malformed | Set it in `assets/js/config.js` |
 | Header says "Saved on this device" forever | Worker unreachable | Check `/v1/health`; check `ALLOWED_ORIGINS` |
 | Browser console shows a CORS error | Origin not in `ALLOWED_ORIGINS` | Add the exact origin, including `https://`, no trailing slash |

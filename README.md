@@ -47,7 +47,7 @@ Useful URLs:
 
 ## 2. Deploying
 
-Two things are deployed, in this order: the **data repository** (private), then the
+Three things are deployed, in this order: the **data repository** (private), the
 **worker**, then the **site**.
 
 Full instructions, including the exact permissions each token needs, are in
@@ -57,11 +57,20 @@ Full instructions, including the exact permissions each token needs, are in
 2. Create a Cloudflare KV namespace and deploy `worker/` to Cloudflare Workers. It holds
    a fine-grained GitHub token and commits responses into the data repository.
 3. Put the worker URL in `assets/js/config.js` → `apiBase`.
-4. Push this repository to `honeray/maelstrom-study` and enable **Settings → Pages →
-   Deploy from a branch → main / (root)**.
+4. Create a **public** repository `honeray/maelstrom-study`, push, then **enable** Pages
+   under **Settings → Pages → Deploy from a branch → main / (root)**.
+
+> **The site repository must be public.** GitHub Free publishes Pages only from public
+> repositories; a private one needs GitHub Pro/Team/Enterprise. And a successful
+> `git push` never publishes a site by itself — Pages must be switched on in the
+> repository settings. If you skip either point, `https://honeray.github.io/maelstrom-study/`
+> answers *"There isn't a GitHub Pages site here."* even though the push succeeded.
+> This is safe: the public repository holds only the questionnaire and its UI, while all
+> responses live in the private `maelstrom-study-data` repository.
 
 The site then lives at <https://honeray.github.io/maelstrom-study/>. All asset paths are
-relative, so the sub-path works without any configuration.
+relative, so the sub-path works without any configuration (the repository name becomes
+the URL path).
 
 ## 3. Repository layout
 
@@ -158,6 +167,7 @@ npm run serve       # local preview at http://127.0.0.1:8080
 npm run validate    # check surveys, i18n, includes and report links
 npm run manifest    # rebuild reports/manifest.json locally
 npm run check       # validate + verify the manifest is up to date
+npm run doctor      # why is (or isn't) the published site reachable?
 ```
 
 Regenerating the image assets from the master artwork in `../Logo`:

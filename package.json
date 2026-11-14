@@ -9,7 +9,8 @@
     "validate": "node tools/validate.mjs",
     "manifest": "node .github/scripts/build-manifest.mjs",
     "check": "node tools/validate.mjs && node .github/scripts/build-manifest.mjs --check",
-    "export": "node tools/export-csv.mjs"
+    "export": "node tools/export-csv.mjs",
+    "doctor": "node tools/doctor.mjs"
   },
   "engines": {
     "node": ">=20"
