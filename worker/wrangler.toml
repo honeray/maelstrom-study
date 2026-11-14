@@ -20,7 +20,7 @@ GIT_COMMITTER_EMAIL = "collector@users.noreply.github.com"
 
 [[kv_namespaces]]
 binding = "MAELSTROM_KV"
-id = "REPLACE_WITH_KV_NAMESPACE_ID"
+id = "1d6fa11b59ba426a96b27c576c676984"
 
 # Secrets are set with `wrangler secret put`, never committed:
 #   GITHUB_TOKEN  fine-grained PAT with Contents: read & write on DATA_REPO
