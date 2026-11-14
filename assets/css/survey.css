@@ -440,7 +440,11 @@ body.survey {
   background: var(--paper-2);
 }
 
-.opt input {
+/* Visually hide the real radio/checkbox while keeping it focusable. Scoped to
+   those two types on purpose: a plain `.opt input` also caught the free-text
+   field revealed by "Other (please specify)" and collapsed it to 1x1px. */
+.opt input[type="radio"],
+.opt input[type="checkbox"] {
   position: absolute;
   opacity: 0;
   width: 1px;
