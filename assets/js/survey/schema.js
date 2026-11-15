@@ -61,6 +61,17 @@ export class SurveyLoader {
     if (!response.ok) throw new Error(`Could not load ${entry.file} (${response.status})`);
     const raw = await response.json();
     raw.pages = await this.expandPages(raw.pages || [], new Set([id]));
+
+    // Provenance: remember where each page and block came from so the editor can
+    // map a click back to the exact JSON value. Included pages keep the ref of
+    // the survey they were copied from, which is where the text really lives.
+    raw.pages.forEach((page, pageIndex) => {
+      if (!page._ref) page._ref = `${entry.file}#/pages/${pageIndex}`;
+      (page.blocks || []).forEach((block, blockIndex) => {
+        if (!block._ref) block._ref = `${page._ref}/blocks/${blockIndex}`;
+      });
+    });
+
     this.jsonCache.set(id, raw);
     return raw;
   }
@@ -99,6 +110,9 @@ export class SurveyLoader {
         if (!sourcePage) throw new Error(`Page "${pageId}" not found in "${from}"`);
         const merged = { ...clone(sourcePage), ...(page.with || {}) };
         merged.includedFrom = from;
+        // A retitled page no longer owns its title in the source file, so the
+        // editor must not offer to edit the source title for it.
+        if (page.with && page.with.title) merged._titleOverridden = true;
         out.push(merged);
       }
     }

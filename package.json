@@ -11,6 +11,7 @@
     "check": "node tools/validate.mjs && node .github/scripts/build-manifest.mjs --check",
     "export": "node tools/export-csv.mjs",
     "doctor": "node tools/doctor.mjs",
+    "edit": "node tools/editor/server.mjs --open",
     "test:survey": "node tools/survey-test.mjs",
     "test:survey:quick": "node tools/survey-test.mjs --quick"
   },

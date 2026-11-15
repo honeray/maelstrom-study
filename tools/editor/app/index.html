@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>MAELStrOM text editor</title>
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <header class="bar">
+      <div class="bar__brand">
+        <strong>MAELStrOM</strong>
+        <span>text editor</span>
+      </div>
+
+      <label class="field">
+        <span>Language</span>
+        <select id="lang">
+          <option value="en">English</option>
+          <option value="zh">中文</option>
+          <option value="fr">Français</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>View</span>
+        <select id="survey"></select>
+      </label>
+
+      <label class="field">
+        <span>Page</span>
+        <select id="page"></select>
+      </label>
+
+      <label class="toggle" title="When on, clicking text opens it for editing. Turn off to answer the survey normally.">
+        <input type="checkbox" id="editmode" checked />
+        <span>Click text to edit</span>
+      </label>
+
+      <div class="bar__actions">
+        <button type="button" id="reload" class="btn">Reload preview</button>
+        <button type="button" id="undo" class="btn" disabled>Undo last change</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="panel panel--list">
+        <div class="panel__head">
+          <input type="search" id="search" placeholder="Search every string in all three languages…" />
+          <span class="count" id="count"></span>
+        </div>
+        <div class="list" id="list"></div>
+      </aside>
+
+      <section class="panel panel--preview">
+        <div class="preview__hint" id="hint">Click any highlighted text to edit it.</div>
+        <iframe id="preview" title="Survey preview"></iframe>
+      </section>
+
+      <aside class="panel panel--editor" id="editorPanel">
+        <div class="empty" id="empty">
+          <h2>Pick a string</h2>
+          <p>Click text in the preview, or choose a row on the left.</p>
+          <p class="muted">
+            Saving writes straight into the JSON file in your working copy. Nothing is
+            committed or pushed — review with <code>git diff</code> and commit as usual.
+          </p>
+        </div>
+
+        <div class="editor" id="editor" hidden>
+          <p class="crumb" id="crumb"></p>
+          <p class="shared" id="shared" hidden></p>
+
+          <label class="editor__label" for="value">Text</label>
+          <textarea id="value" spellcheck="true" rows="6"></textarea>
+          <p class="meta" id="meta"></p>
+
+          <div class="editor__actions">
+            <button type="button" class="btn btn--primary" id="save">Save (Ctrl+S)</button>
+            <button type="button" class="btn" id="revert" disabled>Revert</button>
+          </div>
+
+          <details class="others">
+            <summary>Other languages (not edited)</summary>
+            <div class="others__body">
+              <div><span class="tag">EN</span><p data-other="en"></p></div>
+              <div><span class="tag">中文</span><p data-other="zh"></p></div>
+              <div><span class="tag">FR</span><p data-other="fr"></p></div>
+            </div>
+          </details>
+
+          <div class="diff" id="diff" hidden>
+            <p class="diff__head" id="diffHead"></p>
+            <pre class="diff__before" id="diffBefore"></pre>
+            <pre class="diff__after" id="diffAfter"></pre>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <div class="toast" id="toast" hidden></div>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

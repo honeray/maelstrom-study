@@ -9,6 +9,7 @@ import { loadJSON } from '../lib/net.js';
 import { apiConfigured, fetchStatus } from '../lib/api.js';
 import * as storage from '../lib/storage.js';
 import { renderContact } from '../lib/ui.js';
+import { EDIT_MODE, annotateSurveyTitle } from '../survey/provenance.js';
 
 const model = {
   site: {},
@@ -134,10 +135,14 @@ function renderSurveys() {
       meta.push(el('span', {}, t('home.meta.minutes', { minutes: detail.estimateMinutes })));
     }
 
+    // In edit mode the banner title points back at the survey file's title.
+    const titleNode = el('h3.banner__title', {}, title);
+    if (EDIT_MODE) annotateSurveyTitle(titleNode, entry.file);
+
     const body = el(
       'div.banner__body',
       {},
-      el('h3.banner__title', {}, title),
+      titleNode,
       el('div.banner__meta', {}, ...meta)
     );
 

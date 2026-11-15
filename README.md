@@ -161,11 +161,28 @@ path to CSV, and the retention guidance.
 
 ```bash
 npm run serve       # local preview at http://127.0.0.1:8080
+npm run edit        # point-and-click text editor (see below)
 npm run validate    # check surveys, i18n, includes and report links
 npm run manifest    # rebuild reports/manifest.json locally
 npm run check       # validate + verify the manifest is up to date
 npm run doctor      # why is (or isn't) the published site reachable?
 ```
+
+### Editing the prose without touching code
+
+```bash
+npm run edit        # opens http://127.0.0.1:8123/editor/
+```
+
+Shows the real site in an iframe in all three languages. Click any sentence,
+question, option or interface label, type the replacement, and the matching key
+in `data/surveys/*.json`, `i18n/*.json` or `data/site.json` is rewritten in
+place — only that language, and as a one-line diff. Round 2 pages that reuse
+Round 1 text are flagged, because an edit there changes both rounds.
+
+It writes to your working copy only: review with `git diff` and commit as usual.
+The full guide — the click-to-edit toggle, page jumps, undo and troubleshooting —
+is in [`docs/EDITING.md`](docs/EDITING.md).
 
 ### Survey test suite
 

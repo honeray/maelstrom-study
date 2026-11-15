@@ -12,6 +12,7 @@ import * as storage from '../lib/storage.js';
 import { SurveyLoader, ensurePresentations, applyPresentation } from './schema.js';
 import { SurveyState } from './state.js';
 import { renderPage, showBlockError, clearAllErrors } from './render.js';
+import { EDIT_MODE } from './provenance.js';
 
 const TAG_LENGTH = CONFIG.tagLength;
 
@@ -105,6 +106,30 @@ export class SurveyRunner {
       flush: () => this.syncCloud({ force: true, final: this.state.final }),
     };
 
+    // Editor hooks, only when the page was opened with ?edit=1. They let the
+    // local editor jump straight to a page instead of answering its way there.
+    if (EDIT_MODE) {
+      window.__maelstromEdit = {
+        surveyId: this.survey.id,
+        pages: () =>
+          this.pages.map((page) => ({
+            id: page.id,
+            title: loc(page.title),
+            kind: page.kind || 'questions',
+          })),
+        current: () => this.pages[this.pageIndex]?.id || null,
+        goToPage: (pageId) => {
+          const index = this.pages.findIndex((page) => page.id === pageId);
+          if (index < 0) return false;
+          this.pageIndex = index;
+          this.state.pageId = this.pages[index].id;
+          this.render();
+          scrollToTop();
+          return true;
+        },
+      };
+    }
+
     if (this.resumed && !this.state.final) {
       toast(t('survey.resume.restored'), { tone: 'ok' });
     }
@@ -196,12 +221,15 @@ export class SurveyRunner {
       return;
     }
 
+    const titleRef =
+      EDIT_MODE && page._ref && !page._titleOverridden ? `${page._ref}/title` : null;
+
     card.appendChild(
       el(
         'header.page__head',
         {},
         page.eyebrow ? el('p.page__eyebrow', {}, loc(page.eyebrow)) : null,
-        el('h1.page__title', { id: 'page-title', tabindex: '-1' }, loc(page.title))
+        el('h1.page__title', { id: 'page-title', tabindex: '-1', 'data-loc': titleRef }, loc(page.title))
       )
     );
 

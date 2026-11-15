@@ -10,6 +10,7 @@ import { renderRich, renderContact, toast, inlineMarkdown } from '../lib/ui.js';
 import { CONFIG } from '../config.js';
 import { QUESTION_TYPES } from './schema.js';
 import { otherKey } from './state.js';
+import { EDIT_MODE, annotateBlock } from './provenance.js';
 
 /* --- Shell ------------------------------------------------------------- */
 
@@ -26,7 +27,10 @@ export function renderPage(ctx) {
     const isQuestion = QUESTION_TYPES.has(block.type);
     const index = isQuestion ? (counter.value += 1) : null;
     const node = renderBlock(block, ctx, index);
-    if (node) container.appendChild(node);
+    if (node) {
+      if (EDIT_MODE) annotateBlock(node, block);
+      container.appendChild(node);
+    }
   }
 
   return container;
