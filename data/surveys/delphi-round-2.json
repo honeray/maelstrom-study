@@ -2,7 +2,7 @@
   "id": "delphi-round-2",
   "code": "R2",
   "schemaVersion": 1,
-  "estimateMinutes": 15,
+  "estimateMinutes": 10,
   "flow": {
     "createsTag": false,
     "requiresTag": true,
