@@ -665,11 +665,25 @@ async function fillDemographics(s, pick = (options) => options[0].id) {
   }
 }
 
+/**
+ * Fill every free-text block the survey currently marks required. Driving this
+ * from the JSON rather than a fixed list keeps the suite working when a
+ * previously optional question is made mandatory.
+ */
+async function fillRequiredTexts(s, pageId, text = 'A test response.') {
+  for (const block of questionsOn(pageId)) {
+    if (block.required === false) continue;
+    if (block.type !== 'shortText' && block.type !== 'longText') continue;
+    await typeInto(s, `#input-${block.id}`, text);
+  }
+}
+
 async function fillFactors(s) {
   await chooseOption(s, 'q_factors_sufficient', 'agree');
   await chooseExtent(s, 'q_factors_sufficient', 'somewhat');
   await chooseOption(s, 'q_aural_only', 'agree');
   await chooseExtent(s, 'q_aural_only', 'slightly');
+  await fillRequiredTexts(s, 'factors', 'A test response.');
 }
 
 async function fillScenarios(s, choice = 'a') {
@@ -812,6 +826,12 @@ async function sweepLanguage(lang) {
       await chooseOption(s, blockId, 'agree');
       await chooseExtent(s, blockId, 'somewhat');
     }
+
+    // The page also has free-text questions the survey marks required; leaving
+    // them empty keeps Continue disabled and the page never advances.
+    check((await nextDisabled(s)) === true, 'page 4: the required free-text questions block Continue');
+    await fillRequiredTexts(s, 'factors', 'A test response.');
+    check((await nextDisabled(s)) === false, 'page 4: answering them unblocks Continue');
 
     await clickNext(s);
     await waitForPage(s, 'scenarios');
@@ -1003,6 +1023,15 @@ async function e2eRun(lang, profile) {
         await chooseExtent(s, blockId, extent);
         expected[`${blockId}__extent`] = extent;
       }
+    }
+
+    // Free-text questions on this page the survey marks required.
+    for (const block of questionsOn('factors')) {
+      if (block.required === false) continue;
+      if (block.type !== 'shortText' && block.type !== 'longText') continue;
+      const text = profile.text(block) || 'A test response.';
+      await typeInto(s, `#input-${block.id}`, text);
+      expected[block.id] = text;
     }
     await clickNext(s);
     await waitForPage(s, 'scenarios');
