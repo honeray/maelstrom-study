@@ -309,16 +309,16 @@
           "type": "prose",
           "text": {
             "en": "Now that the introductory sections have been completed, this next section focuses on what factors you believe, in your expert opinion, to be important in music evaluation.",
-            "zh": "完成前几部分的介绍后，本部分希望了解：在您看来，哪些因素对音乐评价至关重要。",
-            "fr": "Les sections introductives étant terminées, cette section vous demande quels facteurs, selon votre expertise, sont importants dans l'évaluation de la musique."
+            "zh": "完成前面的介绍后，接下来的这一部分关注的是：以您的专业判断，哪些因素在音乐评价中最为重要。",
+            "fr": "Les sections introductives étant terminées, la partie suivante porte sur les facteurs que vous jugez importants, selon votre expertise, dans l'évaluation de la musique."
           }
         },
         {
           "type": "prose",
           "text": {
             "en": "From this point forward, please feel free to use the provided text boxes to provide as much input as you would like. If you have any questions or concerns that cannot be expressed in the free-response textboxes, please feel free to contact Benjamin Honeray Lee using the details below.",
-            "zh": "从这里开始，请随意使用所提供的文本框，尽可能充分地表达您的想法。如果您有无法在自由作答框中表达的问题或疑虑，欢迎通过下方信息联系 Benjamin Honeray Lee。",
-            "fr": "À partir de maintenant, n'hésitez pas à utiliser les zones de texte proposées pour vous exprimer aussi longuement que vous le souhaitez. Si vous avez des questions ou des préoccupations qui ne peuvent être exprimées dans les zones de réponse libre, n'hésitez pas à contacter Benjamin Honeray Lee avec les coordonnées ci-dessous."
+            "zh": "从这里开始，请随意使用所提供的文本框，尽可能充分地表达您的想法。如果您有无法在自由作答文本框中表达的问题或疑虑，欢迎通过下方信息联系 Benjamin Honeray Lee。",
+            "fr": "À partir de maintenant, n'hésitez pas à utiliser les zones de texte proposées pour vous exprimer aussi longuement que vous le souhaitez. Si vous avez des questions ou des préoccupations qui ne peuvent être exprimées dans les zones de texte de réponse libre, n'hésitez pas à contacter Benjamin Honeray Lee avec les coordonnées ci-dessous."
           }
         },
         { "type": "contact" },
@@ -738,8 +738,8 @@
           "required": true,
           "a": {
             "en": "A song encouraging child abuse as punishment for bad behaviour is sung to an audience of parents.",
-            "zh": "一首鼓励以体罚管教孩子不当行为的歌曲，唱给父母听众。",
-            "fr": "Une chanson encourageant les châtiments corporels envers les enfants en punition d'un mauvais comportement est chantée devant un public de parents."
+            "zh": "一首鼓励以虐待儿童作为不当行为惩罚的歌曲，唱给父母听众。",
+            "fr": "Une chanson encourageant la maltraitance des enfants comme punition d'un mauvais comportement est chantée devant un public de parents."
           },
           "b": {
             "en": "A song encouraging patience with children is sung to an audience of parents.",

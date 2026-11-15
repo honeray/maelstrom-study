@@ -8,11 +8,11 @@
     "loading": "载入中……"
   },
   "home": {
-    "headerLabel": "音乐评价德尔菲研究",
+    "headerLabel": "Musicking-Aware Evaluation Learned from Structured Objectives of Music",
     "hero": {
       "kicker": "MAELStrOM 项目",
-      "title": "音乐评价德尔菲研究",
-      "lede": "音乐家与教育者如何判断一首音乐是否优秀？本研究以多轮德尔菲法探讨音乐评价背后的因素，其中包括由人工智能生成的音乐。全程匿名，随时自动保存，提供三种语言。",
+      "title": "Musicking-Aware Evaluation Learned from Structured Objectives of Music",
+      "lede": "音乐家与教育者如何判断一首音乐是否优秀？这是一项匿名、多轮次、跨三个国家的研究，探讨评价音乐时所使用的因素，其中包括人工智能（AI）音乐。",
       "cta": "开始填写问卷",
       "ctaNone": "查看问卷",
       "secondary": "我已有标签"
@@ -40,7 +40,7 @@
       "title": "研究流程",
       "sub": "同一批专家参与每一轮，使专家组能够逐步形成共识。",
       "oneTitle": "生成您的标签",
-      "oneText": "系统将为您生成一个八位字符标签。这是我们掌握的唯一标识，请妥善保存。",
+      "oneText": "系统将为您生成一个八位字符标签。这是我们掌握的唯一标识，因此请妥善保存。",
       "twoTitle": "完成本轮问卷",
       "twoText": "回答会自动保存。如需离开可关闭页面，之后用标签即可继续。",
       "threeTitle": "阅读汇总报告",
@@ -64,7 +64,7 @@
       "noneOpen": "目前没有开放的问卷。"
     },
     "footer": {
-      "blurb": "MAELStrOM 项目研究音乐如何被音乐专家评价，特别是AI音乐以及它对于音乐评价感知的非声音印象。",
+      "blurb": "MAELStrOM 项目研究真实音乐家如何评价音乐，重点关注 AI 音乐及其对音乐质量感知的非听觉影响。",
       "contactTitle": "联系方式",
       "privacy": "所有回答均为匿名，仅以参与者的八位字符标签标识。"
     },

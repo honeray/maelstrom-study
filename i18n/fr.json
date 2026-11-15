@@ -8,11 +8,11 @@
     "loading": "Chargement…"
   },
   "home": {
-    "headerLabel": "Étude Delphi sur l'évaluation musicale",
+    "headerLabel": "Musicking-Aware Evaluation Learned from Structured Objectives of Music",
     "hero": {
       "kicker": "Projet MAELStrOM",
-      "title": "Étude Delphi sur l'évaluation musicale",
-      "lede": "Comment les musiciens et les pédagogues décident-ils qu'une œuvre musicale est bonne ? Il s'agit d'une étude Delphi à plusieurs tours sur les facteurs de l'évaluation musicale — y compris la musique produite par l'intelligence artificielle. Anonyme, sauvegardée en continu et proposée en trois langues.",
+      "title": "Musicking-Aware Evaluation Learned from Structured Objectives of Music",
+      "lede": "Comment les musiciens et les pédagogues décident-ils qu'une œuvre musicale est bonne ? Il s'agit d'une étude anonymisée à plusieurs tours, menée dans trois pays, sur les facteurs mobilisés pour évaluer la musique, y compris la musique produite par l'IA.",
       "cta": "Commencer l'enquête",
       "ctaNone": "Voir les enquêtes",
       "secondary": "J'ai déjà une étiquette"
@@ -40,11 +40,11 @@
       "title": "Comment se déroule l'étude",
       "sub": "Le même panel d'experts répond à chaque tour, ce qui permet au groupe de converger vers un consensus.",
       "oneTitle": "Générez votre étiquette",
-      "oneText": "Une étiquette de huit caractères est créée pour vous. C'est le seul identifiant que nous détenons — conservez-la en lieu sûr.",
+      "oneText": "Une étiquette de huit caractères est créée pour vous. C'est le seul identifiant dont nous disposons, alors conservez-la en lieu sûr.",
       "twoTitle": "Complétez le tour",
       "twoText": "Les réponses sont sauvegardées automatiquement. Vous pouvez fermer l'onglet et reprendre plus tard avec votre étiquette.",
       "threeTitle": "Lisez la synthèse",
-      "threeText": "Lorsqu'un tour se termine, une synthèse anonymisée des réponses de tous les experts est publiée sur cette page.",
+      "threeText": "Lorsqu'un tour se termine, une synthèse anonymisée des réponses de tous les experts sera publiée sur cette page.",
       "fourTitle": "Révisez au tour suivant",
       "fourText": "Au tour suivant, vos réponses précédentes sont chargées : vous pouvez les conserver ou les modifier."
     },
@@ -64,7 +64,7 @@
       "noneOpen": "Aucune enquête n'est ouverte pour le moment."
     },
     "footer": {
-      "blurb": "Le projet MAELStrOM étudie la manière dont la musique est évaluée, en mettant l'accent sur la musique générée par l'intelligence artificielle. Ce site héberge les tours d'enquête Delphi de l'étude.",
+      "blurb": "Le projet MAELStrOM étudie la manière dont la musique est évaluée par de vrais musiciens, en se concentrant sur la musique produite par l'IA et son impact non sonore sur la perception de la qualité musicale.",
       "contactTitle": "Contact",
       "privacy": "Les réponses sont anonymes et identifiées uniquement par l'étiquette de huit caractères du participant."
     },
