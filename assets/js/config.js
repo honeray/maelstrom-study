@@ -11,7 +11,7 @@ export const CONFIG = Object.freeze({
    * warning strip. Set this before sharing the survey link.
    * Example: 'https://maelstrom-api.your-subdomain.workers.dev'
    */
-  apiBase: 'https://maelstrom-api.honeray.workers.dev',
+  apiBase: 'https://workers.project-maelstrom.com',
 
   /** How often dirty drafts are pushed to the server (the outline asks for 10s). */
   syncIntervalMs: 10_000,
