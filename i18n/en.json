@@ -52,7 +52,7 @@
     "docs": {
       "title": "Study documents",
       "sub": "Anonymised summary reports and study materials published by the study coordinator.",
-      "empty": "No documents have been published yet. Summary reports appear here after each round closes."
+      "empty": "No documents have been published yet. Summary reports will appear here after each round closes."
     },
     "resume": {
       "title": "Returning to the study?",
