@@ -96,9 +96,9 @@
         {
           "type": "prose",
           "text": {
-            "en": "We will not collect any identifying data from you besides this tag, so **please keep this tag safe**. If you lose it, we will be unable to confirm which surveys in the future are yours.",
-            "zh": "除该标签外，我们不会收集您的任何身份信息，因此**请妥善保管此标签**。若遗失该标签，我们将无法确认后续问卷中哪些回答属于您。",
-            "fr": "Nous ne recueillerons aucune donnée permettant de vous identifier en dehors de cette étiquette ; **conservez donc précieusement cette étiquette**. Si vous la perdez, nous ne pourrons pas confirmer quelles enquêtes futures sont les vôtres."
+            "en": "We will not collect any identifying data from you besides this tag, so **please keep this tag safe. If you lose it, we will be unable to confirm which surveys in the future are yours.**",
+            "zh": "除该标签外，我们不会收集您的任何身份信息，因此**请妥善保管此标签。若遗失该标签，我们将无法确认后续问卷中哪些回答属于您。**",
+            "fr": "Nous ne recueillerons aucune donnée permettant de vous identifier en dehors de cette étiquette ; **conservez donc précieusement cette étiquette. Si vous la perdez, nous ne pourrons pas confirmer quelles enquêtes futures sont les vôtres.**"
           }
         },
         { "type": "tagGenerate", "id": "tag" },
@@ -308,7 +308,7 @@
         {
           "type": "prose",
           "text": {
-            "en": "Now that the introductory sections have been completed, this section focuses on asking you what factors you believe, in your expert opinion, to be important in music evaluation.",
+            "en": "Now that the introductory sections have been completed, this next section focuses on what factors you believe, in your expert opinion, to be important in music evaluation.",
             "zh": "完成前几部分的介绍后，本部分希望了解：在您看来，哪些因素对音乐评价至关重要。",
             "fr": "Les sections introductives étant terminées, cette section vous demande quels facteurs, selon votre expertise, sont importants dans l'évaluation de la musique."
           }
@@ -316,7 +316,7 @@
         {
           "type": "prose",
           "text": {
-            "en": "From this point forward, please feel free to use the provided text boxes to provide as much input as you would like. If you have any questions or concerns that cannot be expressed in the free-response boxes, please feel free to contact Benjamin Honeray Lee using the details below.",
+            "en": "From this point forward, please feel free to use the provided text boxes to provide as much input as you would like. If you have any questions or concerns that cannot be expressed in the free-response textboxes, please feel free to contact Benjamin Honeray Lee using the details below.",
             "zh": "从这里开始，请随意使用所提供的文本框，尽可能充分地表达您的想法。如果您有无法在自由作答框中表达的问题或疑虑，欢迎通过下方信息联系 Benjamin Honeray Lee。",
             "fr": "À partir de maintenant, n'hésitez pas à utiliser les zones de texte proposées pour vous exprimer aussi longuement que vous le souhaitez. Si vous avez des questions ou des préoccupations qui ne peuvent être exprimées dans les zones de réponse libre, n'hésitez pas à contacter Benjamin Honeray Lee avec les coordonnées ci-dessous."
           }
@@ -435,7 +435,7 @@
             "fr": "Êtes-vous d'accord ou non avec l'affirmation suivante ?"
           },
           "statement": {
-            "en": "\"Sufficiently accurate music evaluation can be done by only examining the factors checked in the previous question.\"",
+            "en": "\"Sufficiently accurate music evaluation can be done by examining only the factors checked in the previous question.\"",
             "zh": "“仅考察上一题中所勾选的因素，即可完成足够准确的音乐评价。”",
             "fr": "« Une évaluation musicale suffisamment précise peut être réalisée en examinant uniquement les facteurs cochés à la question précédente. »"
           },
@@ -543,9 +543,9 @@
         {
           "type": "prose",
           "text": {
-            "en": "In this section, you will be given several pairs of contextual scenarios inspired by music in real life. For each pair, please respond with your preference (if any) for which of the two scenarios you believe would lead to a better musical experience. If you believe that there is no appreciable difference in the quality of music experience between the two scenarios, please respond as neutral.",
-            "zh": "本部分将呈现若干组源自现实音乐情境的场景对。对于每一组场景，请说明您更倾向于其中哪一种——即您认为哪种场景会带来更好的音乐体验。如果您认为两种场景在音乐体验质量上没有明显差别，请选择“中立”。",
-            "fr": "Dans cette section, plusieurs paires de scénarios contextuels inspirés de la musique réelle vous seront présentées. Pour chaque paire, indiquez votre préférence (le cas échéant) quant au scénario qui, selon vous, mènerait à une meilleure expérience musicale. Si vous estimez qu'il n'y a pas de différence appréciable entre les deux scénarios, répondez « neutre »."
+            "en": "In this section, you will be given several pairs of contextual scenarios inspired by music in real life. For each pair, **assuming that the aural content (i.e. genre, melody, chord progressions, tempo, etc.) remains broadly constant between the two scenarios,** please respond with your preference (if any) for **which of the two scenarios you believe would lead to a better musical experience.** If you believe that there is no appreciable difference in the quality of music experience between the two scenarios, please respond as neutral.",
+            "zh": "本部分将呈现若干组源自现实音乐情境的场景对。对于每一组场景，请**假定两种场景之间的听觉内容（即曲风、旋律、和弦进行、速度等）大致保持不变**，并说明您的偏好（如有），即您认为**哪一种场景会带来更好的音乐体验。** 如果您认为两种场景在音乐体验质量上没有明显差别，请选择“中立”。",
+            "fr": "Dans cette section, plusieurs paires de scénarios contextuels inspirés de la musique réelle vous seront présentées. Pour chaque paire, **en supposant que le contenu sonore (c'est-à-dire le genre, la mélodie, les progressions d'accords, le tempo, etc.) reste globalement constant entre les deux scénarios,** indiquez votre préférence (le cas échéant) quant à **celui des deux scénarios qui, selon vous, mènerait à une meilleure expérience musicale.** Si vous estimez qu'il n'y a pas de différence appréciable entre les deux scénarios, répondez « neutre »."
           }
         },
         {
@@ -737,7 +737,7 @@
           "id": "s09",
           "required": true,
           "a": {
-            "en": "A song encouraging the physical abuse of children as punishment for bad behaviour is sung to an audience of parents.",
+            "en": "A song encouraging child abuse as punishment for bad behaviour is sung to an audience of parents.",
             "zh": "一首鼓励以体罚管教孩子不当行为的歌曲，唱给父母听众。",
             "fr": "Une chanson encourageant les châtiments corporels envers les enfants en punition d'un mauvais comportement est chantée devant un public de parents."
           },
