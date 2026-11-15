@@ -11,7 +11,7 @@ import { apiConfigured, loadResponse, saveResponse, withRetry } from '../lib/api
 import * as storage from '../lib/storage.js';
 import { SurveyLoader, ensurePresentations, applyPresentation } from './schema.js';
 import { SurveyState } from './state.js';
-import { renderPage, showBlockError, clearAllErrors } from './render.js';
+import { renderPage, showBlockError, clearAllErrors, clearBlockError } from './render.js';
 import { EDIT_MODE } from './provenance.js';
 
 const TAG_LENGTH = CONFIG.tagLength;
@@ -242,7 +242,7 @@ export class SurveyRunner {
         state: this.state,
         site: this.site,
         actions: this.actions(),
-        onChange: () => this.onChange(),
+        onChange: (blockId) => this.onChange(blockId),
       })
     );
 
@@ -387,7 +387,15 @@ export class SurveyRunner {
     const page = this.pages[this.pageIndex];
     if (!page) return;
     const complete = this.pageComplete(page);
-    this.nextButton.disabled = !complete;
+
+    // Never use the disabled attribute: a blocked Continue stays clickable so
+    // pressing it can reveal and jump to the first unanswered question. It is
+    // marked unavailable for styling and for assistive technology instead.
+    this.nextButton.disabled = false;
+    this.nextButton.classList.toggle('is-blocked', !complete);
+    this.nextButton.setAttribute('aria-disabled', complete ? 'false' : 'true');
+    this.nextButton.dataset.ready = complete ? 'true' : 'false';
+
     if (this.hintNode) {
       if (!complete) this.hintNode.textContent = t('survey.nav.incomplete');
       else if (page.submit) this.hintNode.textContent = t('survey.nav.readyToSubmit');
@@ -399,29 +407,36 @@ export class SurveyRunner {
     return this.state.validatePage(page).ok;
   }
 
+  /** Highlight every unanswered question and bring the first one into view. */
+  showFirstProblem() {
+    const page = this.pages[this.pageIndex];
+    const result = this.state.validatePage(page);
+    if (result.ok) return true;
+
+    clearAllErrors();
+    result.errors.forEach((error) => showBlockError(error.blockId, error.message));
+
+    // Consent and tag blocks render outside the .q shell, hence the loose match.
+    const first = document.querySelector('[id^="q-"].is-invalid');
+    if (first) {
+      first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const focusable = first.querySelector('input, textarea, select, button');
+      if (focusable) focusable.focus({ preventScroll: true });
+    }
+    toast(t('survey.error.fix'), { tone: 'warn' });
+    return false;
+  }
+
   next() {
     const page = this.pages[this.pageIndex];
     if (!page || page.kind === 'completion') return;
 
-    if (!page.submit) {
-      const result = this.state.validatePage(page);
-      if (!result.ok) {
-        clearAllErrors();
-        result.errors.forEach((error) => showBlockError(error.blockId, error.message));
-        const first = document.querySelector('.q.is-invalid');
-        if (first) {
-          first.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          const focusable = first.querySelector('input, textarea, button');
-          if (focusable) focusable.focus({ preventScroll: true });
-        }
-        toast(t('survey.error.fix'), { tone: 'warn' });
-        return;
-      }
-      this.goTo(this.pageIndex + 1);
-      return;
-    }
+    // Validate on every page, including the submit page — the button is no
+    // longer natively disabled, so this is what prevents an incomplete submit.
+    if (!this.showFirstProblem()) return;
 
-    this.submit();
+    if (page.submit) this.submit();
+    else this.goTo(this.pageIndex + 1);
   }
 
   goTo(index) {
@@ -439,7 +454,10 @@ export class SurveyRunner {
 
   /* --- Answers --------------------------------------------------------- */
 
-  onChange() {
+  onChange(blockId) {
+    // Answering a question clears its own error immediately, so a warning never
+    // lingers on a question the participant has just filled in.
+    if (blockId) clearBlockError(blockId);
     this.state.dirty = true;
     this.scheduleLocalSave();
     this.updateNavState();

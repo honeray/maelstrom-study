@@ -395,6 +395,18 @@ body.survey {
   border-color: rgba(168, 36, 26, 0.45);
 }
 
+/* Consent blocks render outside the .q shell but can be flagged the same way. */
+.consent.is-invalid {
+  border-color: rgba(168, 36, 26, 0.55);
+  box-shadow: 0 0 0 3px rgba(168, 36, 26, 0.08);
+}
+
+/* A blocked Continue still responds to clicks (it reveals the first missing
+   answer), so do not signal "nothing will happen". */
+.nav-bar__actions .btn[aria-disabled="true"] {
+  cursor: pointer;
+}
+
 /* --- Option lists ------------------------------------------------------- */
 
 .opt-list {

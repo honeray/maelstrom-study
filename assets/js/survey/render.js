@@ -297,7 +297,7 @@ function optionGroup(block, ctx, { multiple = false, labelId, name, inline = fal
             'aria-label': loc(option.placeholder) || t('common.pleaseSpecify'),
             oninput: (event) => {
               ctx.state.setAnswer(otherKey(block.id), event.target.value);
-              ctx.onChange();
+              ctx.onChange(block.id);
             },
             onclick: (event) => event.stopPropagation(),
           })
@@ -324,7 +324,7 @@ function optionGroup(block, ctx, { multiple = false, labelId, name, inline = fal
         const field = extra?.querySelector('input');
         if (field) field.focus();
       }
-      ctx.onChange();
+      ctx.onChange(block.id);
     });
 
     rows.push({ option, input, label, extra });
@@ -376,7 +376,7 @@ function renderText(block, ctx, index) {
   input.addEventListener('input', () => {
     ctx.state.setAnswer(block.id, input.value);
     if (counter) counter.textContent = `${input.value.length}/${block.maxLength}`;
-    ctx.onChange();
+    ctx.onChange(block.id);
   });
 
   return questionShell(block, index, {
@@ -540,7 +540,7 @@ function renderScenarioPair(block, ctx, index) {
     placeholder: loc(block.commentPlaceholder) || t('survey.scenario.commentPlaceholder'),
     oninput: (event) => {
       ctx.state.setAnswer(`${block.id}__comment`, event.target.value);
-      ctx.onChange();
+      ctx.onChange(block.id);
     },
   });
   commentArea.value = ctx.state.getAnswer(`${block.id}__comment`) || '';
@@ -618,7 +618,7 @@ function renderTagGenerate(block, ctx) {
       const copied = await ctx.actions.copyTag(tag);
       showNote(copied);
       ctx.state.dirty = true;
-      ctx.onChange();
+      ctx.onChange(block.id);
     } finally {
       generateButton.disabled = false;
     }
@@ -790,7 +790,7 @@ function renderConsent(block, ctx) {
   input.addEventListener('change', () => {
     ctx.state.setAnswer(block.id, input.checked);
     sync();
-    ctx.onChange();
+    ctx.onChange(block.id);
   });
 
   sync();

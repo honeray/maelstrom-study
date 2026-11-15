@@ -543,14 +543,18 @@ const answers = async (s) => (await snapshot(s)).answers;
 const currentPage = async (s) => (await snapshot(s)).pageId;
 
 async function nextButton(s) {
-  return s.eval(`(()=>{const b=document.querySelector('.nav-bar__actions .btn:last-child');return b?{text:b.textContent.trim(),disabled:b.disabled}:null;})()`);
+  return s.eval(`(()=>{
+    const b=document.querySelector('.nav-bar__actions .btn:last-child');
+    return b ? { text: b.textContent.trim(), blocked: b.getAttribute('aria-disabled') === 'true', disabled: b.disabled } : null;
+  })()`);
 }
 
-const nextDisabled = async (s) => (await nextButton(s))?.disabled;
+/** True while the page is not ready — the button stays clickable, but muted. */
+const nextDisabled = async (s) => (await nextButton(s))?.blocked;
 
 async function clickNext(s) {
   const result = await s.eval(
-    `(()=>{const b=document.querySelector('.nav-bar__actions .btn:last-child');if(!b)return 'no-button';if(b.disabled)return 'disabled';b.click();return 'ok';})()`
+    `(()=>{const b=document.querySelector('.nav-bar__actions .btn:last-child');if(!b)return 'no-button';b.click();return 'ok';})()`
   );
   await sleep(450);
   return result;
@@ -781,6 +785,25 @@ async function sweepLanguage(lang) {
     await checkRequiredMarkers(s, 'demographics');
 
     /* --- page 3: demographics ------------------------------------------ */
+
+    // A blocked Continue must reveal the first unanswered question rather than
+    // sit there doing nothing.
+    check((await nextDisabled(s)) === true, 'page 3: Continue is blocked while questions are unanswered');
+    await clickNext(s);
+    const jumped = await s.eval(`(()=>{
+      const first = document.querySelector('[id^="q-"].is-invalid');
+      if (!first) return null;
+      return {
+        block: first.dataset.block || first.id,
+        error: (first.querySelector('.q__error-text') || {}).textContent || '',
+        focused: first.contains(document.activeElement),
+        page: window.__maelstrom.snapshot().pageId,
+      };
+    })()`);
+    check(jumped?.block === 'q_language', 'page 3: a blocked Continue jumps to the first unanswered question', JSON.stringify(jumped));
+    check(Boolean(jumped?.error), 'page 3: the jumped-to question shows its error message');
+    check(jumped?.focused === true, 'page 3: focus lands inside that question');
+    check(jumped?.page === 'demographics', 'page 3: a blocked Continue does not navigate');
     for (const block of questionsOn('demographics')) {
       if (block.type === 'singleChoice') {
         for (const option of block.options) {
@@ -816,6 +839,10 @@ async function sweepLanguage(lang) {
     check((await nextDisabled(s)) === true, 'page 3: clearing a required answer blocks Continue');
     await typeInto(s, '#input-q_language', 'restored');
     check((await nextDisabled(s)) === false, 'page 3: re-answering unblocks Continue');
+    const stillInvalid = await s.eval(
+      `[...document.querySelectorAll('[id^="q-"].is-invalid')].map((node) => node.id)`
+    );
+    check(stillInvalid.length === 0, 'page 3: answering a question clears its error marker', stillInvalid.join(', '));
 
     await clickNext(s);
     await waitForPage(s, 'factors');
