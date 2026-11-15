@@ -10,7 +10,9 @@
     "manifest": "node .github/scripts/build-manifest.mjs",
     "check": "node tools/validate.mjs && node .github/scripts/build-manifest.mjs --check",
     "export": "node tools/export-csv.mjs",
-    "doctor": "node tools/doctor.mjs"
+    "doctor": "node tools/doctor.mjs",
+    "test:survey": "node tools/survey-test.mjs",
+    "test:survey:quick": "node tools/survey-test.mjs --quick"
   },
   "engines": {
     "node": ">=20"

@@ -96,6 +96,15 @@ export class SurveyRunner {
     this.persistLocal();
     this.startAutosave();
 
+    // Test hooks for the automated suite (tools/survey-test.mjs): a read-only
+    // snapshot of the participant's own answers plus a way to force the pending
+    // save, so a test does not have to wait out the autosave debounce.
+    window.__maelstrom = {
+      surveyId: this.survey.id,
+      snapshot: () => this.state.toRecord(),
+      flush: () => this.syncCloud({ force: true, final: this.state.final }),
+    };
+
     if (this.resumed && !this.state.final) {
       toast(t('survey.resume.restored'), { tone: 'ok' });
     }

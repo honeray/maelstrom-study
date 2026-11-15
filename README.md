@@ -167,6 +167,26 @@ npm run check       # validate + verify the manifest is up to date
 npm run doctor      # why is (or isn't) the published site reachable?
 ```
 
+### Survey test suite
+
+```bash
+npm run test:survey          # all languages, all tiers (~9 minutes)
+npm run test:survey:quick    # English only, sweep + end-to-end (~1 minute)
+```
+
+Drives a real headless Chrome through the survey against a local mock of the response
+API, so no test data ever reaches the production KV store or the data repository.
+
+| Tier | What it proves |
+|---|---|
+| `sweep` | Every option of every question, all 511 factor subsets, every branch and scenario state, free text filled and empty — each checked against the saved answer |
+| `e2e` | Complete runs per language, submission and locking, Round 2 prefill and revision, Round 1 left untouched |
+| `recovery` | Stopping on every page, then recovering the tag in a fresh browser and diffing the restored answers and question order |
+| `extra` | Language switch mid-survey, randomisation determinism, server outage and retry, keyboard-only completion, accessible names, mobile layout, one tag in two browsers, CSV export |
+
+Options: `--langs=en,zh,fr`, `--tiers=sweep,e2e,recovery,extra`, `--keep`, `--timeout=ms`.
+Chrome is autodetected; set `CHROME_PATH` to override. It exits non-zero on any failure.
+
 Regenerating the image assets from the master artwork in `../Logo`:
 
 ```powershell
