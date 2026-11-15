@@ -28,6 +28,24 @@ export function questionBlocks(page) {
   return (page.blocks || []).filter((block) => QUESTION_TYPES.has(block.type));
 }
 
+/**
+ * Does this question gate the page?
+ *
+ * Mirrors SurveyState.isAnswered: a block is required only when the survey JSON
+ * says `"required": true` (the default is optional), and a multi-choice
+ * `minSelections` floor counts even when `required` is false. The renderer marks
+ * questions from this same predicate, so the "Required" / "Optional" label
+ * cannot drift from what actually blocks Continue.
+ */
+export function blockRequiresAnswer(block) {
+  if (!block || !QUESTION_TYPES.has(block.type)) return false;
+  if (block.type === 'multiChoice') {
+    const minimum = block.minSelections ?? (block.required ? 1 : 0);
+    return minimum > 0;
+  }
+  return block.required === true;
+}
+
 export function countQuestions(survey) {
   return (survey.pages || []).reduce((total, page) => total + questionBlocks(page).length, 0);
 }

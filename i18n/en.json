@@ -4,6 +4,7 @@
     "language": "Language",
     "languageShort": "Language",
     "optional": "Optional",
+    "required": "Required",
     "pleaseSpecify": "Please specify",
     "loading": "Loading…"
   },

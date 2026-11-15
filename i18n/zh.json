@@ -4,6 +4,7 @@
     "language": "语言",
     "languageShort": "语言",
     "optional": "选填",
+    "required": "必答",
     "pleaseSpecify": "请注明",
     "loading": "载入中……"
   },

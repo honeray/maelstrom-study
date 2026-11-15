@@ -4,6 +4,7 @@
     "language": "Langue",
     "languageShort": "Langue",
     "optional": "Facultatif",
+    "required": "Obligatoire",
     "pleaseSpecify": "Veuillez préciser",
     "loading": "Chargement…"
   },

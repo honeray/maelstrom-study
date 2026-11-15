@@ -35,6 +35,7 @@ import { existsSync } from 'node:fs';
 import { spawn } from 'node:child_process';
 import path from 'node:path';
 import os from 'node:os';
+import { blockRequiresAnswer } from '../assets/js/survey/schema.js';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const SURVEY_R1 = 'delphi-round-1';
@@ -672,10 +673,50 @@ async function fillDemographics(s, pick = (options) => options[0].id) {
  */
 async function fillRequiredTexts(s, pageId, text = 'A test response.') {
   for (const block of questionsOn(pageId)) {
-    if (block.required === false) continue;
+    if (!blockRequiresAnswer(block)) continue;
     if (block.type !== 'shortText' && block.type !== 'longText') continue;
     await typeInto(s, `#input-${block.id}`, text);
   }
+}
+
+const QUESTION_BLOCK_TYPES = new Set(['shortText', 'longText', 'singleChoice', 'multiChoice', 'branchScale', 'scenarioPair']);
+
+/**
+ * Every rendered question must carry the marker the gating logic implies —
+ * `blockRequiresAnswer`, the same predicate the renderer uses. This is the guard
+ * that keeps the label honest when a question's required flag changes.
+ */
+async function checkRequiredMarkers(s, pageId) {
+  const expected = (PAGE[pageId].blocks || [])
+    .filter((block) => block.id && QUESTION_BLOCK_TYPES.has(block.type))
+    .map((block) => ({ id: block.id, required: blockRequiresAnswer(block) }));
+
+  const actual = await s.eval(`(()=>[...document.querySelectorAll('.q[data-block]')].map((node)=>({
+    id: node.dataset.block,
+    required: node.dataset.required === 'true',
+    marker: Boolean(node.querySelector('.q__required')),
+    optionalMarker: Boolean(node.querySelector('.q__optional')),
+    aria: Boolean(node.querySelector('[aria-required="true"]')),
+  })))()`);
+
+  const problems = [];
+  for (const expect of expected) {
+    const found = actual.find((item) => item.id === expect.id);
+    if (!found) {
+      problems.push(`${expect.id}: not rendered`);
+      continue;
+    }
+    if (found.required !== expect.required) problems.push(`${expect.id}: data-required is ${found.required}`);
+    if (found.marker !== expect.required) problems.push(`${expect.id}: required marker ${found.marker}`);
+    if (found.optionalMarker === expect.required) problems.push(`${expect.id}: optional marker ${found.optionalMarker}`);
+    if (expect.required && !found.aria) problems.push(`${expect.id}: no aria-required`);
+  }
+
+  record(
+    problems.length === 0,
+    `${pageId}: all ${expected.length} questions are marked required or optional correctly`,
+    problems.slice(0, 3).join(' | ')
+  );
 }
 
 async function fillFactors(s) {
@@ -737,6 +778,7 @@ async function sweepLanguage(lang) {
     check((await nextDisabled(s)) === false, 'page 2: Continue enabled after tag consent');
     await clickNext(s);
     await waitForPage(s, 'demographics');
+    await checkRequiredMarkers(s, 'demographics');
 
     /* --- page 3: demographics ------------------------------------------ */
     for (const block of questionsOn('demographics')) {
@@ -777,6 +819,7 @@ async function sweepLanguage(lang) {
 
     await clickNext(s);
     await waitForPage(s, 'factors');
+    await checkRequiredMarkers(s, 'factors');
 
     /* --- page 4: factor subsets (all 512) ------------------------------ */
     const factorBlock = blockById.q_factors;
@@ -835,6 +878,7 @@ async function sweepLanguage(lang) {
 
     await clickNext(s);
     await waitForPage(s, 'scenarios');
+    await checkRequiredMarkers(s, 'scenarios');
 
     /* --- page 5: scenario states (12 pairs x 7 states) ------------------ */
     const scenarioIds = (PAGE.scenarios.blocks || []).filter((b) => b.type === 'scenarioPair').map((b) => b.id);
@@ -910,6 +954,7 @@ async function sweepLanguage(lang) {
 
     await clickNext(s);
     await waitForPage(s, 'closing');
+    await checkRequiredMarkers(s, 'closing');
 
     /* --- page 6: free text, empty and filled --------------------------- */
     await typeInto(s, '#input-q_closing', '');
@@ -953,7 +998,7 @@ const E2E_PROFILES = [
     // free-response box is left empty — that is the "no response" case.
     name: 'first options, optional free text left empty',
     pick: (options) => options[0].id,
-    text: (block) => (block.required === false ? '' : `required ${block.id}`),
+    text: (block) => (blockRequiresAnswer(block) ? `required ${block.id}` : ''),
     pickExtent: (options) => options[0].id,
   },
   {
@@ -1027,7 +1072,7 @@ async function e2eRun(lang, profile) {
 
     // Free-text questions on this page the survey marks required.
     for (const block of questionsOn('factors')) {
-      if (block.required === false) continue;
+      if (!blockRequiresAnswer(block)) continue;
       if (block.type !== 'shortText' && block.type !== 'longText') continue;
       const text = profile.text(block) || 'A test response.';
       await typeInto(s, `#input-${block.id}`, text);

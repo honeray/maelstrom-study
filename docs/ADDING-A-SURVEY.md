@@ -97,6 +97,12 @@ the before/after comparison work.
 Every block may carry `hint` (small text under the prompt) and `required` (defaults to
 **false** — set `"required": true` explicitly on anything that gates the Next button).
 
+Question blocks are labelled automatically, from the same rule the gating follows
+(`blockRequiresAnswer` in `assets/js/survey/schema.js`): a required question shows a
+**Required** marker beside its prompt and carries `aria-required`, an optional one
+shows **Optional**. Nothing extra is written in the survey file, so new questions —
+and new question types — are labelled correctly without further changes.
+
 ### `prose`
 
 ```json

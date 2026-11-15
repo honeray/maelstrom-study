@@ -8,7 +8,7 @@ import { t, loc } from '../lib/i18n.js';
 import { el } from '../lib/util.js';
 import { renderRich, renderContact, toast, inlineMarkdown } from '../lib/ui.js';
 import { CONFIG } from '../config.js';
-import { QUESTION_TYPES } from './schema.js';
+import { QUESTION_TYPES, blockRequiresAnswer } from './schema.js';
 import { otherKey } from './state.js';
 import { EDIT_MODE, annotateBlock } from './provenance.js';
 
@@ -171,9 +171,19 @@ function renderLinkBanner(block) {
 
 /* --- Question shell ----------------------------------------------------- */
 
-function questionShell(block, index, { body, hint, prompt, optional }) {
+/**
+ * @param {object} block
+ * @param {number|null} index
+ * @param {{body: Node, hint?: Array, prompt: string|Node}} parts
+ *
+ * Whether the question is required comes from `blockRequiresAnswer`, the same
+ * predicate the gating logic follows, so every question type — including any
+ * added later — is labelled exactly as it behaves.
+ */
+function questionShell(block, index, { body, hint, prompt }) {
   const labelId = `label-${block.id}`;
   const numberText = index ? String(index).padStart(2, '0') : null;
+  const required = blockRequiresAnswer(block);
 
   const promptNode = el('h3.q__prompt', { id: labelId });
   if (prompt instanceof Node) {
@@ -181,11 +191,17 @@ function questionShell(block, index, { body, hint, prompt, optional }) {
   } else {
     promptNode.appendChild(document.createTextNode(String(prompt ?? '')));
   }
-  if (optional) promptNode.appendChild(el('span.q__optional', {}, t('common.optional')));
+  promptNode.appendChild(
+    el(
+      'span',
+      { class: required ? 'q__required' : 'q__optional' },
+      t(required ? 'common.required' : 'common.optional')
+    )
+  );
 
-  return el(
-    'section.q',
-    { id: `q-${block.id}`, 'data-block': block.id },
+  const shell = el(
+    'section.q' + (required ? '.q--required' : ''),
+    { id: `q-${block.id}`, 'data-block': block.id, 'data-required': required ? 'true' : 'false' },
     el(
       'div.q__head',
       {},
@@ -205,6 +221,18 @@ function questionShell(block, index, { body, hint, prompt, optional }) {
       el('span.q__error-text', {})
     )
   );
+
+  // Screen-reader semantics to match the visible marker. Only the question's own
+  // control is marked: the conditional follow-up inside .branch is required only
+  // once an option that opens it is chosen.
+  if (required) {
+    const primaryGroup = shell.querySelector('.q__body .opt-list[role]');
+    if (primaryGroup) primaryGroup.setAttribute('aria-required', 'true');
+    const ownInput = shell.querySelector(`#input-${CSS.escape(block.id)}`);
+    if (ownInput) ownInput.setAttribute('aria-required', 'true');
+  }
+
+  return shell;
 }
 
 /** Mark a block invalid and surface the message. */
@@ -328,7 +356,6 @@ function optionGroup(block, ctx, { multiple = false, labelId, name, inline = fal
 
 function renderText(block, ctx, index) {
   const labelId = `label-${block.id}`;
-  const optional = block.required === false;
   const long = block.type === 'longText';
   const value = ctx.state.getAnswer(block.id) || '';
 
@@ -356,7 +383,6 @@ function renderText(block, ctx, index) {
     body: el('div', {}, input, counter),
     prompt: loc(block.prompt),
     hint: block.hint ? [loc(block.hint)] : null,
-    optional,
   });
 }
 
@@ -374,7 +400,6 @@ function renderSingleChoice(block, ctx, index) {
     body: group.node,
     prompt: loc(block.prompt),
     hint: block.hint ? [loc(block.hint)] : null,
-    optional: block.required === false,
   });
 }
 
@@ -390,7 +415,6 @@ function renderMultiChoice(block, ctx, index) {
     body: group.node,
     prompt: loc(block.prompt),
     hint: block.hint ? [loc(block.hint)] : null,
-    optional: block.required === false,
   });
 }
 
@@ -438,7 +462,6 @@ function renderBranchScale(block, ctx, index) {
     body: el('div', {}, statement, first.node, branch),
     prompt: loc(block.prompt),
     hint: block.hint ? [loc(block.hint)] : null,
-    optional: block.required === false,
   });
 }
 
@@ -543,7 +566,6 @@ function renderScenarioPair(block, ctx, index) {
   return questionShell(block, index, {
     body: el('div', {}, pair, group.node, branch, comment),
     prompt: el('span.visually-hidden', {}, t('survey.scenario.prompt')),
-    optional: block.required === false,
   });
 }
 
