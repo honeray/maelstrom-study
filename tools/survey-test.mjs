@@ -1056,10 +1056,21 @@ async function e2eRun(lang, profile) {
     await s.waitFor("Boolean(document.querySelector('#q-tag_lookup'))", { label: 'round 2 lookup' });
     await typeInto(s, '#q-tag_lookup input', tag);
     await s.eval("document.querySelector('#q-tag_lookup form').requestSubmit()");
-    await s.waitFor("window.__maelstrom && window.__maelstrom.snapshot().pageId === 'welcome'", { timeout: 12000, label: 'round 2 welcome' });
 
+    // The report-read checkpoint sits between the tag lookup and the welcome page.
+    await s.waitFor("window.__maelstrom && window.__maelstrom.snapshot().pageId === 'report_read'", {
+      timeout: 12000,
+      label: 'round 2 report checkpoint',
+    });
+    same(await answers(s), expected, 'round 2 loads the round 1 answers before the checkpoint');
+    check((await nextDisabled(s)) === true, 'round 2: the report checkbox blocks Continue');
+    await clickSelector(s, '#q-consent_report_read input');
+    check((await nextDisabled(s)) === false, 'round 2: confirming the report unblocks Continue');
+    await clickNext(s);
+
+    await waitForPage(s, 'welcome', 12000);
     const prefilled = await answers(s);
-    same(prefilled, expected, 'round 2 pre-fills the round 1 answers');
+    same(prefilled, { ...expected, consent_report_read: true }, 'round 2 pre-fills the round 1 answers');
 
     await clickNext(s); // welcome -> demographics
     await waitForPage(s, 'demographics');
@@ -1072,7 +1083,7 @@ async function e2eRun(lang, profile) {
       target.click();
       return target.value;
     })()`);
-    const revised = { ...expected, q_age: changed };
+    const revised = { ...expected, q_age: changed, consent_report_read: true };
 
     await clickNext(s); // demographics -> factors
     await waitForPage(s, 'factors');

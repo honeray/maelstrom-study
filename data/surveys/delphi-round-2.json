@@ -54,6 +54,30 @@
       ]
     },
     {
+      "id": "report_read",
+      "eyebrow": { "en": "Round 2", "zh": "第二轮", "fr": "Tour 2" },
+      "title": { "en": "Before You Review", "zh": "复核之前", "fr": "Avant votre révision" },
+      "blocks": [
+        {
+          "type": "prose",
+          "text": {
+            "en": "The summary report of the previous round is published on the study homepage. It brings together the anonymized responses of all the experts who took part.",
+            "zh": "上一轮的汇总报告已发布在研究主页上，其中汇集了所有参与专家的匿名回答。",
+            "fr": "Le rapport de synthèse du tour précédent est publié sur la page d'accueil de l'étude. Il rassemble les réponses anonymisées de tous les experts qui y ont participé."
+          }
+        },
+        {
+          "type": "consent",
+          "id": "consent_report_read",
+          "label": {
+            "en": "I have read the summary report from the previous round and am ready to review my previous responses.",
+            "zh": "我已阅读上一轮的汇总报告，并准备好复核我此前的回答。",
+            "fr": "J'ai lu le rapport de synthèse du tour précédent et je suis prêt(e) à revoir mes réponses précédentes."
+          }
+        }
+      ]
+    },
+    {
       "id": "welcome",
       "eyebrow": { "en": "Round 2", "zh": "第二轮", "fr": "Tour 2" },
       "title": { "en": "Welcome to Round 2", "zh": "欢迎参加第二轮", "fr": "Bienvenue au tour 2" },
