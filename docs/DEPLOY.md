@@ -266,6 +266,20 @@ npx wrangler deploy            # after editing src/index.js or wrangler.toml
 npx wrangler tail              # live logs
 ```
 
+**Deploy after any change to the site's address.** `ALLOWED_ORIGINS` is an
+environment variable baked into the worker at deploy time: editing
+`worker/wrangler.toml` and pushing the site changes nothing until you run
+`npx wrangler deploy`. Moving the site to a custom domain, renaming the
+repository, or switching between `username.github.io` and a domain are all
+origin changes, and every save is blocked until the worker is redeployed.
+
+The origin must match exactly — scheme included, no trailing slash — and a
+`www.` host is a different origin from the apex, so add it separately if it
+serves the site without redirecting.
+
+`npm run doctor` checks this directly: it resolves the origin the published site
+actually runs at and asks the worker whether it accepts it.
+
 Cron triggers are part of the deployment; `*/2 * * * *` is already configured. To flush
 outstanding records immediately:
 
@@ -294,6 +308,7 @@ GITHUB_TOKEN=github_pat_… node tools/doctor.mjs --repo honeray/maelstrom-study
 | Header says "Saved on this device" forever | Worker unreachable | Check `/v1/health`; check `ALLOWED_ORIGINS` |
 | Browser console shows a CORS error | Origin not in `ALLOWED_ORIGINS` | Add the exact origin, including `https://`, no trailing slash |
 | `403 origin_not_allowed` | Same | Same |
+| **Saves worked, then stopped right after the site moved to a custom domain** | **The site's origin changed, but the deployed worker still has the old `ALLOWED_ORIGINS`** | **`cd worker && npx wrangler deploy`, then `npm run doctor` — it now tests the site's real origin and prints this fix. Editing `wrangler.toml` alone changes nothing until you deploy.** |
 | `survey_unknown` in the network tab | Survey id missing from `SURVEYS` | Add it and redeploy |
 | `429 rate_limited` | More than 90 saves/minute from one IP | Usually a proxy/NAT; raise `RATE_LIMIT_PER_MINUTE` |
 | Records never reach GitHub | Expired token or wrong repo name | `wrangler tail`, then rotate `GITHUB_TOKEN` |

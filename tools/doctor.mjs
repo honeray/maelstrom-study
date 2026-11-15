@@ -88,6 +88,34 @@ async function httpStatus(url) {
   }
 }
 
+/** The origin a browser will actually send in the Origin header. */
+async function effectiveOrigin(url) {
+  if (!url) return null;
+  try {
+    const response = await fetch(url, { redirect: 'follow' });
+    return new URL(response.url || url).origin;
+  } catch {
+    return new URL(url).origin;
+  }
+}
+
+/** Ask the API what it thinks of requests from `origin`. */
+async function corsProbe(url, origin) {
+  try {
+    const response = await fetch(url, {
+      headers: { Origin: origin },
+      cache: 'no-store',
+      signal: AbortSignal.timeout(15000),
+    });
+    return {
+      status: response.status,
+      allowOrigin: response.headers.get('access-control-allow-origin'),
+    };
+  } catch (error) {
+    return { status: `unreachable (${error.message})`, allowOrigin: null };
+  }
+}
+
 /* ------------------------------------------------------------------------ */
 
 const args = process.argv.slice(2);
@@ -285,9 +313,37 @@ if (!apiBase) {
     'Set apiBase in assets/js/config.js (docs/DEPLOY.md step 5) before sharing the survey link.'
   );
 } else {
-  const health = await httpStatus(`${apiBase.replace(/\/+$/, '')}/v1/health`);
-  if (health === 200) ok('response server reachable', `${apiBase}/v1/health → HTTP 200`);
-  else fail('response server unreachable', `${apiBase}/v1/health → ${health}`, 'Run `npx wrangler tail` in worker/.');
+  const base = apiBase.replace(/\/+$/, '');
+  const health = await httpStatus(`${base}/v1/health`);
+  if (health === 200) ok('response server reachable', `${base}/v1/health → HTTP 200`);
+  else fail('response server unreachable', `${base}/v1/health → ${health}`, 'Run `npx wrangler tail` in worker/.');
+
+  // Reachable is not the same as usable: the worker must also allow the site's
+  // origin, or every request from the published page is blocked by the browser.
+  const siteOrigin = await effectiveOrigin(pagesUrl);
+  if (siteOrigin && health === 200) {
+    const probe = await corsProbe(`${base}/v1/health`, siteOrigin);
+    if (probe.status === 200 && probe.allowOrigin === siteOrigin) {
+      ok('response server allows the site origin', `${siteOrigin} → ${probe.allowOrigin}`);
+    } else {
+      fail(
+        'response server refuses the site origin',
+        `${siteOrigin} → HTTP ${probe.status}, access-control-allow-origin: ${probe.allowOrigin ?? '(missing)'}`,
+        [
+          'The browser blocks every save with this error:',
+          `  Access to fetch at '${base}/v1/health' from origin '${siteOrigin}'`,
+          "  has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header…",
+          '',
+          'The deployed worker is running an older ALLOWED_ORIGINS than',
+          'worker/wrangler.toml. Redeploy it, then re-run npm run doctor:',
+          '  cd worker',
+          '  npx wrangler deploy',
+        ].join('\n')
+      );
+    }
+  } else if (!siteOrigin) {
+    warn('site origin unknown', 'Could not determine the published origin to test', 'Check the CNAME file or pass --repo.');
+  }
 }
 
 /* ------------------------------------------------------------------------ */
