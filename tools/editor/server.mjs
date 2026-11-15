@@ -410,32 +410,74 @@ function safePath(relative) {
   return { relative: normalised, absolute };
 }
 
+const uid = (prefix) => `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
+
 async function applyEdit({ file, pointer, lang, value }) {
-  if (!LANGS.includes(lang)) throw new Error('bad language');
-  if (typeof value !== 'string') throw new Error('value must be a string');
-  if (value.length > 20000) throw new Error('value too long');
-
-  const target = file === 'i18n' ? `i18n/${lang}.json` : file;
-  const { relative, absolute } = safePath(target);
+  const [result] = await applyBatch([{ file, pointer, lang, value }], uid('edit'));
+  const { relative, absolute } = safePath(result.file);
   const text = await readFile(absolute, 'utf8');
-  const valuePointer = file === 'i18n' ? pointer : `${pointer}/${lang}`;
-
-  const previous = readToken(text, valuePointer);
-  const updated = spliceValue(text, valuePointer, value);
-  JSON.parse(updated); // refuse to write invalid JSON
-
-  await writeFile(absolute, updated, 'utf8');
-
-  undoStack.push({ file: relative, pointer: valuePointer, previous, at: Date.now() });
-  if (undoStack.length > 200) undoStack.shift();
-
-  return { file: relative, pointer: valuePointer, previous, diff: lineDiff(text, updated) };
+  return {
+    file: result.file,
+    pointer: result.pointer,
+    previous: result.previous,
+    diff: lineDiff(result.before, text),
+  };
 }
 
-function readToken(text, pointer) {
-  const span = scanJson(text).get(pointer);
-  if (!span) throw new Error(`No value at ${pointer}`);
-  return JSON.parse(text.slice(span.start, span.end));
+/** `i18n` entries live in one file per language; everything else uses a lang key. */
+function targetFor(file, lang) {
+  if (!LANGS.includes(lang)) throw new Error('bad language');
+  return file === 'i18n'
+    ? { jsonFile: `i18n/${lang}.json`, valuePointer: (pointer) => pointer }
+    : { jsonFile: file, valuePointer: (pointer) => `${pointer}/${lang}` };
+}
+
+/** Apply several edits at once, writing each file only once. */
+async function applyBatch(changes, batch) {
+  if (!changes.length) return [];
+
+  const groups = new Map();
+  for (const change of changes) {
+    if (typeof change.value !== 'string') throw new Error('value must be a string');
+    if (change.value.length > 20000) throw new Error('value too long');
+    const { jsonFile, valuePointer } = targetFor(change.file, change.lang);
+    const pointer = valuePointer(change.pointer);
+    if (!groups.has(jsonFile)) groups.set(jsonFile, { jsonFile, edits: [] });
+    groups.get(jsonFile).edits.push({ pointer, value: change.value, source: change });
+  }
+
+  const results = [];
+  for (const group of groups.values()) {
+    const { relative, absolute } = safePath(group.jsonFile);
+    const text = await readFile(absolute, 'utf8');
+    const spans = scanJson(text);
+
+    const edits = group.edits
+      .map((edit) => ({ ...edit, span: spans.get(edit.pointer) }))
+      .filter((edit) => edit.span);
+
+    if (edits.length !== group.edits.length) {
+      const missing = group.edits.filter((edit) => !spans.has(edit.pointer)).map((edit) => edit.pointer);
+      throw new Error(`No value at ${missing[0]}`);
+    }
+
+    // Splice from the end so earlier offsets stay valid.
+    let updated = text;
+    for (const edit of edits.slice().sort((a, b) => b.span.start - a.span.start)) {
+      updated = updated.slice(0, edit.span.start) + JSON.stringify(edit.value) + updated.slice(edit.span.end);
+    }
+    JSON.parse(updated); // refuse to write invalid JSON
+    await writeFile(absolute, updated, 'utf8');
+
+    for (const edit of edits) {
+      const previous = JSON.parse(text.slice(edit.span.start, edit.span.end));
+      results.push({ file: relative, pointer: edit.pointer, previous, before: text });
+      undoStack.push({ file: relative, pointer: edit.pointer, previous, batch, at: Date.now() });
+    }
+  }
+
+  while (undoStack.length > 5000) undoStack.shift();
+  return results;
 }
 
 /** A tiny context diff: the changed line, before and after. */
@@ -455,6 +497,176 @@ function lineDiff(before, after) {
     before: oldLines.slice(start, endOld + 1).join('\n').slice(0, 400),
     after: newLines.slice(start, endNew + 1).join('\n').slice(0, 400),
   };
+}
+
+/* ========================================================================== */
+/* CSV round-trip                                                             */
+/* ========================================================================== */
+
+const CSV_COLUMNS = ['id', 'group', 'context', 'file', 'pointer', 'page', 'en', 'zh', 'fr', 'shared'];
+
+function csvCell(value) {
+  const text = value === null || value === undefined ? '' : String(value);
+  return /[",\r\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+}
+
+function toCsv(rows) {
+  const lines = [CSV_COLUMNS.join(',')];
+  for (const row of rows) lines.push(CSV_COLUMNS.map((column) => csvCell(row[column])).join(','));
+  // A BOM makes Excel read the file as UTF-8 instead of the local codepage.
+  return `\uFEFF${lines.join('\r\n')}\r\n`;
+}
+
+/** Excel saves with the locale's separator, so do not assume a comma. */
+function detectDelimiter(text) {
+  const firstLine = text.split('\n')[0] || '';
+  for (const delimiter of [',', ';', '\t']) {
+    const cells = firstLine.split(delimiter).map((cell) => cell.trim().replace(/^"|"$/g, '').toLowerCase());
+    if (cells.includes('id') && LANGS.some((lang) => cells.includes(lang))) return delimiter;
+  }
+  return ',';
+}
+
+function parseCsv(text, delimiter = ',') {
+  const rows = [];
+  let row = [];
+  let cell = '';
+  let quoted = false;
+
+  for (let i = 0; i < text.length; i += 1) {
+    const char = text[i];
+    if (quoted) {
+      if (char === '"') {
+        if (text[i + 1] === '"') {
+          cell += '"';
+          i += 1;
+        } else {
+          quoted = false;
+        }
+      } else {
+        cell += char;
+      }
+    } else if (char === '"') {
+      quoted = true;
+    } else if (char === delimiter) {
+      row.push(cell);
+      cell = '';
+    } else if (char === '\r') {
+      /* newlines are normalised in the imported value */
+    } else if (char === '\n') {
+      row.push(cell);
+      rows.push(row);
+      row = [];
+      cell = '';
+    } else {
+      cell += char;
+    }
+  }
+  if (cell.length || row.length) {
+    row.push(cell);
+    rows.push(row);
+  }
+  return rows;
+}
+
+async function buildCsv() {
+  const { entries } = await buildCatalog();
+  return toCsv(
+    entries.map((entry) => ({
+      id: entry.id,
+      group: entry.group,
+      context: entry.context,
+      file: entry.file,
+      pointer: entry.pointer,
+      page: entry.page || '',
+      en: entry.values.en,
+      zh: entry.values.zh,
+      fr: entry.values.fr,
+      shared: (entry.shared || []).join('; '),
+    }))
+  );
+}
+
+/**
+ * Apply every changed cell of an uploaded sheet. Unchanged cells are skipped,
+ * unknown ids are reported rather than written, and everything applied shares
+ * one batch so it can be reverted in a single step.
+ */
+async function importCsv(text) {
+  const clean = text.replace(/^\uFEFF/, '');
+  const rows = parseCsv(clean, detectDelimiter(clean));
+  if (rows.length < 1) throw new Error('the file is empty');
+
+  const header = rows[0].map((cell) => cell.trim().toLowerCase());
+  const idIndex = header.indexOf('id');
+  if (idIndex < 0) throw new Error('the CSV needs an "id" column (export it from the editor first)');
+  const langIndex = Object.fromEntries(LANGS.map((lang) => [lang, header.indexOf(lang)]));
+  if (LANGS.every((lang) => langIndex[lang] < 0)) {
+    throw new Error('the CSV needs at least one of the en / zh / fr columns');
+  }
+
+  const { entries } = await buildCatalog();
+  const byId = new Map(entries.map((entry) => [entry.id, entry]));
+
+  const changes = [];
+  const errors = [];
+  const warnings = [];
+  let unchanged = 0;
+
+  rows.slice(1).forEach((row, offset) => {
+    const line = offset + 2;
+    const id = (row[idIndex] ?? '').trim();
+    if (!id) return; // blank row, e.g. the trailing one
+
+    const entry = byId.get(id);
+    if (!entry) {
+      errors.push({ line, message: `unknown id: ${id}` });
+      return;
+    }
+
+    for (const lang of LANGS) {
+      const index = langIndex[lang];
+      if (index < 0 || index >= row.length) continue;
+      const next = row[index].replace(/\r\n/g, '\n');
+      if (next === entry.values[lang]) {
+        unchanged += 1;
+        continue;
+      }
+      if (!next.trim()) warnings.push({ line, message: `${lang} would become empty for ${id}` });
+      changes.push({ file: entry.file, pointer: entry.pointer, lang, value: next, id });
+    }
+  });
+
+  if (!changes.length) return { updated: 0, unchanged, errors, warnings, batch: null };
+
+  const batch = uid('import');
+  await applyBatch(changes, batch);
+  return {
+    updated: changes.length,
+    unchanged,
+    errors,
+    warnings,
+    batch,
+    files: [...new Set(changes.map((change) => change.file))],
+  };
+}
+
+async function undoBatch(batch) {
+  const target = batch || undoStack[undoStack.length - 1]?.batch;
+  if (!target) return { reverted: 0, batch: null };
+
+  const entries = undoStack.filter((entry) => entry.batch === target);
+  for (const entry of entries) {
+    const index = undoStack.indexOf(entry);
+    if (index >= 0) undoStack.splice(index, 1);
+  }
+
+  for (const entry of entries.slice().reverse()) {
+    const { absolute } = safePath(entry.file);
+    const text = await readFile(absolute, 'utf8');
+    await writeFile(absolute, spliceValue(text, entry.pointer, entry.previous), 'utf8');
+  }
+  return { reverted: entries.length, batch: target };
 }
 
 /* ========================================================================== */
@@ -483,12 +695,17 @@ const json = (res, status, payload) => {
   res.end(body);
 };
 
-const readBody = async (req) => {
+const readText = async (req, limit = 1_000_000) => {
   let raw = '';
   for await (const chunk of req) {
     raw += chunk;
-    if (raw.length > 1_000_000) throw new Error('body too large');
+    if (raw.length > limit) throw new Error('body too large');
   }
+  return raw;
+};
+
+const readBody = async (req) => {
+  const raw = await readText(req);
   return raw ? JSON.parse(raw.replace(/^\uFEFF/, '')) : {};
 };
 
@@ -547,13 +764,34 @@ const server = createServer(async (req, res) => {
 
     if (pathname === '/api/undo' && req.method === 'POST') {
       if (!originAllowed(req)) return json(res, 403, { ok: false, error: 'origin not allowed' });
-      const entry = undoStack.pop();
-      if (!entry) return json(res, 409, { ok: false, error: 'nothing to undo' });
-      const { absolute, relative } = safePath(entry.file);
-      const text = await readFile(absolute, 'utf8');
-      const updated = spliceValue(text, entry.pointer, entry.previous);
-      await writeFile(absolute, updated, 'utf8');
-      return json(res, 200, { ok: true, file: relative, pointer: entry.pointer, restored: entry.previous });
+      const result = await undoBatch(null);
+      if (!result.reverted) return json(res, 409, { ok: false, error: 'nothing to undo' });
+      return json(res, 200, { ok: true, ...result });
+    }
+
+    if (pathname === '/api/undo-batch' && req.method === 'POST') {
+      if (!originAllowed(req)) return json(res, 403, { ok: false, error: 'origin not allowed' });
+      const body = await readBody(req);
+      const result = await undoBatch(body.batch);
+      if (!result.reverted) return json(res, 409, { ok: false, error: 'nothing to undo' });
+      return json(res, 200, { ok: true, ...result });
+    }
+
+    if (pathname === '/api/export.csv' && req.method === 'GET') {
+      const csv = await buildCsv();
+      res.writeHead(200, {
+        'content-type': 'text/csv; charset=utf-8',
+        'content-disposition': 'attachment; filename="maelstrom-text.csv"',
+        'cache-control': 'no-store',
+      });
+      return res.end(csv);
+    }
+
+    if (pathname === '/api/import' && req.method === 'POST') {
+      if (!originAllowed(req)) return json(res, 403, { ok: false, error: 'origin not allowed' });
+      const text = await readText(req, 8_000_000);
+      const report = await importCsv(text);
+      return json(res, 200, { ok: true, ...report });
     }
 
     // Collector for the preview's response API: accepts, stores nothing.

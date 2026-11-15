@@ -384,13 +384,87 @@ function reloadSoon() {
 async function undo() {
   try {
     const result = await post('/api/undo', {});
-    toast(`Reverted ${result.file}`);
+    toast(`Reverted ${result.reverted} change(s)`);
     $('undo').disabled = true;
     await refreshCatalog();
     if (state.current) {
       const entry = state.byId.get(state.current.id) || state.current;
       openEntry(entry, null);
     }
+    loadPreview();
+  } catch (error) {
+    toast(error.message, true);
+  }
+}
+
+/* -------------------------------------------------------------------- CSV */
+
+async function exportCsv() {
+  try {
+    const response = await fetch('/api/export.csv');
+    if (!response.ok) throw new Error(`Export failed (${response.status})`);
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'maelstrom-text.csv';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+    toast(`Exported ${state.entries.length} strings`);
+  } catch (error) {
+    toast(error.message, true);
+  }
+}
+
+function showReport(report) {
+  const list = $('reportList');
+  list.innerHTML = '';
+  const items = [
+    ...report.errors.map((item) => ({ cls: 'is-error', text: `Line ${item.line}: ${item.message}` })),
+    ...report.warnings.map((item) => ({ cls: 'is-warn', text: `Line ${item.line}: ${item.message}` })),
+  ];
+  for (const item of items.slice(0, 200)) {
+    const li = document.createElement('li');
+    li.className = item.cls;
+    li.textContent = item.text;
+    list.appendChild(li);
+  }
+
+  const skipped = report.errors.length ? ` ${report.errors.length} row(s) skipped.` : '';
+  $('reportSummary').textContent = report.updated
+    ? `${report.updated} cell(s) updated across ${report.files.join(', ')}; ${report.unchanged} already matched.${skipped}`
+    : `Nothing to change — ${report.unchanged} cell(s) already matched.${skipped}`;
+
+  $('reportTitle').textContent = report.updated ? 'Import applied' : 'Import — no changes';
+  $('reportRevert').hidden = !report.updated;
+  $('reportRevert').dataset.batch = report.batch || '';
+  $('report').showModal();
+}
+
+async function importFile(file) {
+  const text = await file.text();
+  const report = await api('/api/import', {
+    method: 'POST',
+    headers: { 'content-type': 'text/csv; charset=utf-8' },
+    body: text,
+  });
+  showReport(report);
+  await refreshCatalog();
+  loadPreview();
+  if (report.updated) $('undo').disabled = false;
+}
+
+async function revertImport() {
+  const batch = $('reportRevert').dataset.batch;
+  try {
+    const result = await post('/api/undo-batch', { batch });
+    toast(`Reverted ${result.reverted} change(s)`);
+    $('report').close();
+    $('undo').disabled = false;
+    await refreshCatalog();
+    if (state.current) openEntry(state.byId.get(state.current.id) || state.current, null);
     loadPreview();
   } catch (error) {
     toast(error.message, true);
@@ -428,6 +502,20 @@ function bindControls() {
   });
 
   $('undo').addEventListener('click', undo);
+  $('export').addEventListener('click', exportCsv);
+  $('import').addEventListener('click', () => $('importFile').click());
+  $('importFile').addEventListener('change', async (event) => {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+    try {
+      await importFile(file);
+    } catch (error) {
+      toast(error.message, true);
+    }
+    event.target.value = '';
+  });
+  $('reportClose').addEventListener('click', () => $('report').close());
+  $('reportRevert').addEventListener('click', revertImport);
   $('search').addEventListener('input', renderList);
   $('value').addEventListener('input', onInput);
   $('save').addEventListener('click', save);

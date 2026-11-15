@@ -54,6 +54,47 @@ Round 2 reuses several Round 1 pages. A string on one of those pages shows:
 That is expected: the text lives in Round 1's file and both rounds read it.
 Edit it once and both are correct.
 
+## Working in a spreadsheet
+
+**Export CSV** downloads every string on the site — survey prose, questions,
+options, interface labels and contact text — as one row per string:
+
+| column | meaning |
+|---|---|
+| `id` | Stable identifier. **Do not edit or rename it** — it is how the row is matched on import. |
+| `group`, `context` | Where the string appears, for orientation. Ignored on import. |
+| `file`, `pointer`, `page` | Exact source location, for reference. Ignored on import. |
+| `en`, `zh`, `fr` | The three values. **These are the only columns written back.** |
+| `shared` | Which rounds reuse this page, if any. |
+
+Edit the `en` / `zh` / `fr` cells, save, then press **Import CSV…**. Only cells
+whose text actually differs are written; everything else is skipped, and the
+report says how many changed, how many already matched and which rows were
+skipped. Importing the same file twice is harmless — the second time reports
+"nothing to change".
+
+An import is applied as **one action**, so **Revert this import** undoes the
+whole sheet in a single click, even after hundreds of cells.
+
+Practical notes:
+
+- Use a UTF-8 CSV. In Excel that is *Save as → CSV UTF-8 (comma delimited)*.
+  The export carries a byte-order mark, so Excel shows Chinese and French
+  correctly; do not save as "CSV (MS-DOS)".
+- The separator is detected, so a sheet saved with semicolons (common in
+  French-locale Excel) imports fine.
+- Excel turns a cell starting with `=` into a formula. If a sentence must start
+  with `=`, edit that one in the panel instead.
+- Cells may contain commas, quotes and line breaks; they are quoted correctly in
+  both directions.
+- An empty cell means "delete this text". The import warns about each one, and
+  `npm run validate` catches the cases the survey does not allow.
+- Rows with an unrecognised `id` are reported and skipped; the rest of the file
+  is still applied.
+
+This is the recommended route for a translator: send them the CSV, ask for the
+`zh` or `fr` column back, and import it.
+
 ## Saving, committing, publishing
 
 The editor writes to the files in your working copy and does nothing else — no

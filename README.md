@@ -181,8 +181,12 @@ place — only that language, and as a one-line diff. Round 2 pages that reuse
 Round 1 text are flagged, because an edit there changes both rounds.
 
 It writes to your working copy only: review with `git diff` and commit as usual.
-The full guide — the click-to-edit toggle, page jumps, undo and troubleshooting —
-is in [`docs/EDITING.md`](docs/EDITING.md).
+
+**Export CSV** puts every string in one spreadsheet (one row per string, columns
+`en`/`zh`/`fr`); **Import CSV…** writes back only the cells you changed, as a
+single undoable action. That is the easiest way to hand a whole language to a
+translator. The full guide — the click-to-edit toggle, page jumps, undo, the
+spreadsheet round-trip and troubleshooting — is in [`docs/EDITING.md`](docs/EDITING.md).
 
 ### Survey test suite
 

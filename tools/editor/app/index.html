@@ -39,6 +39,13 @@
       </label>
 
       <div class="bar__actions">
+        <button type="button" id="export" class="btn" title="Download every string as a spreadsheet, one row per string">
+          Export CSV
+        </button>
+        <button type="button" id="import" class="btn" title="Upload an edited CSV; only the cells you changed are written">
+          Import CSV…
+        </button>
+        <input type="file" id="importFile" accept=".csv,text/csv,text/plain" hidden />
         <button type="button" id="reload" class="btn">Reload preview</button>
         <button type="button" id="undo" class="btn" disabled>Undo last change</button>
       </div>
@@ -98,6 +105,16 @@
         </div>
       </aside>
     </main>
+
+    <dialog id="report" class="report">
+      <h2 id="reportTitle">Import report</h2>
+      <p id="reportSummary" class="report__summary"></p>
+      <ul id="reportList" class="report__list"></ul>
+      <div class="editor__actions">
+        <button type="button" id="reportRevert" class="btn" hidden>Revert this import</button>
+        <button type="button" id="reportClose" class="btn btn--primary">Close</button>
+      </div>
+    </dialog>
 
     <div class="toast" id="toast" hidden></div>
     <script type="module" src="app.js"></script>
