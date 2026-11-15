@@ -506,7 +506,7 @@
         {
           "type": "longText",
           "id": "q_own_factors",
-          "required": false,
+          "required": true,
           "prompt": {
             "en": "What factors would you, as a musician, use to accurately evaluate music? Are there any factors you believe are important to music evaluation that have not yet been mentioned in this survey?",
             "zh": "作为音乐家，您会使用哪些因素来准确评价音乐？您是否认为还有一些对音乐评价很重要、但本问卷尚未提及的因素？",
@@ -516,7 +516,7 @@
         {
           "type": "longText",
           "id": "q_ai_positive",
-          "required": false,
+          "required": true,
           "prompt": {
             "en": "What aspects of musicianship (e.g. authenticity, virtuosity, etc.) do you believe are positively impacted by a piece of music being AI-generated, if any? Why?",
             "zh": "您认为一首音乐由 AI 生成，会对音乐素养的哪些方面（如真实性、技艺精湛度等）产生积极影响（如果有的话）？为什么？",
@@ -526,7 +526,7 @@
         {
           "type": "longText",
           "id": "q_ai_negative",
-          "required": false,
+          "required": true,
           "prompt": {
             "en": "What aspects of musicianship (e.g. authenticity, virtuosity, etc.) do you believe are negatively impacted by a piece of music being AI-generated, if any? Why?",
             "zh": "您认为一首音乐由 AI 生成，会对音乐素养的哪些方面（如真实性、技艺精湛度等）产生负面影响（如果有的话）？为什么？",
