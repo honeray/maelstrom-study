@@ -759,6 +759,93 @@ body.survey {
   font-weight: 650;
 }
 
+/* --- Link banner (e.g. the previous round's report) --------------------- */
+
+.link-banner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.05rem 1.2rem;
+  border-radius: var(--radius);
+  border: 1px solid rgba(23, 137, 214, 0.32);
+  background: linear-gradient(180deg, rgba(23, 137, 214, 0.09), rgba(23, 137, 214, 0.03));
+  color: var(--blue-900);
+  text-decoration: none;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+}
+
+a.link-banner:hover,
+a.link-banner:focus-visible {
+  border-color: var(--blue-600);
+  box-shadow: 0 8px 22px rgba(6, 46, 77, 0.12);
+  transform: translateY(-1px);
+}
+
+.link-banner__badge {
+  display: grid;
+  place-items: center;
+  min-width: 2.7rem;
+  height: 2.7rem;
+  padding: 0 0.5rem;
+  border-radius: var(--radius-sm);
+  background: var(--blue-800);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+}
+
+.link-banner__body {
+  display: block;
+  min-width: 0;
+}
+
+.link-banner__label {
+  display: block;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.link-banner__note {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.link-banner__arrow {
+  font-size: 1.15rem;
+  color: var(--blue-600);
+}
+
+.link-banner.is-unavailable {
+  border-style: dashed;
+  border-color: var(--line-strong);
+  background: var(--paper-2);
+  color: var(--text-muted);
+  cursor: default;
+}
+
+.link-banner.is-unavailable .link-banner__badge {
+  background: var(--line-strong);
+}
+
+.link-banner.is-unavailable .link-banner__arrow {
+  color: inherit;
+}
+
+.link-banner__chip {
+  white-space: nowrap;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
 /* --- Contact block ------------------------------------------------------ */
 /* The .contact* component lives in base.css because the homepage footer uses
    it too; only the survey-specific spacing is set here. */

@@ -58,6 +58,11 @@ export function annotateBlock(node, block) {
       mark(node.querySelector('.consent__text'), refOf(ref, 'label'));
       break;
     }
+    case 'linkBanner': {
+      mark(node.querySelector('.link-banner__label'), refOf(ref, 'label'));
+      mark(node.querySelector('.link-banner__note'), refOf(ref, 'note'));
+      break;
+    }
     case 'shortText':
     case 'longText': {
       mark(node.querySelector('.q__prompt'), refOf(ref, 'prompt'));

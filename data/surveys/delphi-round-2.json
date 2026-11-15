@@ -61,9 +61,24 @@
         {
           "type": "prose",
           "text": {
-            "en": "The summary report of the previous round is published on the study homepage. It brings together the anonymized responses of all the experts who took part.",
-            "zh": "上一轮的汇总报告已发布在研究主页上，其中汇集了所有参与专家的匿名回答。",
-            "fr": "Le rapport de synthèse du tour précédent est publié sur la page d'accueil de l'étude. Il rassemble les réponses anonymisées de tous les experts qui y ont participé."
+            "en": "The summary report of the previous round brings together the anonymized responses of all the experts who took part. If you would like to read it again before reviewing your own answers, open it below.",
+            "zh": "上一轮的汇总报告汇集了所有参与专家的匿名回答。如果您想在复核自己的回答前再次阅读，请点击下方链接打开。",
+            "fr": "Le rapport de synthèse du tour précédent rassemble les réponses anonymisées de tous les experts qui y ont participé. Si vous souhaitez le relire avant de revoir vos propres réponses, ouvrez-le ci-dessous."
+          }
+        },
+        {
+          "type": "linkBanner",
+          "href": "reports/round-1-summary.pdf",
+          "format": "PDF",
+          "label": {
+            "en": "Read the Round 1 summary report",
+            "zh": "阅读第一轮汇总报告",
+            "fr": "Lire le rapport de synthèse du tour 1"
+          },
+          "note": {
+            "en": "Opens in a new tab, so this survey stays open.",
+            "zh": "在新标签页中打开，本问卷会保持原样。",
+            "fr": "S'ouvre dans un nouvel onglet, afin que cette enquête reste ouverte."
           }
         },
         {

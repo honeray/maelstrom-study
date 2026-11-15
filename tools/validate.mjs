@@ -16,6 +16,7 @@
  */
 
 import { readFile, readdir, stat } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import path from 'node:path';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
@@ -25,6 +26,7 @@ const KNOWN_TYPES = new Set([
   'callout',
   'contact',
   'consent',
+  'linkBanner',
   'tagGenerate',
   'tagLookup',
   'tagDisplay',
@@ -207,6 +209,22 @@ function validateBlock(scope, surveyId, block, seenIds, pageId) {
 
   if (['prose', 'callout'].includes(block.type)) {
     checkLocalised(scope, 'text', block.text);
+  }
+
+  if (block.type === 'linkBanner') {
+    checkLocalised(scope, 'label', block.label);
+    if (block.note) checkLocalised(scope, 'note', block.note, { required: false });
+    if (typeof block.href !== 'string' || !block.href.trim()) {
+      error(scope, 'linkBanner needs an href');
+    } else if (/^https?:/i.test(block.href)) {
+      // an absolute URL is fine as written
+    } else if (block.href.includes('..')) {
+      error(scope, `linkBanner href may not leave the site: ${block.href}`);
+    } else if (!existsSync(path.join(ROOT, block.href))) {
+      // Expected before the report is uploaded: the banner shows "not published
+      // yet" and becomes a link once the file exists.
+      warn(scope, `linkBanner target not published yet: ${block.href}`);
+    }
   }
 
   if (block.type === 'longText' || block.type === 'shortText') {

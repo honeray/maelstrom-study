@@ -1063,6 +1063,28 @@ async function e2eRun(lang, profile) {
       label: 'round 2 report checkpoint',
     });
     same(await answers(s), expected, 'round 2 loads the round 1 answers before the checkpoint');
+
+    const banner = await s.eval(`(()=>{
+      const node=document.querySelector('.link-banner');
+      if(!node) return null;
+      return {
+        tag: node.tagName,
+        href: node.getAttribute('href'),
+        target: node.getAttribute('target'),
+        rel: node.getAttribute('rel'),
+        unavailable: node.classList.contains('is-unavailable'),
+      };
+    })()`);
+    check(Boolean(banner), 'round 2: the report banner is rendered');
+    if (banner && banner.href) {
+      check(banner.target === '_blank', 'round 2: the report opens in a new tab', banner.target);
+      check(/noopener/.test(banner.rel || ''), 'round 2: the new tab gets no opener', banner.rel);
+    } else {
+      // The report is uploaded after the round closes; until then the banner
+      // must be inert rather than a dead link.
+      check(Boolean(banner && banner.unavailable), 'round 2: an unpublished report gives an inert banner');
+    }
+
     check((await nextDisabled(s)) === true, 'round 2: the report checkbox blocks Continue');
     await clickSelector(s, '#q-consent_report_read input');
     check((await nextDisabled(s)) === false, 'round 2: confirming the report unblocks Continue');

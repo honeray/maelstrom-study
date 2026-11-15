@@ -44,6 +44,8 @@ function renderBlock(block, ctx, index) {
       return renderCallout(block);
     case 'contact':
       return renderContactBlock(block, ctx);
+    case 'linkBanner':
+      return renderLinkBanner(block);
     case 'consent':
       return renderConsent(block, ctx);
     case 'tagGenerate':
@@ -101,6 +103,70 @@ function renderContactBlock(block, ctx) {
   const contact = ctx.site?.contact;
   if (!contact) return null;
   return renderContact(contact, { heading: block.heading ? loc(block.heading) : undefined });
+}
+
+/**
+ * A banner that links out to something the participant should read in a
+ * separate tab — typically the previous round's summary report.
+ */
+const linkProbeCache = new Map();
+
+function targetExists(href) {
+  if (!linkProbeCache.has(href)) {
+    linkProbeCache.set(
+      href,
+      fetch(href, { method: 'HEAD', cache: 'no-store' })
+        .then((response) => response.ok)
+        .catch(() => false)
+    );
+  }
+  return linkProbeCache.get(href);
+}
+
+function renderLinkBanner(block) {
+  const href = String(block.href || '').trim();
+  if (!href) return null;
+
+  const newTab = block.newTab !== false;
+  const arrow = el('span.link-banner__arrow', { 'aria-hidden': 'true' }, '\u2197');
+
+  const link = el(
+    'a.link-banner',
+    {
+      href,
+      target: newTab ? '_blank' : null,
+      rel: newTab ? 'noopener noreferrer' : null,
+    },
+    el('span.link-banner__badge', { 'aria-hidden': 'true' }, block.format || 'PDF'),
+    el(
+      'span.link-banner__body',
+      {},
+      el('span.link-banner__label', {}, loc(block.label)),
+      block.note ? el('span.link-banner__note', {}, loc(block.note)) : null
+    ),
+    arrow
+  );
+
+  // A relative target may not be published yet (reports are uploaded later).
+  // Probe it so the page never offers a dead link; absolute URLs are left alone.
+  if (!/^https?:/i.test(href)) {
+    targetExists(href).then((exists) => {
+      if (exists || !link.isConnected) return;
+      link.removeAttribute('href');
+      link.removeAttribute('target');
+      link.removeAttribute('rel');
+      link.classList.add('is-unavailable');
+      link.setAttribute('aria-disabled', 'true');
+      arrow.classList.add('link-banner__chip');
+      arrow.removeAttribute('aria-hidden');
+      arrow.textContent = t('survey.report.unavailable');
+      // "Opens in a new tab" would be a promise the inert banner cannot keep.
+      const note = link.querySelector('.link-banner__note');
+      if (note) note.hidden = true;
+    });
+  }
+
+  return link;
 }
 
 /* --- Question shell ----------------------------------------------------- */

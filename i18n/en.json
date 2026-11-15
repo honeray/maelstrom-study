@@ -137,6 +137,9 @@
     "resume": {
       "restored": "Your saved answers have been restored."
     },
+    "report": {
+      "unavailable": "Not published yet"
+    },
     "sync": {
       "failed": "We could not reach the study server. Your answers are saved on this device and will be sent as soon as the connection returns.",
       "retry": "Try again now"

@@ -137,6 +137,9 @@
     "resume": {
       "restored": "Vos réponses enregistrées ont été restaurées."
     },
+    "report": {
+      "unavailable": "Pas encore publié"
+    },
     "sync": {
       "failed": "Le serveur de l'étude est injoignable. Vos réponses sont enregistrées sur cet appareil et seront envoyées dès le retour de la connexion.",
       "retry": "Réessayer maintenant"
