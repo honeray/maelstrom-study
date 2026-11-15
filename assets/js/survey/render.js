@@ -417,7 +417,10 @@ function renderScenarioPair(block, ctx, index) {
   }));
   choices.splice(1, 0, { id: 'neutral', label: t('survey.scenario.neutral') });
 
-  const group = optionGroup({ id: block.id, options: choices }, ctx, {
+  // Carry the block type through: SurveyState.setBlockValue uses it to drop the
+  // follow-up extent when the answer becomes "neutral". A bare {id, options}
+  // object would silently keep a stale extent in the stored record.
+  const group = optionGroup({ ...block, options: choices }, ctx, {
     multiple: false,
     labelId,
     name: `scenario-${block.id}`,
