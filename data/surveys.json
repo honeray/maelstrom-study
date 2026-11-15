@@ -13,7 +13,7 @@
       "file": "data/surveys/delphi-round-2.json",
       "code": "R2",
       "order": 2,
-      "status": "scheduled"
+      "status": "open"
     }
   ]
 }

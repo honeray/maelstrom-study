@@ -8,11 +8,11 @@
     "loading": "Loading…"
   },
   "home": {
-    "headerLabel": "Music Evaluation Delphi Study",
+    "headerLabel": "Musicking-Aware Evaluation Learned from Structured Objectives of Music",
     "hero": {
       "kicker": "Project MAELStrOM",
-      "title": "Music Evaluation Delphi Study",
-      "lede": "How do musicians and educators decide whether a piece of music is good? This is a multi-round Delphi study on the factors behind musical evaluation — including music made by artificial intelligence. Anonymous, saved as you go, and open to experts in three languages.",
+      "title": "Musicking-Aware Evaluation Learned from Structured Objectives of Music",
+      "lede": "How do musicians and educators decide whether a piece of music is good? This is an anonymized multi-round study spanning three countries on the factors used when evaluating music, including AI music.",
       "cta": "Begin the survey",
       "ctaNone": "See the surveys",
       "secondary": "I have a tag"

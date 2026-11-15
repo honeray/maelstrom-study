@@ -126,7 +126,7 @@ try {
     $fmt = New-Object System.Drawing.StringFormat
     $fmt.Alignment = [System.Drawing.StringAlignment]::Center
     $textBrush = New-Object System.Drawing.SolidBrush([System.Drawing.Color]::FromArgb(190, 226, 244, 255))
-    $g.DrawString('Music Evaluation Delphi Study', $font, $textBrush, (New-Object System.Drawing.RectangleF(0, 400, $ogW, 60)), $fmt)
+    $g.DrawString('Musicking-Aware Evaluation Learned from Structured Objectives of Music', $font, $textBrush, (New-Object System.Drawing.RectangleF(0, 400, $ogW, 60)), $fmt)
     $textBrush.Dispose(); $font.Dispose(); $fmt.Dispose()
 }
 finally { $g.Dispose() }
