@@ -155,9 +155,78 @@ const PREVIEW_CSS = `
   [data-loc]:hover, [data-i18n]:hover { outline: 2px dashed #1668c9; outline-offset: 2px; }
 `;
 
+/** How many times each path has been reloaded to restore the preview flags. */
+const editFixups = new Map();
+
+/**
+ * The preview only renders editable markers when the page is opened with
+ * ?edit=1, and it renders in the language given by ?lang. A link or redirect
+ * inside the preview navigates to a URL with neither, which leaves the new page
+ * with nothing clickable and possibly in the wrong language until the preview is
+ * reloaded by hand. Re-open such a page with both flags instead.
+ *
+ * @returns {boolean} true when a corrected reload has been started.
+ */
+function restorePreviewParams() {
+  let url;
+  try {
+    url = new URL(frame.contentWindow.location.href);
+  } catch {
+    return false; // not reachable yet
+  }
+  if (url.origin !== window.location.origin) return false;
+  if (url.pathname !== '/' && !/\.html?$/i.test(url.pathname)) return false;
+
+  let changed = false;
+  if (!url.searchParams.has('edit')) {
+    url.searchParams.set('edit', '1');
+    changed = true;
+  }
+  if (!url.searchParams.has('lang')) {
+    url.searchParams.set('lang', state.lang);
+    changed = true;
+  }
+  if (!changed) return false;
+
+  const attempts = (editFixups.get(url.pathname) || 0) + 1;
+  editFixups.set(url.pathname, attempts);
+  if (attempts > 3) return false; // a page that keeps redirecting: leave it be
+
+  frame.src = url.toString();
+  return true;
+}
+
+/**
+ * Keep the toolbar honest when the participant navigates inside the preview:
+ * the View selector and the page list should describe what is actually shown.
+ */
+function syncViewFromPreview() {
+  let url;
+  try {
+    url = new URL(frame.contentWindow.location.href);
+  } catch {
+    return;
+  }
+  if (url.origin !== window.location.origin) return;
+
+  const isHome = url.pathname === '/' || url.pathname === '/index.html';
+  const next = isHome ? 'home' : url.searchParams.get('s');
+  if (!next || next === state.view) return;
+
+  const select = $('survey');
+  if (![...select.options].some((option) => option.value === next)) return;
+  state.view = next;
+  select.value = next;
+}
+
 function loadPreview() {
+  editFixups.clear();
   frame.src = previewUrl();
   frame.onload = () => {
+    // A navigation inside the preview may have dropped ?edit=1 / ?lang; the
+    // corrected reload fires onload again, so stop and wait for that one.
+    if (restorePreviewParams()) return;
+    syncViewFromPreview();
     attachPreview();
     // The survey runner fetches its JSON after the load event, so the editor
     // hook appears a little later. Poll briefly for it.
