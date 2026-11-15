@@ -376,26 +376,44 @@ function renderBranchScale(block, ctx, index) {
 
 function renderScenarioPair(block, ctx, index) {
   const labelId = `label-${block.id}`;
+  // The two scenarios are shuffled per participant, but the letters are
+  // POSITIONAL: the card on the left is always "A", the one on the right is
+  // always "B". Otherwise a swapped pair would show "B" first, which reads as
+  // if the pair had been reversed by mistake.
   const display = block._display || ['a', 'b'];
+  const letters = ['A', 'B'];
 
   const pair = el(
     'div.scenario',
     {},
-    ...display.map((side) =>
+    ...display.map((side, position) =>
       el(
         'div.scenario__card',
         {},
-        el('span.scenario__tag', { 'aria-hidden': 'true' }, side.toUpperCase()),
-        el('p.scenario__text', {}, loc(block[side]))
+        el('span.scenario__tag', { 'aria-hidden': 'true' }, letters[position]),
+        el(
+          'p.scenario__text',
+          {},
+          // Screen readers get the same "Contextual Scenario A: …" framing that
+          // the answer options use, so the pairing is never ambiguous.
+          el(
+            'span.visually-hidden',
+            {},
+            `${t('survey.scenario.option', { letter: letters[position] })}: `
+          ),
+          loc(block[side])
+        )
       )
     )
   );
 
-  // Option order follows the on-screen order, but the stored value is always
-  // the stable "a" / "neutral" / "b" id, so randomisation cannot corrupt data.
-  const choices = display.map((side) => ({
+  // The stored value is the CONTENT id ("a" / "b"), never the letter, so
+  // randomisation can only move text between the A and B slots — it can never
+  // change which scenario an answer refers to. `presentation.swapped[id]` records
+  // whether the content in slot A is the pair's "a" or its "b".
+  const choices = display.map((side, position) => ({
     id: side,
-    label: t('survey.scenario.option', { letter: side.toUpperCase() }),
+    label: t('survey.scenario.option', { letter: letters[position] }),
   }));
   choices.splice(1, 0, { id: 'neutral', label: t('survey.scenario.neutral') });
 

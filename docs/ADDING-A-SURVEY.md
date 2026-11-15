@@ -241,10 +241,25 @@ Stored as `<id>` and `<id>__extent`. Choosing `neutral` clears the extent automa
 Renders two labelled cards then A / Neutral / B. Stored as `a`, `neutral` or `b` plus
 `<id>__extent` and an optional `<id>__comment`.
 
+The letters are **positional**: the card on the left is always "A" and the one on the
+right is always "B". What moves during randomisation is the *text*, not the label.
+
 The pairs' order and left/right placement are shuffled **deterministically from the
 participant's tag**, so a participant always sees the same order, and Round 2 reproduces
 it exactly. The order and swap map are saved in `presentation` so analysis can recover
 what was shown.
+
+Because the letters are positional and the stored value is the content id, the two can
+differ for a swapped pair:
+
+| `presentation.swapped["s01"]` | Left card (A) holds | Answer stored if A is chosen |
+|---|---|---|
+| `false` | `s01.a` | `"a"` |
+| `true` | `s01.b` | `"b"` |
+
+So `s01: "b"` always means *"preferred the scenario written in the `b` field"*, whatever
+position it appeared in. To report results by what participants actually saw, join with
+`presentation.swapped` — never assume the letter equals the stored id.
 
 ## 5. How answers are stored
 
