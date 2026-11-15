@@ -691,14 +691,14 @@
           "id": "s07",
           "required": true,
           "a": {
-            "en": "The anthem of a racial hate group is sung to an audience of children.",
-            "zh": "一个种族仇恨团体的颂歌，唱给儿童听众。",
-            "fr": "L'hymne d'un groupe de haine raciale est chanté devant un public d'enfants."
+            "en": "A song with lyrics taken from the teachings of a racial hate group is sung to an audience of children.",
+            "zh": "一首歌词取自一个种族仇恨团体教义的歌曲，唱给儿童听众。",
+            "fr": "Une chanson dont les paroles sont tirées des enseignements d'un groupe de haine raciale est chantée devant un public d'enfants."
           },
           "b": {
-            "en": "A song conveying compassion regardless of race is sung to an audience of children.",
-            "zh": "一首传达不分种族之悲悯的歌曲，唱给儿童听众。",
-            "fr": "Une chanson prônant la compassion sans distinction de race est chantée devant un public d'enfants."
+            "en": "A song with lyrics conveying compassion regardless of race is sung to an audience of children.",
+            "zh": "一首歌词传达不分种族之悲悯的歌曲，唱给儿童听众。",
+            "fr": "Une chanson dont les paroles expriment la compassion sans distinction de race est chantée devant un public d'enfants."
           },
           "followUp": {
             "prompt": { "en": "To what extent?", "zh": "程度如何？", "fr": "Dans quelle mesure ?" },
@@ -714,14 +714,14 @@
           "id": "s08",
           "required": true,
           "a": {
-            "en": "A love song treating the female romantic partner as an object to be bought is sung to an audience of children.",
-            "zh": "一首把女性伴侣物化为可购买之物的情歌，唱给儿童听众。",
-            "fr": "Une chanson d'amour présentant la partenaire féminine comme un objet à acheter est chantée devant un public d'enfants."
+            "en": "A love song with lyrics treating the female romantic partner as an object to be bought is sung to an audience of children.",
+            "zh": "一首歌词把女性伴侣物化为可购买之物的情歌，唱给儿童听众。",
+            "fr": "Une chanson d'amour dont les paroles présentent la partenaire féminine comme un objet à acheter est chantée devant un public d'enfants."
           },
           "b": {
-            "en": "A love song treating both partners in the relationship as equal human beings is sung to an audience of children.",
-            "zh": "一首把恋爱双方都视为平等个体的情歌，唱给儿童听众。",
-            "fr": "Une chanson d'amour considérant les deux partenaires comme des êtres humains égaux est chantée devant un public d'enfants."
+            "en": "A love song with lyrics treating both partners in the relationship as equal human beings is sung to an audience of children.",
+            "zh": "一首歌词把恋爱双方都视为平等个体的情歌，唱给儿童听众。",
+            "fr": "Une chanson d'amour dont les paroles considèrent les deux partenaires comme des êtres humains égaux est chantée devant un public d'enfants."
           },
           "followUp": {
             "prompt": { "en": "To what extent?", "zh": "程度如何？", "fr": "Dans quelle mesure ?" },
@@ -737,14 +737,14 @@
           "id": "s09",
           "required": true,
           "a": {
-            "en": "A song encouraging child abuse as punishment for bad behaviour is sung to an audience of parents.",
-            "zh": "一首鼓励以虐待儿童作为不当行为惩罚的歌曲，唱给父母听众。",
-            "fr": "Une chanson encourageant la maltraitance des enfants comme punition d'un mauvais comportement est chantée devant un public de parents."
+            "en": "A song with lyrics encouraging child abuse as punishment for bad behaviour is sung to an audience of parents.",
+            "zh": "一首歌词鼓励以虐待儿童作为不当行为惩罚的歌曲，唱给父母听众。",
+            "fr": "Une chanson dont les paroles encouragent la maltraitance des enfants comme punition d'un mauvais comportement est chantée devant un public de parents."
           },
           "b": {
-            "en": "A song encouraging patience with children is sung to an audience of parents.",
-            "zh": "一首鼓励耐心对待孩子的歌曲，唱给父母听众。",
-            "fr": "Une chanson encourageant la patience envers les enfants est chantée devant un public de parents."
+            "en": "A song with lyrics encouraging patience with children is sung to an audience of parents.",
+            "zh": "一首歌词鼓励耐心对待孩子的歌曲，唱给父母听众。",
+            "fr": "Une chanson dont les paroles encouragent la patience envers les enfants est chantée devant un public de parents."
           },
           "followUp": {
             "prompt": { "en": "To what extent?", "zh": "程度如何？", "fr": "Dans quelle mesure ?" },
@@ -760,14 +760,14 @@
           "id": "s10",
           "required": true,
           "a": {
-            "en": "A song meant to unite two sides of a war favours one side of the war.",
-            "zh": "一首旨在弥合战争双方的歌曲，却偏袒其中一方。",
-            "fr": "Une chanson destinée à unir les deux camps d'une guerre prend parti pour l'un d'eux."
+            "en": "A song meant to unite two sides of a war has lyrics favoring one side of the war.",
+            "zh": "一首旨在弥合战争双方的歌曲，其歌词偏袒其中一方。",
+            "fr": "Une chanson destinée à unir les deux camps d'une guerre a des paroles qui prennent parti pour l'un d'eux."
           },
           "b": {
-            "en": "A song meant to unite two sides of a war details the casualties on both sides.",
-            "zh": "一首旨在弥合战争双方的歌曲，详述双方的伤亡。",
-            "fr": "Une chanson destinée à unir les deux camps d'une guerre relate les pertes des deux côtés."
+            "en": "A song meant to unite two sides of a war has lyrics detailing the casualties on both sides.",
+            "zh": "一首旨在弥合战争双方的歌曲，其歌词详述双方的伤亡。",
+            "fr": "Une chanson destinée à unir les deux camps d'une guerre a des paroles qui relatent les pertes des deux côtés."
           },
           "followUp": {
             "prompt": { "en": "To what extent?", "zh": "程度如何？", "fr": "Dans quelle mesure ?" },
@@ -806,14 +806,14 @@
           "id": "s12",
           "required": true,
           "a": {
-            "en": "A traditional song from one religion is performed in an attempt to unite an audience of multiple religions.",
-            "zh": "某一宗教的传统歌曲被用来团结多宗教的听众。",
-            "fr": "Une chanson traditionnelle d'une religion est interprétée pour tenter d'unir un public multiconfessionnel."
+            "en": "A song with lyrics taken from the sacred text of one religion is performed in an attempt to unite an audience of multiple religions.",
+            "zh": "一首歌词取自某一宗教圣典的歌曲，被用来团结多宗教的听众。",
+            "fr": "Une chanson dont les paroles sont tirées du texte sacré d'une religion est interprétée pour tenter d'unir un public multiconfessionnel."
           },
           "b": {
-            "en": "A medley of songs from various religions is performed in an attempt to unite an audience of multiple religions.",
-            "zh": "多宗教歌曲的集锦被用来团结多宗教的听众。",
-            "fr": "Un medley de chansons de diverses religions est interprété pour tenter d'unir un public multiconfessionnel."
+            "en": "A song with lyrics taken from the sacred texts of various religions is performed in an attempt to unite an audience of multiple religions.",
+            "zh": "一首歌词取自多种宗教圣典的歌曲，被用来团结多宗教的听众。",
+            "fr": "Une chanson dont les paroles sont tirées des textes sacrés de plusieurs religions est interprétée pour tenter d'unir un public multiconfessionnel."
           },
           "followUp": {
             "prompt": { "en": "To what extent?", "zh": "程度如何？", "fr": "Dans quelle mesure ?" },
