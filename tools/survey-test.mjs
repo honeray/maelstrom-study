@@ -664,7 +664,7 @@ async function fillDemographics(s, pick = (options) => options[0].id) {
       if (block.options.find((o) => o.id === choice)?.allowText) {
         await typeInto(s, `#q-${block.id} .opt__extra input`, `other ${block.id}`);
       }
-    } else if (block.type === 'shortText') {
+    } else if (block.type === 'shortText' || block.type === 'longText') {
       await typeInto(s, `#input-${block.id}`, `text ${block.id}`);
     }
   }
@@ -824,7 +824,7 @@ async function sweepLanguage(lang) {
           }
         }
       }
-      if (block.type === 'shortText') {
+      if (block.type === 'shortText' || block.type === 'longText') {
         await typeInto(s, `#input-${block.id}`, `answer for ${block.id}`);
         if ((await answers(s))[block.id] !== `answer for ${block.id}`) problems.push(`${block.id}: text not stored`);
         await typeInto(s, `#input-${block.id}`, '');
@@ -1066,7 +1066,7 @@ async function e2eRun(lang, profile) {
           await typeInto(s, `#q-${block.id} .opt__extra input`, text);
           expected[`${block.id}__other`] = text;
         }
-      } else if (block.type === 'shortText') {
+      } else if (block.type === 'shortText' || block.type === 'longText') {
         const text = profile.text(block);
         if (text) {
           await typeInto(s, `#input-${block.id}`, text);
@@ -1186,6 +1186,22 @@ async function e2eRun(lang, profile) {
       check(Boolean(banner && banner.unavailable), 'round 2: an unpublished report gives an inert banner');
     }
 
+    // The page asks what the participant makes of the report, then confirms.
+    const reportQuestions = await s.eval(`(()=>(['q_report_valid','q_report_invalid']).map((id)=>{
+      const node=document.getElementById('q-'+id);
+      return node ? { id, required: node.dataset.required === 'true', optional: Boolean(node.querySelector('.q__optional')) } : null;
+    }))()`);
+    check(reportQuestions.filter(Boolean).length === 2, 'round 2: the report page asks about valid and invalid viewpoints');
+    check(
+      reportQuestions.every((question) => question && question.required === false && question.optional),
+      'round 2: those two questions are optional',
+      JSON.stringify(reportQuestions)
+    );
+
+    const reportComment = 'The point about live performance.';
+    await typeInto(s, '#input-q_report_valid', reportComment);
+    check((await answers(s)).q_report_valid === reportComment, 'round 2: a report comment is stored');
+
     check((await nextDisabled(s)) === true, 'round 2: the report checkbox blocks Continue');
     await clickSelector(s, '#q-consent_report_read input');
     check((await nextDisabled(s)) === false, 'round 2: confirming the report unblocks Continue');
@@ -1193,7 +1209,11 @@ async function e2eRun(lang, profile) {
 
     await waitForPage(s, 'welcome', 12000);
     const prefilled = await answers(s);
-    same(prefilled, { ...expected, consent_report_read: true }, 'round 2 pre-fills the round 1 answers');
+    same(
+      prefilled,
+      { ...expected, consent_report_read: true, q_report_valid: reportComment },
+      'round 2 pre-fills the round 1 answers'
+    );
 
     await clickNext(s); // welcome -> demographics
     await waitForPage(s, 'demographics');
@@ -1206,7 +1226,7 @@ async function e2eRun(lang, profile) {
       target.click();
       return target.value;
     })()`);
-    const revised = { ...expected, q_age: changed, consent_report_read: true };
+    const revised = { ...expected, q_age: changed, consent_report_read: true, q_report_valid: reportComment };
 
     await clickNext(s); // demographics -> factors
     await waitForPage(s, 'factors');

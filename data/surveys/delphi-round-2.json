@@ -2,7 +2,7 @@
   "id": "delphi-round-2",
   "code": "R2",
   "schemaVersion": 1,
-  "estimateMinutes": 10,
+  "estimateMinutes": 15,
   "flow": {
     "createsTag": false,
     "requiresTag": true,
@@ -79,6 +79,26 @@
             "en": "Opens in a new tab, so this survey stays open.",
             "zh": "在新标签页中打开，本问卷会保持原样。",
             "fr": "S'ouvre dans un nouvel onglet, afin que cette enquête reste ouverte."
+          }
+        },
+        {
+          "type": "longText",
+          "id": "q_report_valid",
+          "required": false,
+          "prompt": {
+            "en": "Do you find any viewpoints in the summary report to be valid? If so, which ones, and why?",
+            "zh": "您认为汇总报告中是否有观点成立？如果有，是哪些，为什么？",
+            "fr": "Trouvez-vous certains points de vue du rapport de synthèse valables ? Si oui, lesquels, et pourquoi ?"
+          }
+        },
+        {
+          "type": "longText",
+          "id": "q_report_invalid",
+          "required": false,
+          "prompt": {
+            "en": "Do you find any viewpoints in the summary report to be invalid? If so, which ones, and why?",
+            "zh": "您认为汇总报告中是否有观点不成立？如果有，是哪些，为什么？",
+            "fr": "Trouvez-vous certains points de vue du rapport de synthèse non valables ? Si oui, lesquels, et pourquoi ?"
           }
         },
         {

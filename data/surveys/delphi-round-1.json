@@ -294,6 +294,26 @@
             "zh": "您主要专注于哪些具体的音乐领域（作曲、演奏、乐器等）？",
             "fr": "Sur quel(s) domaine(s) musical(aux) précis (composition, interprétation, instrument(s), etc.) vous concentrez-vous principalement ?"
           }
+        },
+        {
+          "type": "longText",
+          "id": "q_genres_like",
+          "required": true,
+          "prompt": {
+            "en": "What genres of music do you favor the most (if any)? Why?",
+            "zh": "您最喜欢哪些音乐类型（如果有的话）？为什么？",
+            "fr": "Quels genres de musique préférez-vous le plus (le cas échéant) ? Pourquoi ?"
+          }
+        },
+        {
+          "type": "longText",
+          "id": "q_genres_dislike",
+          "required": true,
+          "prompt": {
+            "en": "What genres of music do you dislike the most (if any)? Why?",
+            "zh": "您最不喜欢哪些音乐类型（如果有的话）？为什么？",
+            "fr": "Quels genres de musique aimez-vous le moins (le cas échéant) ? Pourquoi ?"
+          }
         }
       ]
     },
