@@ -1186,12 +1186,27 @@ async function e2eRun(lang, profile) {
       check(Boolean(banner && banner.unavailable), 'round 2: an unpublished report gives an inert banner');
     }
 
-    // The page asks what the participant makes of the report, then confirms.
+    // The checkpoint itself only asks for confirmation; the two questions about
+    // the report live on the page after it.
+    const onCheckpoint = await s.eval(
+      `(()=>['q_report_valid','q_report_invalid'].map((id)=>Boolean(document.getElementById('q-'+id))))()`
+    );
+    check(onCheckpoint.every((present) => !present), 'round 2: the confirmation page does not carry the viewpoint questions');
+
+    check((await nextDisabled(s)) === true, 'round 2: the report checkbox blocks Continue');
+    await clickSelector(s, '#q-consent_report_read input');
+    check((await nextDisabled(s)) === false, 'round 2: confirming the report unblocks Continue');
+    await clickNext(s);
+
+    await waitForPage(s, 'welcome', 12000);
+    const prefilled = await answers(s);
+    same(prefilled, { ...expected, consent_report_read: true }, 'round 2 pre-fills the round 1 answers');
+
     const reportQuestions = await s.eval(`(()=>(['q_report_valid','q_report_invalid']).map((id)=>{
       const node=document.getElementById('q-'+id);
       return node ? { id, required: node.dataset.required === 'true', optional: Boolean(node.querySelector('.q__optional')) } : null;
     }))()`);
-    check(reportQuestions.filter(Boolean).length === 2, 'round 2: the report page asks about valid and invalid viewpoints');
+    check(reportQuestions.filter(Boolean).length === 2, 'round 2: the page after the confirmation asks about valid and invalid viewpoints');
     check(
       reportQuestions.every((question) => question && question.required === false && question.optional),
       'round 2: those two questions are optional',
@@ -1201,19 +1216,7 @@ async function e2eRun(lang, profile) {
     const reportComment = 'The point about live performance.';
     await typeInto(s, '#input-q_report_valid', reportComment);
     check((await answers(s)).q_report_valid === reportComment, 'round 2: a report comment is stored');
-
-    check((await nextDisabled(s)) === true, 'round 2: the report checkbox blocks Continue');
-    await clickSelector(s, '#q-consent_report_read input');
-    check((await nextDisabled(s)) === false, 'round 2: confirming the report unblocks Continue');
-    await clickNext(s);
-
-    await waitForPage(s, 'welcome', 12000);
-    const prefilled = await answers(s);
-    same(
-      prefilled,
-      { ...expected, consent_report_read: true, q_report_valid: reportComment },
-      'round 2 pre-fills the round 1 answers'
-    );
+    check((await nextDisabled(s)) === false, 'round 2: the optional report questions do not block Continue');
 
     await clickNext(s); // welcome -> demographics
     await waitForPage(s, 'demographics');
