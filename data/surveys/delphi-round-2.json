@@ -125,7 +125,7 @@
         {
           "type": "longText",
           "id": "q_report_valid",
-          "required": false,
+          "required": true,
           "prompt": {
             "en": "Do you find any viewpoints in the summary report to be valid? If so, which ones, and why?",
             "zh": "您认为汇总报告中是否有观点成立？如果有，是哪些，为什么？",
@@ -135,7 +135,7 @@
         {
           "type": "longText",
           "id": "q_report_invalid",
-          "required": false,
+          "required": true,
           "prompt": {
             "en": "Do you find any viewpoints in the summary report to be invalid? If so, which ones, and why?",
             "zh": "您认为汇总报告中是否有观点不成立？如果有，是哪些，为什么？",
