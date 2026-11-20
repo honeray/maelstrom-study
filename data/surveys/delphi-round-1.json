@@ -494,8 +494,8 @@
             "fr": "Êtes-vous d'accord ou non avec l'affirmation suivante ?"
           },
           "statement": {
-            "en": "\"Accurate music evaluation can be achieved by examining **only** its aural content, i.e. its sound. In other words, non-aural context (e.g. composer background, culture, human relationships, etc.) does **not** need to be considered to accurately evaluate music.\"",
-            "zh": "“只要考察其听觉内容（即声音本身），就能实现准确的音乐评价。换言之，为了准确评价音乐，**无需**考虑非听觉语境（如作曲家背景、文化、人际关系等）。”",
+            "en": "\"Accurate music evaluation can be achieved by examining **only** its aural content, i.e. its sound. In other words, non-aural factors (e.g. composer background, culture, human relationships, etc.) does **not** need to be considered to accurately evaluate music.\"",
+            "zh": "“只要考察其听觉内容（即声音本身），就能实现准确的音乐评价。换言之，为了准确评价音乐，**无需**考虑非听觉因素（如作曲家背景、文化、人际关系等）。”",
             "fr": "« Une évaluation musicale précise peut être obtenue en examinant **uniquement** son contenu sonore, c'est-à-dire son son. Autrement dit, le contexte non sonore (p. ex. le parcours du compositeur, la culture, les relations humaines, etc.) n'a **pas** besoin d'être pris en compte pour évaluer précisément la musique. »"
           },
           "options": [
@@ -597,7 +597,7 @@
           "required": true,
           "a": {
             "en": "A singer who espouses feminist views collaborates with an alleged sexual abuser to compose and perform a song conveying the value of feminist ideals.",
-            "zh": "一位秉持女性主义观点的歌手，与一名被指控性侵者合作创作并演唱一首传达女性主义理想的歌曲。",
+            "zh": "一位女性主义歌手与一名被指控性侵者合作演唱女性主义歌曲。",
             "fr": "Une chanteuse qui défend des idées féministes collabore avec une personne accusée d'agression sexuelle pour composer et interpréter une chanson portant les valeurs féministes."
           },
           "b": {
@@ -735,12 +735,12 @@
           "required": true,
           "a": {
             "en": "A love song with lyrics treating the female romantic partner as an object to be bought is sung to an audience of children.",
-            "zh": "一首歌词把女性伴侣物化为可购买之物的情歌，唱给儿童听众。",
+            "zh": "一首爱情歌曲，歌词将女性伴侣物化为可以购买的商品，并在儿童观众面前演唱。",
             "fr": "Une chanson d'amour dont les paroles présentent la partenaire féminine comme un objet à acheter est chantée devant un public d'enfants."
           },
           "b": {
             "en": "A love song with lyrics treating both partners in the relationship as equal human beings is sung to an audience of children.",
-            "zh": "一首歌词把恋爱双方都视为平等个体的情歌，唱给儿童听众。",
+            "zh": "一首爱情歌曲，歌词将恋爱双方描绘为平等的个体，并在儿童观众面前演唱。",
             "fr": "Une chanson d'amour dont les paroles considèrent les deux partenaires comme des êtres humains égaux est chantée devant un public d'enfants."
           },
           "followUp": {
@@ -757,8 +757,8 @@
           "id": "s09",
           "required": true,
           "a": {
-            "en": "A song with lyrics encouraging child abuse as punishment for bad behaviour is sung to an audience of parents.",
-            "zh": "一首歌词鼓励以虐待儿童作为不当行为惩罚的歌曲，唱给父母听众。",
+            "en": "A song with lyrics encouraging child abuse is sung to an audience of parents.",
+            "zh": "一首歌词明确支持虐待儿童的歌曲，唱给父母听众。",
             "fr": "Une chanson dont les paroles encouragent la maltraitance des enfants comme punition d'un mauvais comportement est chantée devant un public de parents."
           },
           "b": {
@@ -803,14 +803,14 @@
           "id": "s11",
           "required": true,
           "a": {
-            "en": "A historically anti-fascist song is used in the modern day to protest public safety regulations.",
-            "zh": "一首历史上反法西斯的歌曲，在当代被用来抗议公共安全法规。",
-            "fr": "Une chanson historiquement antifasciste est utilisée aujourd'hui pour protester contre des réglementations de sécurité publique."
+            "en": "A song with monolingual lyrics is used to unite different ethnic minorites.",
+            "zh": "一首只有一种语言的歌曲，可以用来团结不同的种族群体。",
+            "fr": "Une chanson avec des paroles monolingues est utilisée pour unir des personnes issues de différentes minorités ethno-raciales."
           },
           "b": {
-            "en": "A historically anti-fascist song is used to unite disparate rebel groups against a fascist regime.",
-            "zh": "一首历史上反法西斯的歌曲，被用来团结各自分散的抵抗团体，共同对抗法西斯政权。",
-            "fr": "Une chanson historiquement antifasciste est utilisée pour unir des groupes rebelles disparates contre un régime fasciste."
+            "en": "A song with multilingual lyrics is used to unite different ethnic minorites.",
+            "zh": "一首包含多种语言的歌曲，可以用来团结不同的种族群体。",
+            "fr": "Une chanson avec des paroles multilingues est utilisée pour unir des personnes issues de différentes minorités ethno-raciales."
           },
           "followUp": {
             "prompt": { "en": "To what extent?", "zh": "程度如何？", "fr": "Dans quelle mesure ?" },
